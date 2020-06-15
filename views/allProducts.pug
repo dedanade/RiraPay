@@ -1,0 +1,40 @@
+extends base
+block Indexcss
+block content
+
+    section
+        .form-container(style='margin-top: 120px;')
+            .row
+                .col-12
+                    .card.border-1.my-5.shadow-sm
+                        .card-body.py-5.mx-2
+                            ul.list-group
+                                li.d-flex.justify-content-between
+                                    h4.d-flex.justify-content-between All Products:  
+                                    h6
+                                        a(href='/createproduct') Create New Product
+                            table#all-table.table.table-condensed.table-hover                       
+                                thead
+                                    tr
+                                        th Date
+                                        th Product Name
+                                        th Stock
+                                        th Amount
+
+                                tbody
+                                    each product in businessUser.products
+                                        -const Date = moment(product.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                        -const productprice = product.price.toLocaleString()
+
+
+                                        tr.table-row(style= 'height: 60px')(data-href=`/myproduct/${product.slug}/${product._id}`)
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=Date
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=product.productName
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=product.stock                                
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)= `₦${productprice}`
+                            
+        

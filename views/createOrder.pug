@@ -1,0 +1,108 @@
+extends base
+block Indexcss
+block content
+block header
+block footer
+        section
+            .summary_container
+                #card-order-summary.card.border-1.box-shadow-1
+                    .card.wrap
+                        .card-body(style='background-color: #FFFFFF;')
+                            h5#th-1.card-title.my-4 Order Summary
+                            ul.list-group
+                            -const carttotal = cart.total.toLocaleString()
+                                li.d-flex.justify-content-between
+                                    .my-0
+                                        p Product 
+                                        p.mt-3= product.productName
+                                    div.my-0
+                                        p Quantity
+                                        p.text-center.mt-3= cart.qty
+                                li.d-flex.justify-content-between.lh-condensed.mt-3(style='border-top: 1px solid black;')
+                                    div
+                                        p Subtotal
+                                    p= `₦${carttotal}`
+                                li.d-flex.justify-content-between.lh-condensed
+                                    div
+                                        p Tax
+                                    p.text-muted #0
+                                li.d-flex.justify-content-between.lh-condensed.mb-3
+                                    div
+                                        p Delivery Fee
+                                    p.text-muted Free
+                                li.d-flex.justify-content-between.lh-condensed(style=' font-weight: bold; border-top: 1px solid black;')
+                                    div
+                                        p Total
+                                    p= `₦${carttotal}`
+        section
+            .form-container.my-5
+                .text-center.my-3
+                    h6#form-heading Fill in your Delivery Details
+                .card.border-2.box-shadow-1.py-5.mx-lg-5
+                    .card.wrap.border-0
+                    form.create-order-form
+                        .row.mx-2
+                            .col
+                                
+                                 input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
+                        .row.mx-2
+                            .col
+                                 input#cart(type='hidden', name='cart', value= cart.id)
+                        .row.mx-2
+                            .col
+                                
+                                 input#product_id(type='hidden', name='product_id', value= product.id)
+                        .row.mx-2
+                            .col
+                                label(for='checkoutemail')  Your Email Address
+                                input#checkoutemail.form-control(type='email', placeholder='Adengozi21414@gmail.com' required='')
+                                medium.form-text.mt-3.mx-1
+                                    | This Email will be used to sign up later on to track your
+                                    | orders and request for refund
+                                #th-1.mt-0
+
+                                label(for='validationCustom04') State
+                        .row.mx-2.py-3
+                            .col-12
+                                label(for='checkoutname')  Your Name
+                                input#checkoutname.form-control(type='text', placeholder='' required='')
+                                medium.form-text.mt-1
+                                    |eg: Mr Moshood Bello
+                        .row.mx-2.py-3
+                            .col
+                                label(for='checkoutaddress') Your Full Address
+                                input#checkoutaddress.form-control(type='text-area', placeholder='' required='')
+                                medium.form-text.mt-1
+                                    |eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop
+                        .row.mx-2.py-3
+                            .col
+                                label(for='checkoutstate') State
+                                input#checkoutstate.form-control(type='text', placeholder='' required='')
+                                medium.form-text.mt-1
+                                    |eg: Lagos, Abuja, etc
+                        .row.mx-2.py-3
+                            .col
+                                label(for='checkoutarea') Area
+                                input#checkoutarea.form-control(type='text', placeholder='' required='')
+                                medium.form-text.mt-1
+                                    |eg: Oshodi, Owerri, Lekki, Garki etc
+                        .row.mx-2.py-3
+                            .col
+                                div
+                                label(for='checkoutphone') Phone Number
+                                input#checkoutphone.form-control(type='number', placeholder=''  minlength= '11' maxlength= '11' required='')
+                                medium.form-text.mt-1
+                                    |eg: 07066514541
+                        .row.mx-2.py-3
+                            .col
+                                div
+                                label(for='checkoutphone2')
+                                    | Alternative Phone Number
+                                input#checkoutphone2.form-control(type='tel', placeholder='' maxlength= '11' minlength= '11')
+                                medium.form-text.mt-1
+                                    |eg: 07066514541
+                        .text-center
+                            button#checkout1-button.btn.btn-lg.mt-3.mb-3(type='submit')
+                                | Continue
+
+                        

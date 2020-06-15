@@ -1,0 +1,51 @@
+extends base
+block Indexcss
+block content
+    
+    section
+        .large-container.mb-5(style= 'margin-top: 150px;')
+            .row
+                .col-12
+                        .card-body.py-5.mx-2
+                            ul.list-group
+                                    li.d-flex.justify-content-between
+                                        h4.d-flex.justify-content-between All Orders:  
+                            table#all-table.table.table-condensed.table-hover                       
+                                thead
+                                    tr
+                                        th Date
+                                        th Product Name
+                                        th Status
+                                        th Customer
+                                        th Amount
+                                        th Tags
+
+                                tbody
+                                    each orders in businessUser.orders
+                                        each cart in orders.cart
+                                            each product in orders.product
+
+                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const carttotal = cart.total.toLocaleString()
+
+                                                    
+
+                                                    tr.table-row(style= 'height: 65px')(data-href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)
+                                                    
+                                                        td
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=Date
+                                                                                                
+                                                        td
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)= product.productName
+                                                        td
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)= orders.status
+                                                        td
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=orders.name                              
+                                                        td
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=`₦${carttotal}`
+                                                        td(colspan='2')
+                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=orders.tags
+
+                            //- .text-center.mb-3
+                            //-     h6
+                            //-         a(href='/allbusorders') View All orders

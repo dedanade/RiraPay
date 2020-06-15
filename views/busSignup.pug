@@ -1,0 +1,47 @@
+extends base
+block Indexcss
+block script
+block content
+block header
+block footer
+
+    section
+        .form-container
+            .text-center
+                img(src='#', style='margin-top: 20px; padding-bottom: 30px;')
+                h1.header-signup-business Open a RiraPay Business Account
+    section
+        .form-container
+            .row
+                .col-12
+                    #card-border-wrap.card.border.mx-lg-5
+                        form.signup-bus-form
+                            .row.mx-2.py-3
+                            .col
+                                label(for='input-bus-name') Business Name
+                                input#input-bus-name.form-control(type='text', placeholder='eg: RiraPay Enterprise' required='')
+                            .row.mx-2.py-3
+                            .col
+                                label(for='input-bus-email') Email Address
+                                input#input-bus-email.form-control(type='email', placeholder='eg: rirapayenterprise@gmail.com' required='')
+                            .row.mx-2.py-3
+                            .col
+                                div
+                                label(for='input-bus-phone')  Business Phone Number
+                                input#input-bus-phone.form-control(type='tel', placeholder='eg: 07066514541' maxlength= '11' minlength= '11' required='')
+                            .row.mx-2.py-3
+                            .col
+                                .password-wrap
+                                label(for='input-bus-password') Password
+                                input#input-bus-password.form-control(type='password', placeholder='Minimum of 6 words' minlength= '6' required='')
+                            
+                            .row
+                            .col.ms-2.py-2
+                                button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create My Account 
+                                br
+                                p.mx-3.text-center(style='font-size: 15px;')
+                                    | By clicking the &ldquo;Create My Account&rdquo; button, you agree to RiraPay&apos;s 
+                                    a(href='#') Terms and Conditions
+                    p.text-center.py-4(style='color: black;')
+                        | Already have an Account? 
+                        a(href='#') Click here to login

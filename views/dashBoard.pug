@@ -1,0 +1,84 @@
+extends base
+block Indexcss
+block script
+block content
+    section
+    .container
+        .row(style='margin-top: 120px;')
+            .col-lg-8-sm-12-md-12
+                h4= `Hello, ${user.firstName}`
+                a.mx-1(href='#') View and Edit Profile
+        .row(stye= 'margin-top: 50px;')
+            .col-12.col-lg-5
+                .card.border-1.my-5.shadow-sm
+                    .card-body.py-5.mx-2
+                        h6 RiraPay Wallet Balance
+                        h3  &#x20A6;0.00
+
+    section
+        .large-container
+            .card-body.py-5.mx-2
+                - const order = user.orders;
+                
+                if(order.length)
+                    ul.list-group
+                        li.d-flex.justify-content-between
+                            h4.d-flex.justify-content-between.mb-0.mt-3 Latest Orders:
+                            form#updateorderform
+                                input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
+                                button#sign-up-button.btn.btn-sm.my-3.mx-auto.d-block(type='submit') Refresh Orders
+                    table.table.table-condensed.table-hover
+                        
+                            thead
+                                th Date
+                                th Product Name
+                                th Status
+                                th Merchant
+                                th Amount
+
+                            tbody
+
+                                    each orders in user.orders.reverse().slice(0, 10)
+                                        each cart in orders.cart
+                                            each product in orders.product
+                                                each businessUser in orders.businessUser
+
+                                                    
+                                                    - const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const carttotal = cart.total.toLocaleString()
+                                                
+
+                                                    tr.table-row(style= 'height: 65px' data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                                    
+                                                        td
+                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=Date
+                                                                                                
+                                                        td
+                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= product.productName
+                                                        td
+                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                                        td
+                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=businessUser.businessName                              
+                                                        td
+                                                             a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=`₦${carttotal}`
+                    p=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
+                    h6
+                        .text-center
+                            a(href='#') View All Orders
+                            
+                else
+                    ul.list-group
+                    li.d-flex.justify-content-between
+                        h4.d-flex.justify-content-between Latest Orders:
+                    .text-center.mx-3
+                        h6=`If you have Placed Order with your Email Address ${user.email}, Click on the button below to show the orders`
+                        form#updateorderform
+                            input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
+                            button#sign-up-button.btn.btn-md.my-3.mx-auto.d-block(type='submit') Update Orders
+                    
+                                
+                                            
+                    
+                    
+                            
+

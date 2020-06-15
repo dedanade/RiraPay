@@ -1,0 +1,203 @@
+extends ./../base
+block script
+block content
+block header
+block footer
+
+      section.headline-section(style='background-color: rgb(33, 118, 141) ')
+        nav.navbar.navbar-expand-lg.navbar-dark.fixed-top.py-2.navbar--true(style='background-color: rgb(33, 118, 141);')
+          .container
+            a#navbarr.navbar-brand(href='/business') RiraPay
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+              span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse.justify-content-end
+              ul#navbarr.navbar-nav
+                li.nav-item.active
+                  a.nav-link(href='/business')
+                    | Home 
+                    span.sr-only (current)
+                li.nav-item.active
+                  a.nav-link(href='#why-rira-bus') Why Rirapay
+                li.nav-item.active
+                  a.nav-link(href='#how-works') How It Works
+                li.nav-item.active
+                  a.nav-link(href='/') Personal
+              ul.navbar-nav
+                a(href='./../busLogin' type='button')#navbar-button-login.btn.btn-lg Login
+                a(href='./../busSignup' type='button')#navbar-button-Get-Started.btn.btn-lg Get Started
+      section.headline-page-h1
+        .container
+          .d-flex.align-items-center.sol-landing
+            .col-lg-12
+              .header-text--section.pt-5
+                .header-text
+                  h1.font-weight-bold
+                    | RiraPay for Business
+                .header-sub-text
+                  p(style='color: white; font-size: 25px; text-align: center; margin-top: 20px;')
+                    | RiraPay is building a payment infrastructure to help you receive payment from your buyers and also as a sign of trust.
+                    | We will also be paternering with top logistics to help you ship your orders faster.
+                  .text-center
+                    a#navbar-button-Get-Started.btn.btn-lg.mx-2.mx-lg-3(href='./../busSignup') Get Started
+                    a#navbar-button-login.btn.btn-lg(href='#what-rira-bus')
+                      | Learn More
+      section#what-rira-bus
+        .container(style='background-color: white;')
+          .col-lg-12
+            .header-text--section.pt-5
+              .header-text-what-is
+                h1
+                  | What is RiraPay for Business?
+              .header-text-what-is-sub-text
+                p
+                  | RiraPay for Business is an escrow payment infrastructure that serves as an intermidiary between your
+                  | business and your customers. Rirapay makes sure your products is delivered timely with zero percent cancelation rate
+                  | at the same time make sure your customers are satisfied.
+      section#why-rira-bus(style='background-color: #f7fcfe; padding-bottom: 50px;')
+        .header-text-why
+          h1
+            | Why RiraPay for Business?
+        .container
+          .row.text-center
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/fast_shipping.svg', alt='')
+                  h3.card-title Fast Delivery and Easy Tracking
+                  p#why-text
+                    | When you recieve payment through Rirapay, you&apos;re expected to ship the product within 48 hours after the
+                    | order has been confirmed this means orders will be delivered faster. We will be collaborating with top logistics firm to make
+                    | this process faster and smoother. Also, you will be able to track all shipment live and receive lifetime updates.
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/stock management.svg', alt='')
+                  h3.card-title Inventory Management
+                  p#why-text
+                    | Not sure when your stock is going to finish or when you should stock up? With our inventory management,
+                    | you can manage all your inventories and also add an alert when your stock is going low according to your settings.
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/low failed delivery.svg', alt='')
+                  h3.card-title Low Failed Delivery Rate
+                  p#why-text
+                    | Since buyers are paying ahead through our escrow infrastructure,you&apos;re assured all orders will be delivered.
+        .container
+          .row.text-center
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/undraw_online_payments_luau (1).svg', alt='')
+                  h3.card-title Fast Remittance
+                  p#why-text(style='padding-bottom: 40px;')
+                    | Waitimg forever for your logistics company to remit your money to you?
+                    | With rirapay, your money is sent to your RiraPay wallet imediately the escrow days are over
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/CRM.svg', alt='')
+                  h3.card-title  Customer Relationship Management 
+                  p#why-text
+                    | You don&apos;t need to download or subscribe to any CRM software; with Rirapay, you can manage your customers right from the app.
+                    | You can have access to details of each trasaction and customer. Launching a new product? you can easily contact your last customers right from your RiraPay app
+            .col-lg-4.my-3
+              .card.border-3.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/undraw_setup_analytics_8qkl.svg', alt='')
+                  h3.card-title  Analytics 
+                  p#why-text
+                    | With RiraPay, you can keep track on your sales, compare sales
+                    | to previous sales and also keep track of your goals. We are also
+                    | building an alogirthm that help you chek an estimmated net sales and revenue.
+      section#how-works(style='background-color: whitesmoke;')
+        .container
+          .row
+            .col-md-12
+              h1.hd-how-bus How Does RiraPay for Business Work?
+              p.hd-how-bus Wondering how RiraPay for Business works? RiraPay works in the following steps:
+              ul.listed-how
+                li.li-listed-how
+                  h3 Sign up on Rirapay
+                p.li-listed-how Click on the Get Started Button and register with your real bsuiness details
+                br
+                li.li-listed-how
+                  h3 Create a payment link
+                p.li-listed-how
+                  | Insert the payment link to your ecommerce store or if you&apos;re a social commerce merchant, reconmend RiraPay to your customers and
+                  | send the payment link to make payment.
+                br
+                li.li-listed-how
+                  h3 Recieve Payment
+                p.li-listed-how
+                  | Payment is made through our secured and certified payment proccesor. Once payment has been made,
+                  | you will receive a notification on your mail and you can confirm the payment on your transaction page on RiraPay web app.
+                br
+                li.li-listed-how
+                  h3 Ship Product
+                p.li-listed-how
+                  | After payment has been confirmed, you have 48 hours to ship the product or order might be canceled by the buyer. If you&apos;re not able
+                  | to ship product within the 48 hours timefraame, send a message through the instant messaging and plead for delivery time extension. when shipped,
+                  | mark the order as shipped and include the logistics firm and tracking number
+                br
+                li.li-listed-how
+                  h3 Product Delivered
+                p.li-listed-how
+                  | When your product is delivered, update your order as delivered.
+                  | The buyer has 24 hours to confirm receiving the order or it will be automatically be marked as &quot;delivered&quot;. After that, you will have
+                  | to wait for 7 days before the amount is sent to your RiraPay wallet which you can withdraw to your bank account immediately
+                br
+                li.li-listed-how
+                  h3 Refund Process
+                p.li-listed-how(style='margin-bottom: 120px;')
+                  | When a buyer is disatisfied with a product due to a difference in description or quality, they have 7 days after the order has been marked &quot;delivered&quot;.
+                  | Buyer has to prove their assertion with an evidence; you have 24 hours after the request has been made to counter their request. If you feel the buyer is right, you can accept the request or renegotiate a new price.
+                  | If you reject the request, you can escalate the issue to our dedicated resolution team who will go
+                  | through both conversation and make a verdict within 24 hours of making request.
+            .col-mid-2
+      section(style='background-color: darkslategrey;')
+        .container(style='padding-top: 70px; padding-bottom: 70px;')
+          .form-row.text-center
+            .col-lg-12
+              h1.font-weight-bold(style='color: white;') Move Your Online Business To The Next Level!
+              a.btn.btn-primary.btn-lg(href='./../busSignup', id='#navbar-button-Get-Started') Join RiraPay for Business Now
+      footer
+        section
+          .container
+            div(style='background-color: white; color: black; margin-top: 120px;')
+              .row.px-5
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Company
+                  h5
+                    a(href='#')  About Us
+                  h5
+                    a(href='#why-rira-bus')  Why RiraPay
+                  h5
+                    a(href='#how-works')   How It Works 
+                  h5
+                    a(href='#')  Get Started
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Customers
+                    h5
+                      a(href='#')  Pricing
+                    h5
+                      a(href='#')   Testimonials 
+                    h5
+                      a(href='#')  Policies
+                    h5
+                      a(href='#')  Terms Of Service
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Support
+                    h5
+                      a(href='#')  FAQ
+                    h5
+                      a(href='#')   Contact Us 
+                    h5
+                      a(href='#')  Live Chat
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Social
+                  h5 Blog
+                  a.fa.fa-facebook(href='#')
+                  a.fa.fa-twitter(href='#')
+                  a.fa.fa-instagram(href='#')
+                  a.fa.fa-linkedin(href='#')

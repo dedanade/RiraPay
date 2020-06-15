@@ -1,0 +1,31 @@
+extends base
+block Indexcss
+block content
+
+    section
+        -const productprice = product.price.toLocaleString()
+        .form-container(style='margin-top: 120px;')
+            .row
+                .col-12
+                    .card.border-1.shadow-sm
+                        .card-body.pt-5.pb-2.mx-2
+                            h5= product.productName
+                            .d-flex.mx-2.mb-3.mt-5
+                                p.font-weight-bold Product Price:
+                                p.mx-5= `₦${productprice}`
+                            .d-flex.mx-2.my-3
+                                p.font-weight-bold Product Stock:
+                                p.mx-5= product.stock
+                            .d-flex.mx-2.my-3
+                                p.font-weight-bold Additional Info:
+                                p.mx-4= product.additionalInfo
+                            .d-flex.mx-2.my-3
+                                p.font-weight-bold Product link
+                                .mx-4
+                                    button.btn(data-clipboard-text=`${protocol}/product/${product.slug}/${product.id}/${businessUser.id}`, style='background-color: #01afee; color: white;')
+                                        | Copy Link
+                                    a(href= `/product/${product.slug}/${product.id}/${businessUser.id}` target="_blank")
+                                        input.btn.mx-3( type='button' value='Preview' style='background-color: #01afee; color: white;')
+                                        
+                        h6.text-center.py-3
+                            a(href='#') Edit Product

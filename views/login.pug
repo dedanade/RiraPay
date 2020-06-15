@@ -1,0 +1,35 @@
+extends base
+block Indexcss
+block script
+block content
+block header
+block footer
+
+      section
+        .container
+          .text-center
+            img.login-head(src='#')
+            h4
+              | Login
+        #login-container.container
+          .row
+            .col
+              .card-wrap
+                form.login-form
+                  .row.mx-2.my-3
+                    #form-container-login.col
+                      label(for='email-login')  Email-Address 
+                      input#email-login.form-control(type='text', placeholder='Username/Email-Address' required='')
+                  .row.mx-2.my-3
+                    .col
+                      .password-wrap
+                        label(for='pass-login') Password
+                        input#pass-login.form-control(type='password', placeholder='Password' required='')
+                  .text-center
+                    button.btn.btn-lg.my-3.align.align-items-center(style='width: 100%; background-color: #01afee; color: white;', type='submit') login to your account 
+                    .mt-3
+                      p
+                        | New to RiraPay? 
+                        a(href='#') Sign Up
+                    p
+                      a(href='#') Forgot Your Password?

@@ -1,0 +1,110 @@
+extends base
+block Indexcss
+block script
+block content    
+    section
+        .form-container(style='margin-top: 150px;')
+            #card-order.card.border-5.box-shadow
+                .card-block.py-5
+                    #border-row.row.mx-1.mx-lg-5.mx-md-5
+                        #pro-descirpt.col-12
+                            -const Date = order.date.toDateString();
+                            -const carttotal = cart.total.toLocaleString()
+
+                            h5#ord-text.ml-0= product.productName
+                            p#ord-text
+                            b Quality: 
+                            = cart.qty
+                            p#ord-text
+                            b Order Id: 
+                            = order.id
+                            p#ord-text
+                            b Date Created: 
+                            =Date
+                            p#ord-text
+                            b Additional Information: 
+                            =product.additionalInfo
+                            
+
+                            h3#ord-text.price-bold=`#${carttotal}`
+
+                    if (order.status === 'incomplete')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    |Incomplete (Buyer is yet to complete Payment) 
+
+                    if (order.status === 'paid')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Paid (Buyer has completed payment for the order. You have 48 hours to ship) 
+
+                    if (order.status === 'shipped')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Shipped (Order has been shipped, wait for it to be delivered) 
+                    #border-row.row.mx-1.mx-lg-5.mx-md-5.my-3
+                        .col
+         
+                    nav
+                        #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
+                            a#nav-order-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-order-details ', role='tab', aria-controls='nav-order-details', aria-selected='true')  Order Details 
+                            a#nav-del-tab.nav-item.nav-link(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='false')  Delivery Details
+                        #nav-tabContent.tab-content
+                            #nav-order-details.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-order-tab')
+                                #border-row.row.mx-1.mx-lg-5.mx-md-5
+                                .col-12.my-3
+                                    .justify-content-center.my-5
+                                        p
+                                            | This order is currently Incomplete which means you&apos;ve not paid for the product through Rirapay. 
+                                            | When you pay with RiraPay, you&apos;re Guaranteed Product delivery and 7 days money-back Guarantee. 
+                                            a(href='http://')  Learn More 
+                                        p To make payment, click on the button below or if you prefer paying offline, click on the merchant info to talk with them.
+                                
+                                    form#paymentForm
+                                        input#email(type='hidden', name='email', value= order.email)
+                                        input#total(type='hidden', name='total', value= cart.total)
+                                        input#name(type='hidden', name='name', value= order.name)
+                                        .text-center
+                                            .form-submit
+                                                button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
+                                    
+                                    .text-center
+                                        button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details
+                                        .justify-content-center
+                                            #merchantinfo.collapse
+                                                .card.card-body
+                                                    p Merchant Name: 
+                                                        = busUser.businessName
+                                                    p Merchant Phone Number: 
+                                                        a(href=`tel:${busUser.businessPhoneNumber}`)= busUser.businessPhoneNumber
+                                                    
+                                                    .ignore-css
+                                                        p(style='font-size: 13px; text-align: justify; margin: 0px, 0px;')
+                                                            | *Please note that RiraPay is not
+                                                            | involve in any transaction carried out offline without the prior notice of Rirapay
+                            #nav-deliver-info.tab-pane.fade(role='tabpanel', aria-labelledby='nav-del-tab')
+                                #border-row.row.mx-1.mx-lg-5.mx-md-5
+                                .col-12.mx-1.mx-lg-2.mx-md-2.my-5
+                                    .delivery-info
+                                        p Product Name: #{product.productName}
+
+                                        p  Name: #{order.name}
+                            
+                                        p  Address: #{order.address}
+                                        
+                                        p State: #{order.state}
+                                        
+                                        p City:  #{ order.area}
+                                        
+                                        p
+                                            | Phone: 
+                                            a(href=`tel:${order.phone}`)= order.phone 
+                                        p
+                                            | Alternative Phone Number:
+                                            a(href=`tel:${order.altphone}`)= order.altPhone

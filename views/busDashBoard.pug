@@ -1,0 +1,156 @@
+extends base
+block Indexcss
+block content
+    
+    section
+        .container
+            .row(style='margin-top: 120px;')
+                .col-6
+                    h4= `Hello, ${businessUser.businessName}`
+                    a.mx-1(href='#') View and Edit Profile
+                .col-6
+                    form#pixelform
+                            .form-group.mx-3
+                                p Facebook Pixel Id:
+                            .form-group.mx-3.mb-2
+                                label.sr-only(for='pixelId') Password
+                                input#pixelId.form-control(type='number', min='11', value=businessUser.facebookPixel)
+                            button.btn.btn-primary.my-sm-2.mx-lg-3.mx-md-3(type='submit') Update
+        section
+        .container
+            .row.my-5
+                #card2.col-12.col-md-6.col-xl-4
+                    .card.border-1.shadow-sm
+                        .card-body.py-5
+                            h6 RiraPay Wallet Balance
+                            h3  &#x20A6;0.00
+                #card2.col-12.col-md-6.col-xl-4
+                    .card.border-1.shadow-sm
+                        .card-body.py-5
+                            h6 Sales
+                            .btn-group
+                            button#button-sales.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                | Today
+                            #dropdownbtn.dropdown-menu
+                                a Yesterday
+                                a This Week
+                                a This Month
+                                a Last 30 Days
+                                a Last 90 Days
+                                a All Time
+                            h3  &#x20A6;0.00
+                #card2.col-12.col-md-6.col-xl-4
+                    .card.border-1.shadow-sm
+                        .card-body.py-5
+                            h6 Transactions
+                            .btn-group
+                            button#button-sales.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                | Today
+                            #dropdownbtn.dropdown-menu
+                                a Yesterday
+                                a This Week
+                                a This Month
+                                a Last 30 Days
+                                a Last 90 Days
+                                a All Time
+                            h3  &#x20A6;0.00
+
+    section
+        .large-container.mb-5
+            .row
+                .col-12
+                        .card-body.py-5.mx-2
+                            ul.list-group
+                                    li.d-flex.justify-content-between
+                                        h4.d-flex.justify-content-between Latest Orders:
+                            - const busOrder = businessUser.orders;
+                            if (busOrder.length)
+                                table.table.table-condensed.table-hover                       
+                                    thead
+                                        tr
+                                            th Date
+                                            th Product Name
+                                            th Status
+                                            th Customer
+                                            th Amount
+                                            th Tags
+
+                                    tbody
+                                        each orders in businessUser.orders.reverse().slice(0, 10)
+                                            each cart in orders.cart
+                                                each product in orders.product
+                                                
+
+                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const carttotal = cart.total.toLocaleString()
+
+                                                
+
+                                                    tr.table-row(style= 'height: 65px')(data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                                    
+                                                        td
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=Date
+                                                                                                
+                                                        td
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= product.productName
+                                                        td
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.status
+                                                        td
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=orders.name                              
+                                                        td
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=`₦${carttotal}`
+                                                        td(colspan='2')
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=orders.tags
+                                        //- if (!orders)
+                                        //-     .text-center
+                                        //-         p You have no Orders Right now. Create a Product and Start Selling!
+                                            
+                                .text-center.mb-3
+                                    h6
+                                        a(href='/allbusorders') View All orders
+                            if (!busOrder.length)
+                                .text-center
+                                    p.mt-2(style='font-size: 1.2rem;') You don't have an order for now. Create a new product and share the link to your customers to pay through RiraPay
+                                .text-center
+                                    a(style='font-size: 1.2rem;' href='/createproduct') Create New Product
+
+                                
+    section
+        .large-container
+            .row
+                .col-12                        
+                    .card-body.py-5.mx-2
+                            ul.list-group
+                                    li.d-flex.justify-content-between
+                                        h4.d-flex.justify-content-between Latest Products:  
+                                        h6
+                                            a(href='/createproduct') Create New Product
+                        
+                            table.table.table-condensed.table-hover                       
+                                thead
+                                    tr
+                                        th Date
+                                        th Product Name
+                                        th Stock
+                                        th Amount
+
+                                tbody
+                                    each product in businessUser.products.reverse().slice(0, 10)
+
+                                        - const Date = moment(product.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                        -const productprice = product.price.toLocaleString()
+
+                                        tr.table-row(data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                                    
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=Date
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=product.productName
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=product.stock                                
+                                            td
+                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `₦${productprice}`
+                                    
+                            .text-center.mb-3
+                                h6
+                                    a(href='/allproducts') View All Products

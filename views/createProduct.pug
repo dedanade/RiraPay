@@ -1,0 +1,32 @@
+extends base
+block Indexcss
+block content
+
+        section
+            .form-container(style= 'margin-top: 150px;')
+                .card.border.card-container
+
+                    form.create-product-form
+                            .text-center.py-4
+                                h3.pt-3 Create a New Product
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='productName') Product Name (Required)
+                                    input#productName.form-control(type='text', placeholder='eg: Bluetooth Speaker' required='')
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='productPrice') Price (required)
+                                    input#productPrice.form-control(type='number', placeholder='Price of your Product' required='')
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='productStock') Quantity Availabe (required)
+                                    input#productStock.form-control(type='number', placeholder='Quanity Available' required='')
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='additionalInfo') Additional Info (Not required)
+                                    textarea#additionalInfo.form-control.rounded-0(placeholder='eg: Bluetooth Speaker with 6 hours Usage Time', rows='3')
+                            .row
+                                .col.ms-2.py-4
+                                    input#businessId(type='hidden', value= businessUser.id)
+
+                                    button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create Product 

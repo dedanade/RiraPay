@@ -1,0 +1,53 @@
+extends base
+block Indexcss
+block script
+block content
+block header
+block footer
+
+      section
+        .container
+          .text-center
+            img(src='#', style='margin-top: 10px; padding-bottom: 30px;')
+            h1.header-signup-business Open a RiraPay Personal Account
+      section
+        .form-container
+          .row
+            .col-12
+              #card-border-wrap.card.border.mx-lg-5
+                form.signup-form
+                  .row.mx-2.py-3
+                    .col
+                      label(for='inputfirstname') First Name
+                      input#inputfirstname.form-control(type='text', placeholder='First Name' required='')
+                  .row.mx-2.py-3
+                    .col
+                      label(for='inputlastname') Last Name
+                      input#inputlastname.form-control(type='text', placeholder='Last Name' required='')
+                  .row.mx-2.py-3
+                    .col
+                      label(for='inputemail') Email Address
+                      input#inputemail.form-control(type='email', placeholder='eg: daboy@gmail.com' required='')
+                  .row.mx-2.py-3
+                    .col
+                      div
+                        label(for='inputphonenumber')  Phone Number
+                        input#inputphonenumber.form-control(type='tel', placeholder='eg: 07066514541' maxlength= '11' minlength= '11' required='')
+                  .row.mx-2.py-3
+                    .col
+                      .password-wrap
+                        label(for='inputpassword') Password
+                        input#inputpassword.form-control(type='password', placeholder='Password' minlength= '6' required='')
+                  .row
+                    .col.ms-2.py-2
+                      button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create My Account 
+                      br
+                      p.mx-3.text-center(style='font-size: 15px;')
+                        | By clicking the &ldquo;Create My Account&rdquo; button, you agree to RiraPay&apos;s 
+                        a(href='#') Terms and Conditions
+                      .form-group.form-check
+                  .row.text-center
+                    .col
+                      p.mx-1.py-2(style='color: black;')
+                        | Already have an Account? 
+                        a(href='#', login='') Login

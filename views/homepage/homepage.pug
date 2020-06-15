@@ -1,0 +1,207 @@
+extends ./../base
+block script
+block content
+block header
+block footer
+
+
+      section(style='background-color: #F4F8FC ;')
+        nav.navbar.navbar-expand-lg.fixed-top.py-2.navbar--true(style='background-color: #F4F8FC ;')
+          .container
+            a#navbarr-homepage.navbar-brand(href='#') RiraPay
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation', style='color: whitesmoke')
+              span.navbar-toggler-icon
+                i.fas.fa-bars(style='color: black ; font-size:28px;')
+            #navbarNav.collapse.navbar-collapse.justify-content-end
+              ul#navbarr-homepage.navbar-nav
+                li.nav-item.active
+                  a.nav-link(href='#')
+                    | Home 
+                    span.sr-only (current)
+                li.nav-item.active
+                  a.nav-link(href='#why-rirapay') Why RiraPay
+                li.nav-item.active
+                  a.nav-link(href='#') How it Works
+                li.nav-item.active
+                  a.nav-link(href='/business') Business
+              ul.navbar-nav
+                a#navbar-button-login.btn.btn-lg(href='./../login')  Login 
+                a#navbar-button-Get-Started.btn.btn-lg(href='./../signup') Get Started
+      section.headline-page-1
+        .container
+          .row
+            .col-sm-12.col-md-10.col-lg-7
+              h1.header-text-one
+                | RiraPay-Better Than Pay On Delivery
+              h3.header-sub-text
+                | Thinking of making payment for your Goods/Services online? 
+                br
+                | There is a better way!
+                br
+                div
+                  a#headline-buttonn1.btn.btn-primary.btn-lg(href='./../signup') Get Started
+                  a#headline-buttonn.btn.btn-primary.btn-lg(href='#what-rira')
+                    | Learn More
+            .col-sm-alt.col-md-6.col-lg-5
+              .image-headline(style='margin-top: 150px;')
+                img(src='/img/homepage/undraw_wallet_aym5.svg', alt='', style='height: 300px; width: 490px; margin-bottom: 50px;')
+      section#what-rira.what-rirapay(style='background-color: #FCFCFC;')
+        .container
+          .row
+            .col-sm-12.col-md-12.col-lg-8
+              h1(style='font-weight:bold; font-size: 40px; margin-top: 50px;') What Is RiraPay?
+              br
+              h3(style='font: weight 400; margin-top: 30px;')
+                | RiraPay is
+                | an Escrow Payment that serves as an intermediary between you
+                | and a merchant. RiraPay ensures you enjoy the value of whatever
+                | product you&apos;re buying.
+            .col-sm-o.col-md-0.col-lg-4
+              .img-wht
+                img(src='/img/homepage/undraw_online_transactions_02ka.svg', alt='', style='height: 400px; width: 400px;')
+      section(style='background-color: darkslategrey;')
+        .container(style='padding-top: 30px; padding-bottom: 30px;')
+          .form-row.text-center
+            .col-lg-12
+              h1.font-weight-bold(style='color: white; font-size: 30px;') Are you a Merchant/seller online?
+              a.btn.btn-primary.btn-lg.my-4(href='/business', id='#checkout-rira-btn') Checkout RiraPay for Business
+      section.why-rirapay
+        .container
+          h1#why-rira-heading Why RiraPay?
+          h5#why-rira-heading
+            | Wondering why RiraPay is Better than other means of payment you&apos;ve been using? Go through the list below and be the judge.
+          .row.text-center
+            .col-lg-4.my-3
+              .card.border-4.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/fast_shipping.svg', alt='')
+                  h3#why-text.card-title Fast Shipping
+                  p#why-text
+                    | When you buy with Rirapay, the merchants has 48 hours to ship
+                    | the item and provide a tracking number which will be verified. You&apos;re eligible
+                    | to request your money back immediately the 48 hours elapsed.
+            .col-lg-4.my-3
+              .card.border-4.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/Easy_Tracking.svg', alt='')
+                  h3#why-text Easy Tracking
+                  p#why-text
+                    | Always wondering when you will receive your orders? We will be working with top logistics firm so you easily track all orders
+                    | through your rirapay account and know where your item currently is and when it will be delivered.
+            .col-lg-4.my-3
+              .card.border-4.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/Money_back.svg', alt='')
+                  h3#why-text 7 Days Money-Back-Gurantee
+                  p#why-text
+                    | Have you had the experience of paying for an item on delivery and later on realise the product doesn&apos;t work as described but you can&apos;t get your money back? Well, with RiraPay, you enjoy 7 days Money-back Guarantee. Immediately a product/services is delivered to you, you have 7 days to test the quality of the product.
+                    | If you feel cheated or product doesn&apos;t fit the description, you can request your money back with one click on a button!
+        br
+        br
+        .container
+          .row.text-center
+            .col-lg-4.my-3
+              .card.border-4.shadow-lg
+                .card-body.px-4
+                  img.svg-icon(src='/img/homepage/undraw_online_messaging_9ro6.svg', alt='')
+                  h3#why-text Instant Messaging
+                  p#why-text
+                    | Experiencing slow response from merchants after paying for a product? With Rirapay, you can chat with your
+                    | merchants directly on the platform and also request your money back if the merchant ignores your message.
+            .col-lg-4.my-3
+              .card.border-4.shadow-lg
+                .card-body.py-5.px-4
+                  img.svg-icon(src='/img/homepage/undraw_on_the_way_ldaq.svg', alt='')
+                  h3#why-text Fast Return Process
+                  p#why-text
+                    | When you request a refund for a product, the merchant has 24 hours to reject or accept your request. If rejected, you can escalate the refund process to Rirapay Resolution Team who will
+                    | respond within 24 hours. If you your refund is approved, the money is sent back to your wallet immediately!
+      section.how-works(style='background-color: whitesmoke;')
+        .container
+          .row
+            .col-md-10
+              h1(style='margin-top: 120px; display: block; padding-left: 50px;') How Does RiraPay Work?
+              p(style='padding-left: 50px; font-size: 20px; margin-bottom: 50px;') Wondering how RiraPay works? RiraPay works in the following steps:
+              ul.listed-how
+                li.li-listed-how
+                  h3 Sign up on Rirapay
+                p.li-listed-how Click on the Get Started Button and register with your real details
+                br
+                li.li-listed-how
+                  h3 Request for an Invoice
+                p.li-listed-how
+                  | Whenever you&apos;re shopping online, request for a
+                  | Rirapay Invoice OR watchout for Rirapay as a method of payment on your favuorite e-commerce store.
+                br
+                li.li-listed-how
+                  h3 Make Payment
+                p.li-listed-how
+                  | Make payment through our secured and certified payment proccesor.
+                  | We hold this payment till order has been delivered and tested for 7 days after the delivered date.
+                br
+                li.li-listed-how
+                  h3 Wait for Shipment
+                p.li-listed-how
+                  | After payment, wait for 48 hours for your product to be ship with a tracking number.
+                  | If product is not shipped within 48 hours, you&apos;re eligible to resuest your money back which will be refunded immediately.
+                br
+                li.li-listed-how
+                  h3 Product Delivered
+                p.li-listed-how
+                  | When your product is delivered, you want to check and make sure it fits the description; from size, to color and other description
+                  | you can easily indentify. If it doesn&apos;t fit description, you go back to the transaction page to request for your money back and also inlcude pictures/videos why you&apos;re requesting for
+                  | money back; don&apos;t worry if you&apos;re not sure of the quality, you have 7 days more to check the quality of the product.
+                br
+                li.li-listed-how
+                  h3 Refund Process
+                p.li-listed-how(style='margin-bottom: 120px;')
+                  | We run the fastest refund process ever! When you request for a refund, the merchant receives the notification and must respond to your request within 24 hours.
+                  | If merchant accept your request, the funds is automically sent back to your Rirapay wallet which you can withdraw into your bank account anytime of the day.
+                  | If your request is rejected by the merchant, and you&apos;re not satisfied with the reasons given, you can then escalate the case to Rirapay Resolution Team who will investigate and respond with a verdict within 24 hours!
+            .col-mid-2
+      section.footer-are-you
+        .container
+          .form-row.text-center
+            .col-lg-12
+              h1.font-weight-bold(style='margin-top: 50px; color: white;') Are you still waiting?
+              a.btn.btn-primary.btn-lg.mt-3(href='./../signup', id='#navbar-button-Get-Started') Get Started Now
+      footer
+        section(style='background-color: #F4F8FC ;')
+          .container
+            div(style='background-color: white; color: black; margin-top: 70px;')
+              .row.px-5
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Company
+                  h5
+                    a(href='#')  About Us
+                  h5
+                    a(href='#why-rira-bus')  Why RiraPay
+                  h5
+                    a(href='#how-works')   How It Works 
+                  h5
+                    a(href='#')  Get Started
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Customers
+                    h5
+                      a(href='#')  Pricing
+                    h5
+                      a(href='#')   Testimonials 
+                    h5
+                      a(href='#')  Policies
+                    h5
+                      a(href='#')  Terms Of Service
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Support
+                    h5
+                      a(href='#')  FAQ
+                    h5
+                      a(href='#')   Contact Us 
+                    h5
+                      a(href='#')  Live Chat
+                #rirapay-footer.col-12.col-sm-4.col-md-3.col-lg-3
+                  h4#hd Social
+                  h5 Blog
+                  a.fa.fa-facebook(href='#')
+                  a.fa.fa-twitter(href='#')
+                  a.fa.fa-instagram(href='#')
+                  a.fa.fa-linkedin(href='#')

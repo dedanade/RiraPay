@@ -1,0 +1,373 @@
+body {
+  background-color: whitesmoke;
+  font-size: 1rem;
+}
+
+/* Business Dashboard */
+
+.navbar-nav#first {
+  margin-right: 50px;
+}
+
+#card2 {
+  margin-bottom: 20px;
+}
+
+#button-sales {
+  display: inline;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 40px;
+}
+.alert {
+  display: inline-flex;
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 2rem 8rem;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+  background-color: #01afee;
+}
+.alert--error {
+  background-color: #eb4d4b;
+}
+
+.error_title {
+  margin-top: 200px;
+  color: red;
+  text-align: center;
+}
+.error_msg {
+  text-align: center;
+  margin-top: 30px;
+}
+h6 {
+  display: inline;
+}
+#dropdownbtn a {
+  font-size: 15px;
+  display: grid;
+  text-align: center;
+  margin-top: 5px;
+}
+
+#dropdownbtn a:hover {
+  cursor: pointer;
+  color: cadetblue;
+}
+th {
+  font-size: 15px;
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+*[data-href] {
+  cursor: pointer;
+}
+
+td a {
+  display: inline-block;
+  font-size: 15px;
+  color: black;
+  text-decoration: none;
+  min-height: 100%;
+  width: 100%;
+}
+
+td a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+#card-border {
+  width: 30em;
+}
+
+#footer {
+  border-top: 1.5px solid #ededed;
+  margin-top: 150px;
+  margin-bottom: 70px;
+}
+
+#footer-text {
+  color: black;
+  margin-left: 10px;
+}
+
+@media (min-width: 600px) {
+  #card-border {
+    width: 50em;
+  }
+}
+
+@media (max-width: 417.98px) {
+  th,
+  td a {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  th,
+  td a {
+    font-size: 13px;
+  }
+}
+@media (max-width: 600.98px) {
+  th,
+  td a {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 992px) {
+  footer a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  #footer-text {
+    text-align: center !important;
+    display: inline-block;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 991px) {
+  #footer-text2 {
+    text-align: center !important;
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  #card2 {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+
+/* Signup */
+
+label {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.header-signup-business {
+  font-weight: bold;
+  color: #0d5e7e;
+  font-size: 30px;
+  padding-bottom: 30px;
+}
+
+#sign-up-button,
+#copyclipboardbtn {
+  background-color: #01afee;
+  color: white;
+}
+
+#checkout1-button {
+  background-color: #01afee;
+  color: white;
+  width: 12em;
+}
+.checkout1-button {
+  background-color: #01afee;
+  color: white;
+  width: 12em;
+}
+@media (max-width: 400.98px) {
+  .header-signup-business {
+    font-size: 20px;
+  }
+}
+
+/* Login */
+.form-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 35em;
+}
+#login-container {
+  background-color: white;
+  height: fit-contents;
+  width: fit-content;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.large-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+  background-color: white;
+  font-size: 1em;
+}
+
+#form-container-login {
+  width: 400px;
+  height: fit-content;
+}
+
+.login-head {
+  font-weight: bold;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 550px) {
+  .form-container {
+    width: 35em;
+  }
+}
+
+@media (min-width: 740px) {
+  .form-container {
+    width: 38em;
+  }
+}
+
+@media (min-width: 980px) {
+  .form-container {
+    width: 45em;
+  }
+}
+/* @media (min-width: 1000px) {
+  .form-container {
+    width: 45em;
+  }
+} */
+*/
+/* CheckOut */
+
+
+
+
+#what-rira-checkout p {
+  font-weight: 400px;
+  font-size: 20px;
+  text-align: center;
+}
+#what-rira-checkout li {
+  font-weight: 400px;
+  margin-top: 10px;
+}
+#what-rira-checkout h1 {
+  color: #0d5e7e;
+  margin: 50px 10px;
+  text-align: center;
+  font-weight: bold;
+}
+#card-order {
+  margin-top: 50px;
+}
+
+#border {
+  border: 1.5px solid #ededed;
+}
+
+#form-heading {
+  font-weight: 900px;
+  color: #0d5e7e;
+  text-align: center;
+  font-size: 30px;
+  margin: 50px 0px;
+}
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+
+.summary_container {
+  width: 35em;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#th-1 {
+  border-bottom: 1px solid black;
+  font-size: 1rem;
+}
+
+#card-order-summary {
+  margin: 50px 5px;
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 400px) {
+  #card-order-summary {
+    width: 25em;
+  }
+}
+
+/* Order-Page */
+
+#card-order {
+  margin-top: 150px;
+  border: 3px solid #ededed;
+}
+
+#border-row {
+  border: 1.5px solid #ededed;
+}
+
+#nav-tab {
+  margin-top: 20px;
+}
+
+#pro-descirpt {
+  text-align: left;
+  margin-top: 20px;
+}
+
+#ord-text {
+  margin: 10px 5px;
+}
+
+#pro-descirpt h5 {
+  display: inline;
+  color: #01afee;
+  text-transform: capitalize;
+}
+
+.price-bold {
+  text-align: right;
+  color: #01afee;
+}
+
+#btn-link {
+  background-color: #01afee;
+  color: white;
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  #card-order {
+    width: fit-content;
+    margin-top: 150px;
+    border: 3px solid #ededed;
+  }
+}

@@ -1,0 +1,90 @@
+extends base
+block Indexcss
+block content
+block header
+block footer
+    
+    script.
+        fbq('track', 'ViewContent');
+
+    section
+        .container
+            .text-center
+                img(src='#')
+                h2(style='color: black; margin-top: 80px;') You&apos;re 100% safe when you Buy with Rirapay
+    section
+        .container
+            .card.border-0.box-shadow-1
+                .card-block.my-3
+                    .row.my-2.mx-1.mx-lg-5.mx-md-5
+                        #what-rira-checkout.col-12.col-lg-6
+                            h1 What is RiraPay?
+                            p Rirapay is an Escrow Payment that serves as an intermediary between you and a merchant. RiraPay makes you enjoy the quality of products you buy online
+                        #what-rira-checkout.col-12.col-lg-6
+                            h1 How is RiraPay better than Pay on Delivery ?
+                            ul
+                                li You Enjoy 48 hours shipping
+                                li 7 Days Money-back Guarantee : You have 7 days to test the Quality of the product after being delivered
+                                li Fast Refund: Not satisfied with the product? You get your money back directly into you bank account within 48 hours!
+                            br
+                            p
+                            .text-center
+                                a(href='#')  Learn More About Rirapay
+    section
+        .form-container(style = 'margin-bottom: 300px;')
+            h4#form-heading
+                | Place Order for your 
+                b=product.productName 
+                |  below
+            .card.border-0.box-shadow-1
+                form.cart-details
+                    .row.mx-2.mx-lg-4.pb-5
+                        .col-12.py-5
+                            table
+                                thead
+                                    th#th-1 Product
+                                tbody
+                                    td.mt-5=product.productName
+                        -const productprice = product.price.toLocaleString()
+                        .col-12
+                            table
+                                thead
+                                    th#th-1 Price
+                                tbody
+                                    tr
+                                        td
+                                            input#first_price.readonly.mt-2(type='text', readonly value=`₦${productprice}` style= 'border: solid transparent; width: fit-content')
+                                    
+                                    input#price.readonly.mt-2(type='hidden', readonly value=`${product.price}`)
+   
+                                        
+                        .col-12
+                            table
+                                thead
+                                    th#th-1 How many Pcs? 
+                                tbody
+                                    tr
+                                        td
+                                            //- span
+                                            //-     button#subtract(type = 'button') -
+                                            input#quantity.form-control.mt-4(type='number', value=`1` min='1' minlenght='1' required='' style= 'width: 20%; display: inherit;')
+                                            //- span
+                                            //-     button#add(type = 'button') +
+                                            medium.form-text.mt-2.mb-3.mx-1
+                                                | (Type how many Quantity you want)
+                        .col-12
+                            table
+                                thead
+                                    th#th-1 Total
+                                tbody
+                                    tr
+                                        td
+                                            input#total.readonly.font-weight-bold(type='text', readonly value=`₦${productprice}` style= 'border: solid transparent; width: fit-content')
+
+                        .col-12.mx-1.px-0.my-lg-0.my-3
+                                p
+                                b Aditional Information:
+                                =product.additionalInfo 
+                    .text-center
+                        input#submitlinkinput(type='hidden', value=`${product.id}/${businessUser.id}`)
+                        button#checkout1-button.btn.btn-lg.mt-3.mb-5( type='submit') Continue

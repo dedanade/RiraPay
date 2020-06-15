@@ -1,0 +1,65 @@
+html
+    body
+        if user
+            section.headline-section
+                nav.navbar.navbar-expand-lg.navbar-light.fixed-top.navbar--true(style='background-color: white; padding-top: 20px;')
+                    .container
+                        a#navbarr.navbar-brand(href='/dashboard') RiraPay
+                        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+                            span.navbar-toggler-icon
+                        
+                        #navbarNav.collapse.collapse.navbar-collapse.justify-content-end
+                            ul#first.navbar-nav
+                                li.nav-item.active
+                                a#navbarr.nav-link(href='/dashboard')
+                                    | Dashboard 
+                                span.sr-only (current)
+                                li.nav-item.active
+                                a#navbarr.nav-link(href='#') Orders
+                                li.nav-item.dropdown
+                                    a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                        | Settings
+                                    .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                                        a.dropdown-item(href='#') Profile
+                                        a.dropdown-item(href='#')  Delivery Address
+                                        a.dropdown-item(href='#') Payment Methods
+                            ul.navbar-nav
+                                li.nav-item.active
+                                    .logout_btn
+                                        a#navbarr.nav-link(href='#') Logout
+
+        if businessUser
+            section.headline-section
+                nav.navbar.navbar-expand-lg.navbar-light.fixed-top.navbar--true(style='background-color: white; padding-top: 20px;')
+                    .container
+                        a#navbarr.navbar-brand(href='/busdashboard') RiraPay
+                        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+                            span.navbar-toggler-icon
+                        
+                        #navbarNav.collapse.collapse.navbar-collapse.justify-content-end
+                            ul#first.navbar-nav
+                                li.nav-item.active
+                                a#navbarr.nav-link(href='/busdashboard')
+                                    | Dashboard 
+                                span.sr-only (current)
+                                li.nav-item.active
+                                a#navbarr.nav-link(href='allbusorders') Orders
+
+                                li.nav-item.active
+                                a#navbarr.nav-link(href='/allproducts') Products
+
+                                li.nav-item.dropdown
+                                    a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                        | Settings
+                                    .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                                        a.dropdown-item(href='#') Profile
+                                        
+                            ul.navbar-nav
+                                li.nav-item.active
+                                    .logout_bus_btn
+                                        a#navbarr.nav-link(href='#') Logout
+        else
+
+            
+
+
