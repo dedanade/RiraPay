@@ -243,7 +243,7 @@ exports.myorderinfo = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no order with that ID.', 404));
   }
 
-  res.status(200).render('OrderInfo', {
+  res.status(200).render('orderInfo', {
     title: 'My OrderInfo',
     order,
     product,
