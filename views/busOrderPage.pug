@@ -9,7 +9,8 @@ block content
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
                             - const Date = order.date.toDateString();
-                            -order.status = 'paid';
+                            - const carttotal = cart.total.toLocaleString()
+
 
                             h5#ord-text.ml-0= product.productName
                             p#ord-text
@@ -26,7 +27,7 @@ block content
                             =product.additionalInfo
                             
 
-                            h3#ord-text.price-bold=`#${cart.total}`
+                            h3#ord-text.price-bold=`#${carttotal}`
 
                     - if (order.status === 'incomplete')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5

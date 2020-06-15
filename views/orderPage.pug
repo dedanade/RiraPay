@@ -33,14 +33,14 @@ block content
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
-                                    |Incomplete (Buyer is yet to complete Payment) 
+                                    |Incomplete (You're yet to pay for this order) 
 
                     if (order.status === 'paid')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
-                                    | Paid (Buyer has completed payment for the order. You have 48 hours to ship) 
+                                    | Paid (You have completed payment for the order. Merchant has 48 hours to ship) 
 
                     if (order.status === 'shipped')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
