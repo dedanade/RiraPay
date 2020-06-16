@@ -12,18 +12,15 @@ const signToken = id => {
   });
 };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-  const cookieOptions = {
+  res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true
-  };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-  res.cookie('jwt', token, cookieOptions);
-
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+  });
   // Remove password from output
   user.password = undefined;
 
@@ -45,7 +42,7 @@ exports.businesssignup = catchAsync(async (req, res, next) => {
     facebookPixel: req.body.facebookPixel
   });
 
-  createSendToken(newBusinessUser, 201, res);
+  createSendToken(newBusinessUser, 201, req, res);
 });
 
 exports.businesslogin = catchAsync(async (req, res, next) => {
@@ -71,7 +68,7 @@ exports.businesslogin = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(businessUser, 200, res);
+  createSendToken(businessUser, 200, req, res);
 });
 
 exports.protectBusiness = catchAsync(async (req, res, next) => {
@@ -182,7 +179,7 @@ exports.resetBusinessPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the businessUser
   // 4) Log the businessUser in, send JWT
-  createSendToken(businessUser, 200, res);
+  createSendToken(businessUser, 200, req, res);
 });
 
 exports.updateBusinessPassword = catchAsync(async (req, res, next) => {
@@ -206,5 +203,5 @@ exports.updateBusinessPassword = catchAsync(async (req, res, next) => {
   // User.findByIdAndUpdate will NOT work as intended!
 
   // 4) Log user in, send JWT
-  createSendToken(businessUser, 200, res);
+  createSendToken(businessUser, 200, req, res);
 });
