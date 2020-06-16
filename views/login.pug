@@ -11,7 +11,7 @@ block footer
             img.login-head(src='#')
             h4
               | Login
-        #login-container
+        .form-container
           .row.no-gutters
             .col
               .card-wrap
@@ -26,7 +26,7 @@ block footer
                         label(for='pass-login') Password
                         input#pass-login.form-control(type='password', placeholder='Password' required='')
                   .text-center
-                    button.btn.btn-lg.my-3.align.align-items-center(style='width: 85%; background-color: #01afee; color: white;', type='submit') login to your account 
+                    button.btn.btn-lg.my-3(style='width: 85%; background-color: #01afee; color: white;', type='submit') login to your account 
                     .mt-3
                       p
                         | New to RiraPay? 

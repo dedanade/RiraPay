@@ -199,13 +199,6 @@ label {
 
 /* Login */
 .form-container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 35em;
-}
-#login-container {
   background-color: white;
   width: 100%;
   padding-top: 50px;
@@ -230,7 +223,7 @@ label {
   margin-bottom: 20px;
 }
 
-@media (min-width: 550px) {
+/* @media (min-width: 550px) {
   .form-container {
     width: 35em;
   }
@@ -246,7 +239,7 @@ label {
   .form-container {
     width: 45em;
   }
-}
+} */
 /* @media (min-width: 1000px) {
   .form-container {
     width: 45em;
