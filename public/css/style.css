@@ -207,10 +207,12 @@ label {
 }
 #login-container {
   background-color: white;
-  height: fit-contents;
-  width: fit-content;
+  width: 100%;
   padding-top: 50px;
   padding-bottom: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 26rem;
 }
 .large-container {
   padding-right: 15px;
@@ -220,11 +222,6 @@ label {
   width: fit-content;
   background-color: white;
   font-size: 1em;
-}
-
-#form-container-login {
-  width: 400px;
-  height: fit-content;
 }
 
 .login-head {
