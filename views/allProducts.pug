@@ -27,7 +27,7 @@ block content
                                         -const productprice = product.price.toLocaleString()
 
 
-                                        tr.table-row(style= 'height: 60px')(data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                                        tr.table-row(style= 'height: 60px' data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
                                             td
                                                 a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=Date
                                             td

@@ -30,6 +30,7 @@ const createOrderForm = document.querySelector('.create-order-form');
 const pixelForm = document.getElementById('pixelform');
 const tagsForm = document.getElementById('tagsform');
 const updateForm = document.getElementById('updateorderform');
+const updateFormmobile = document.getElementById('updateFormmobile');
 
 // const addbtn = document.querySelector('#add');
 // const subbtn = document.querySelector('#subtract');
@@ -125,6 +126,13 @@ if (updateForm)
     updateOrderEmails(orders);
   });
 
+if (updateFormmobile)
+  updateFormmobile.addEventListener('submit', e => {
+    e.preventDefault();
+    const orders = document.getElementById('ordersemail').value;
+    updateOrderEmails(orders);
+  });
+
 $('#quantity').on('keyup click', function() {
   const tot = $('#price').val() * this.value;
   const total = `That's ₦${tot.toLocaleString()}`;
@@ -196,6 +204,15 @@ function payWithPaystack(e) {
   handler.openIframe();
 }
 
+$('.mini-table[data-href]').on('click', function() {
+  window.location = $(this).data('href');
+  $(this).css({ background: 'darkgray' });
+  return false;
+});
+$('.mini-table > a').on('click', function(e) {
+  e.stopPropagation();
+});
+
 $('tr[data-href]').on('click', function() {
   window.location = $(this).data('href');
   return false;
@@ -203,7 +220,6 @@ $('tr[data-href]').on('click', function() {
 $('td > a').on('click', function(e) {
   e.stopPropagation();
 });
-
 const clipboard = new ClipboardJS('.btn');
 
 clipboard.on('success', function(e) {

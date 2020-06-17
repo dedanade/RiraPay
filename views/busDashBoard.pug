@@ -13,9 +13,9 @@ block content
                             .form-group.mx-3
                                 p Facebook Pixel Id:
                             .form-group.mx-3.mb-2
-                                label.sr-only(for='pixelId') Password
+                                label.sr-only(for='pixelId')
                                 input#pixelId.form-control(type='number', min='11', value=businessUser.facebookPixel)
-                            button.btn.btn-primary.my-sm-2.mx-lg-3.mx-md-3(type='submit') Update
+                            button.btn.btn-primary.ml-3(type='submit') Update
         section
         .container
             .row.my-5
@@ -55,7 +55,7 @@ block content
                                 a All Time
                             h3  &#x20A6;0.00
 
-    section
+    section.large-view-table
         .large-container.mb-5
             .row
                 .col-12
@@ -86,7 +86,7 @@ block content
 
                                                 
 
-                                                    tr.table-row(style= 'height: 65px')(data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                                    tr.table-row(style= 'height: 65px' data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
                                                     
                                                         td
                                                             a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=Date
@@ -112,19 +112,17 @@ block content
                                 .text-center
                                     p.mt-2(style='font-size: 1.2rem;') You don't have an order for now. Create a new product and share the link to your customers to pay through RiraPay
                                 .text-center
-                                    a(style='font-size: 1.2rem;' href='/createproduct') Create New Product
-
-                                
-    section
+                                    a(style='font-size: 1.2rem;' href='/createproduct') Create New Product                             
+    section.large-view-table
         .large-container
             .row
                 .col-12                        
                     .card-body.py-5.mx-2
                             ul.list-group
-                                    li.d-flex.justify-content-between
-                                        h4.d-flex.justify-content-between Latest Products:  
-                                        h6
-                                            a(href='/createproduct') Create New Product
+                                li.d-flex.justify-content-between
+                                    h4.d-flex.justify-content-between Latest Products:  
+                                    h6
+                                        a(href='/createproduct') Create New Product
                         
                             table.table.table-condensed.table-hover                       
                                 thead
@@ -154,3 +152,72 @@ block content
                             .text-center.mb-3
                                 h6
                                     a(href='/allproducts') View All Products
+
+    section
+        .small-container
+            ul.list-group.my-4
+                li.d-flex.justify-content-between
+                h4.d-flex.justify-content-between Latest Orders:
+            if (busOrder.length)
+                each orders in businessUser.orders.slice(0, 10)
+                        each cart in orders.cart
+                            each product in orders.product
+                                -const carttotal = cart.total.toLocaleString()
+                                -const mobiledate = moment(orders.date).format('DD/MMM/YY');
+
+                                .mini-table(data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                    .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
+                                        .col-9
+                                            p.m-0 
+                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                                    b= `₦${carttotal}`
+                                            p.m-0 
+                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`) Adebonojo Daniel
+                                        .col-3
+                                            p.m-0 
+                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`) Incomplete
+                                            p.m-0 
+                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= mobiledate
+                .text-center.my-3
+                    h6
+                        a#sign-up-button.btn(href='/allbusorders') View All orders
+            if (!busOrder.length)
+                .text-center
+                    p.mt-2(style='font-size: 1.2rem;') You don't have an order for now. Create a new product and share the link to your customers to pay through RiraPay
+                .text-center
+                    a#sign-up-button.btn(href='/createproduct') Create your first Product
+
+
+    section(style = 'margin-top: 150px;')
+        .small-container
+            - const busproducts = businessUser.products;
+            if (busproducts.length)
+                ul.list-group.my-4
+                    li.d-flex.justify-content-between
+                        h4.d-flex.justify-content-between Latest Product:
+                        a#sign-up-button.btn(href='/createproduct') Create New Product
+                each product in businessUser.products.slice(0, 10)
+                    -const productprice = product.price.toLocaleString()
+                    - const mobiledate = moment(product.date).format('DD/MMM/YY');
+
+                    .mini-table(data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                        .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
+                            .col-9
+                                p.m-0 
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                                        b= `${product.productName}`
+                                p.m-0 
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `Stock: ${product.stock}`
+                                p.m-0 
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `Price: ₦${productprice}`
+                            .col-3
+                                p.mt-3
+                                a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= mobiledate
+                .text-center.my-3
+                    h6
+                        a#sign-up-button.btn(href='/allproducts') View All Products
+            if (!busproducts.length)
+                .text-center
+                    p.mt-2(style='font-size: 1.2rem;') Create your first product and share to your social media buyers
+                .text-center
+                    a#sign-up-button.btn(href='/createproduct') Create your first Product

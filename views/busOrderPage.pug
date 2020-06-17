@@ -3,9 +3,9 @@ block Indexcss
 block content
     
     section
-        .form-container(style='margin-top: 150px;')
-            #card-order.card.border-5.box-shadow
-                .card-block.py-5
+        .mobile-container(style='margin-top: 150px;')
+            .card.border-0.box-shadow
+                .card-block
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
                             - const Date = order.date.toDateString();
@@ -62,35 +62,36 @@ block content
 
                                 
                     nav
-                        #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
-                            a#nav-del-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='true') Delivery Information
-                            a#nav-order-tab.nav-item.nav-link(data-toggle='tab', href='#nav-order-details', role='tab', aria-controls='nav-order-details', aria-selected='false') Order Details
-                    #nav-tabContent.tab-content
-                        #nav-deliver-info.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-del-tab')
-                            #border-row.row.mx-1.mx-lg-5.mx-md-5
-                                .col-12.mx-1.mx-lg-2.mx-md-2.my-5
-                                    .delivery-info
-                                    p Product Name: #{product.productName}
+                        .row.no-gutters
+                            #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
+                                a#nav-del-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='true') Delivery Information
+                                a#nav-order-tab.nav-item.nav-link(data-toggle='tab', href='#nav-order-details', role='tab', aria-controls='nav-order-details', aria-selected='false') Order Details
+                        #nav-tabContent.tab-content
+                            #nav-deliver-info.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-del-tab')
+                                #border-row.row.mx-1.mx-lg-5.mx-md-5
+                                    .col-12.mx-1.mx-lg-2.mx-md-2.my-5
+                                        .delivery-info
+                                        p Product Name: #{product.productName}
 
-                                    p  Name: #{order.name}
-                        
-                                    p  Address: #{order.address}
-                                    
-                                    p State: #{order.state}
-                                    
-                                    p City:  #{ order.area}
-                                    
-                                    p
-                                        | Phone: 
-                                        a(href=`tel:${order.phone}`)= order.phone 
-                                    p
-                                        | Alternative Phone Number:
-                                        a(href=`tel:${order.altphone}`)= order.altPhone
-                                    .text-center
-                                        button.btn(data-clipboard-text=`${product.productName} ${order.name} ${order.address} ${order.state} ${order.area} ${order.phone} ${order.altPhone} `, style='background-color: #01afee; color: white;')
-                                            | Copy Everything
+                                        p  Name: #{order.name}
+                            
+                                        p  Address: #{order.address}
+                                        
+                                        p State: #{order.state}
+                                        
+                                        p City:  #{ order.area}
+                                        
+                                        p
+                                            | Phone: 
+                                            a(href=`tel:${order.phone}`)= order.phone 
+                                        p
+                                            | Alternative Phone Number:
+                                            a(href=`tel:${order.altphone}`)= order.altPhone
+                                        .text-center
+                                            button.btn(data-clipboard-text=`${product.productName} ${order.name} ${order.address} ${order.state} ${order.area} ${order.phone} ${order.altPhone} `, style='background-color: #01afee; color: white;')
+                                                | Copy Everything
 
-                        #nav-order-details.tab-pane.fade(role='tabpanel', aria-labelledby='nav-order-tab')
-                            p.mx-3
-                                | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
-                                | You can contact the buyer to encourage them to pay or you deliver offline
+                            #nav-order-details.tab-pane.fade(role='tabpanel', aria-labelledby='nav-order-tab')
+                                p.mx-3
+                                    | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
+                                    | You can contact the buyer to encourage them to pay or you deliver offline

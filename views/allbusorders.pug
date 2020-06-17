@@ -30,21 +30,21 @@ block content
 
                                                     
 
-                                                    tr.table-row(style= 'height: 65px')(data-href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)
+                                                    tr.table-row(style= 'height: 65px' data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
                                                     
                                                         td
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=Date
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=Date
                                                                                                 
                                                         td
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)= product.productName
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= product.productName
                                                         td
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)= orders.status
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.status
                                                         td
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=orders.name                              
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=orders.name                              
                                                         td
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=`₦${carttotal}`
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=`₦${carttotal}`
                                                         td(colspan='2')
-                                                            a(href=`/myorder/${product.slug}/${orders._id}/${cart._id}`)=orders.tags
+                                                            a(href=`/myorder/${product.id}/${orders._id}/${cart._id}`)=orders.tags
 
                             //- .text-center.mb-3
                             //-     h6

@@ -3,9 +3,9 @@ block Indexcss
 block script
 block content    
     section
-        .form-container(style='margin-top: 150px;')
-            #card-order.card.border-5.box-shadow
-                .card-block.py-5
+        .mobile-container(style='margin-top: 150px;')
+            .card.border-0.box-shadow
+                .card-block
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
                             -const Date = order.date.toDateString();
@@ -52,9 +52,10 @@ block content
                         .col
          
                     nav
-                        #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
-                            a#nav-order-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-order-details ', role='tab', aria-controls='nav-order-details', aria-selected='true')  Order Details 
-                            a#nav-del-tab.nav-item.nav-link(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='false')  Delivery Details
+                        .row.no-gutters
+                            #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
+                                a#nav-order-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-order-details ', role='tab', aria-controls='nav-order-details', aria-selected='true')  Order Details 
+                                a#nav-del-tab.nav-item.nav-link(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='false')  Delivery Details
                         #nav-tabContent.tab-content
                             #nav-order-details.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-order-tab')
                                 #border-row.row.mx-1.mx-lg-5.mx-md-5

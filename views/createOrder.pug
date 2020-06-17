@@ -5,9 +5,9 @@ block header
 block footer
         section
             .summary_container
-                #card-order-summary.card.border-1.box-shadow-1
+                .card.border-1.box-shadow-1
                     .card.wrap
-                        .card-body(style='background-color: #FFFFFF;')
+                        .card-body(style='background-color:#eee;')
                             h5#th-1.card-title.my-4 Order Summary
                             ul.list-group
                             -const carttotal = cart.total.toLocaleString()
@@ -38,7 +38,7 @@ block footer
             .form-container.my-5
                 .text-center.my-3
                     h6#form-heading Fill in your Delivery Details
-                .card.border-2.box-shadow-1.py-5.mx-lg-5
+                .card.border-2.box-shadow-1.py-5.mx-lg-1
                     .card.wrap.border-0
                     form.create-order-form
                         .row.mx-2

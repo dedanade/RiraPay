@@ -15,11 +15,10 @@ block content
                         h6 RiraPay Wallet Balance
                         h3  &#x20A6;0.00
 
-    section
+    section.large-view-table
         .large-container
             .card-body.py-5.mx-2
                 - const order = user.orders;
-                
                 if(order.length)
                     ul.list-group
                         li.d-flex.justify-content-between
@@ -44,7 +43,7 @@ block content
                                                 each businessUser in orders.businessUser
 
                                                     
-                                                    - const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
                                                     -const carttotal = cart.total.toLocaleString()
                                                 
 
@@ -75,7 +74,51 @@ block content
                         form#updateorderform
                             input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
                             button#sign-up-button.btn.btn-md.my-3.mx-auto.d-block(type='submit') Update Orders
+    section
+        .small-container
+            if (order.length)
+                ul.list-group.my-4
+                    li.d-flex.justify-content-between.my-2
+                        h4 Latest Orders:
+                        form#updateFormmobile
+                            input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
+                            button#sign-up-button.btn.btn-sm.my-0(type='submit') Refresh Orders 
+                    each orders in user.orders.slice(0, 10)
+                        each cart in orders.cart
+                            each product in orders.product
+                                each businessUser in orders.businessUser
+                                    -const carttotal = cart.total.toLocaleString()
+                                    -const mobiledate = moment(orders.date).format('DD/MMM/YY');
+
+                                    .mini-table(data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                        .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
+                                            .col-9
+                                                p.m-0 
+                                                    a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                                        b= `₦${carttotal}`
+                                                p.m-0 
+                                                    a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)=product.productName 
+                                            .col-3
+                                                p.m-0 
+                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                                p.m-0 
+                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= mobiledate
+                    p.my-3.mx-2=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
                     
+                    .text-center.my-3
+                        h6
+                            a#sign-up-button.btn(href='#') View All orders
+            
+            if (!order.length)
+                ul.list-group.my-4
+                    li.d-flex.justify-content-between.my-2
+                        h4 Latest Orders:   
+                .text-center.mx-3 
+                    h6=`If you have Placed Order with your Email Address ${user.email}, Click on the button below to show the orders`
+                    form#updateFormmobile
+                        input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
+                        button#sign-up-button.btn.btn-md.my-3.mx-auto.d-block(type='submit') Update Orders      
+                
                                 
                                             
                     

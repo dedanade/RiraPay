@@ -14,51 +14,50 @@ block content
         .form-container(style='margin-top: 150px; margin-bottom: 150px;')
             .row
                 .col-12
-                    .card.border-1.shadow-sm
-                        .card-body.pt-5.pb-2.mx-2.mb-5
-                            h5 Confirm Your Order Details:
-                            .row.mt-5.mb-3.mx-3
-                                .col-4
-                                    p.font-weight-bold Name:
-                                .col-8
-                                    p= order.name
-                            .row.my-3.mx-3
-                                .col-4
-                                    p.font-weight-bold Address:
-                                .col-8
-                                    p= order.address
-                            .row.my-3.mx-3
-                                .col-4
-                                    p.font-weight-bold State:
-                                .col-8
-                                    p= order.state
-                            .row.my-3.mx-3
-                                .col-4
-                                    p.font-weight-bold Area:
-                                .col-8
-                                    p= order.area
-                            .row.my-3.mx-3
-                                .col-4
-                                    p.font-weight-bold Phone Number:
-                                .col-8
-                                    p= order.phone
-                            .row.my-3.mx-3
-                                .col-4
-                                    p.font-weight-bold Alt Phone Number:
-                                .col-8
-                                    p= order.altphone
-                                    if (!order.altphone)
-                                    p None  
-                            .d-flex.justify-content-between.mx-3
-                                p= product.productName
-                                p= `₦${productprice}`
-                            .d-flex.justify-content-between.mx-3
-                                p Quantity
-                                p= cart.qty
-                            .d-flex.justify-content-between.mx-3
-                                p.font-weight-bold Total:
-                                p.font-weight-bold= `#${carttotal}`
-                    input#successpage(type='hidden', name='successpage', value= `${protocol}/success/${order.id}`)
+                    .card-body.pt-3.pb-2.mx-2.mb-5
+                        h5 Confirm Your Order Details:
+                        .row.mt-5.mb-3.mx-3
+                            .col-4
+                                p.font-weight-bold Name:
+                            .col-8
+                                p= order.name
+                        .row.my-3.mx-3
+                            .col-4
+                                p.font-weight-bold Address:
+                            .col-8
+                                p= order.address
+                        .row.my-3.mx-3
+                            .col-4
+                                p.font-weight-bold State:
+                            .col-8
+                                p= order.state
+                        .row.my-3.mx-3
+                            .col-4
+                                p.font-weight-bold Area:
+                            .col-8
+                                p= order.area
+                        .row.my-3.mx-3
+                            .col-4
+                                p.font-weight-bold Phone Number:
+                            .col-8
+                                p= order.phone
+                        .row.my-3.mx-3
+                            .col-4
+                                p.font-weight-bold Alt Phone Number:
+                            .col-8
+                                p= order.altphone
+                                if (!order.altphone)
+                                p None  
+                        .d-flex.justify-content-between.mx-3
+                            p= product.productName
+                            p= `₦${productprice}`
+                        .d-flex.justify-content-between.mx-3
+                            p Quantity
+                            p= cart.qty
+                        .d-flex.justify-content-between.mx-3
+                            p.font-weight-bold Total:
+                            p.font-weight-bold= `#${carttotal}`
+                input#successpage(type='hidden', name='successpage', value= `${protocol}/success/${order.id}`)
             form#paymentForm
                 input#email(type='hidden', name='email', value= order.email)
                 input#total(type='hidden', name='total', value= cart.total)
