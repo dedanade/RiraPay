@@ -192,7 +192,7 @@ function payWithPaystack(e) {
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
     lastname: document.getElementById('orderid').value,
-    reference: { order_Id },
+    reference: `${order_Id}`,
     onClose: function() {
       alert('Window closed.');
     },
