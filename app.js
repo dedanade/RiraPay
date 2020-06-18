@@ -86,6 +86,7 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/businessUsers', businessUserRouter);
 app.use('/api/v1/orders', orderRoutes);
+app.post('/mywebhook', Ordercontroler.paystackwebhook);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

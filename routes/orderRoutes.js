@@ -12,5 +12,4 @@ router
 
 router.route('/:OrderId').patch(orderController.updateOrder);
 
-router.post('/mywebhook', orderController.paystackwebhook);
 module.exports = router;
