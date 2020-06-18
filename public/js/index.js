@@ -181,6 +181,8 @@ const successpage = (document.getElementById('successpage') || {}).value;
 const paymentForm = document.getElementById('paymentForm');
 
 if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
+const order_Id = document.getElementById('orderid').value;
+console.log(order_Id);
 
 function payWithPaystack(e) {
   e.preventDefault();
@@ -191,10 +193,13 @@ function payWithPaystack(e) {
     firstname: document.getElementById('name').value,
     reference: document.getElementById('orderid').value,
     metadata: {
-      custom_fields: {
-        orderId: document.getElementById('orderid').value,
-        value: '12323111'
-      }
+      custom_fields: [
+        {
+          display_name: 'Mobile Number',
+          variable_name: 'mobile_number',
+          value: '12323111'
+        }
+      ]
     },
     onClose: function() {
       alert('Window closed.');
