@@ -58,12 +58,9 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
 });
 
 exports.paystackwebhook = catchAsync(async (req, res, next) => {
-  const hash = crypto
-    .createHmac('sha512', secret)
-    .update(JSON.stringify(req.body))
-    .digest('hex');
+  const hash = secret;
   console.log(` The hash is ${hash}`);
-  if (hash === req.headers['x-paystack-signature']) {
+  if (req.headers['x-paystack-signature'] === hash) {
     console.log('here');
     // Retrieve the request's body
     const event = req.body;
