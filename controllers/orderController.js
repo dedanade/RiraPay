@@ -65,11 +65,11 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const event = req.body;
     // Do something with event
     // if (event === 'charge.success');
-    console.log(res);
-    console.log(`pheww ${event}`);
-    console.log(`uuhh ${event.data}`);
+    console.log(event);
   }
   res.sendStatus(200);
+  console.log(res.data);
+  console.log(res.event);
 });
 exports.getAllOrders = factory.getAll(Order);
 exports.getOrder = factory.getOne(Order);
