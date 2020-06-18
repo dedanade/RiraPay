@@ -62,11 +62,14 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     .createHmac('sha512', secret)
     .update(JSON.stringify(req.body))
     .digest('hex');
-  if (hash == req.headers['x-paystack-signature']) {
+  console.log(` The hash is ${hash}`);
+  if (hash === req.headers['x-paystack-signature']) {
     console.log('here');
     // Retrieve the request's body
     const event = req.body;
     // Do something with event
+    //   const eventtype = event.event;
+    // if (eventtype === 'charger.success') console.log(`even type na ${eventtype}`);
     // if (event === 'charge.success');
     console.log(event);
   }
