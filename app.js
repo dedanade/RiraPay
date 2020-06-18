@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
+const Ordercontroler = require('./controllers/orderController');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const businessUserRouter = require('./routes/businessUserRoutes');
@@ -42,6 +43,12 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour!'
 });
 app.use('/api', limiter);
+
+app.post(
+  '/mywebhook',
+  express.raw({ type: 'application/json' }),
+  Ordercontroler.paystackwebhook
+);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));

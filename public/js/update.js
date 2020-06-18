@@ -79,6 +79,6 @@ export const updateOrderEmails = async orders => {
     window.setTimeout(() => {
       location.reload();
     }, 1500);
-    console.log(err.response.data.message);
+    console.log(`🔥🔥🔥 ${err.response.data.message}`);
   }
 };

@@ -62,6 +62,8 @@ block content
                 input#email(type='hidden', name='email', value= order.email)
                 input#total(type='hidden', name='total', value= cart.total)
                 input#name(type='hidden', name='name', value= order.name)
+                input#orderid(type='hidden', name='orderid', value= order._id)
+
                 .text-center
                     .form-submit
                         button.checkout1-button.btn.btn-lg.mt-5.mb-3#pay-btn(type= 'submit') Pay Now

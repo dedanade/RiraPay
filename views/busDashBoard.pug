@@ -172,10 +172,10 @@ block content
                                                 a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
                                                     b= `₦${carttotal}`
                                             p.m-0 
-                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`) Adebonojo Daniel
+                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.name
                                         .col-3
                                             p.m-0 
-                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`) Incomplete
+                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.status
                                             p.m-0 
                                             a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= mobiledate
                 .text-center.my-3

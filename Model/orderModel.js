@@ -68,8 +68,8 @@ const orderSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: ['incomplete', 'paid', 'shipped', 'completed', 'canceled'],
-      default: 'incomplete'
+      enum: ['Incomplete', 'Paid', 'Shipped', 'Completed', 'Canceled'],
+      default: 'Incomplete'
     },
 
     tags: [
