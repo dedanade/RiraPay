@@ -1,8 +1,6 @@
 /*eslint-disable */
 
 const crypto = require('crypto');
-
-const secret = process.env.SECRET_KEYS;
 const Order = require('./../Model/orderModel');
 // const User = require('./../Model/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -58,9 +56,12 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
 });
 
 exports.paystackwebhook = catchAsync(async (req, res, next) => {
-  const hash = secret;
-  console.log(` The hash is ${hash}`);
-  if (req.headers['x-paystack-signature'] === hash) {
+  const secret = process.env.SECRET_KEYS;
+  const hash = crypto
+    .createHmac('sha512', secret)
+    .update(JSON.stringify(req.body))
+    .digest('hex');
+  if (hash === req.headers['x-paystack-signature']) {
     console.log('here');
     // Retrieve the request's body
     const event = req.body;
