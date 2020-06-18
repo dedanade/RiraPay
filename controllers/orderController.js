@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 const crypto = require('crypto');
 
 const secret = process.env.SECRET_KEYS;
@@ -60,7 +62,8 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     .createHmac('sha512', secret)
     .update(JSON.stringify(req.body))
     .digest('hex');
-  if (hash === req.headers['x-paystack-signature']) {
+  if (hash == req.headers['x-paystack-signature']) {
+    console.log('here');
     // Retrieve the request's body
     const event = req.body;
     // Do something with event
