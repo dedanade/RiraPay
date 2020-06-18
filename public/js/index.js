@@ -189,13 +189,15 @@ function payWithPaystack(e) {
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
-    order_id: document.getElementById('orderid').value,
+    custom_fields: {
+      orderId: document.getElementById('orderid').value
+    },
+
     onClose: function() {
       alert('Window closed.');
     },
     callback: function(response) {
-      window.location =
-        document.getElementById('successpage').value + response.reference;
+      window.location = document.getElementById('successpage').value;
       alert(message);
     }
   });
