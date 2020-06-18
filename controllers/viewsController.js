@@ -263,8 +263,8 @@ exports.getsuccesspage = catchAsync(async (req, res, next) => {
   //   { status: 'Paid' },
   //   { new: true }
   // );
-  order.status = 'Paid';
-  await order.save();
+  // order.status = 'Paid';
+  // await order.save();
   // const cart = await Cart.findById(order.cart);
 
   // const product = await Cart.findById(order.product);
