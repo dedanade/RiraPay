@@ -182,7 +182,7 @@ const paymentForm = document.getElementById('paymentForm');
 
 if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
 
-const order_Id = document.getElementById('orderid').value;
+const order_Id = (document.getElementById('orderid') || {}).value.toHexString();
 
 function payWithPaystack(e) {
   e.preventDefault();
@@ -190,9 +190,9 @@ function payWithPaystack(e) {
     key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
-    firstname: document.getElementById('name').value,
-    lastname: document.getElementById('orderid').value,
-    reference: `${order_Id}`,
+    firstname: 'dan',
+    lastname: document.getElementById('orderid').value.toString(),
+    ref: order_Id,
     onClose: function() {
       alert('Window closed.');
     },
