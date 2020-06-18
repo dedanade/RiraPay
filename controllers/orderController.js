@@ -62,7 +62,6 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     .update(JSON.stringify(req.body))
     .digest('hex');
   if (hash === req.headers['x-paystack-signature']) {
-    console.log('here');
     // Retrieve the request's body
     const event = req.body;
     // Do something with event
@@ -72,7 +71,6 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     console.log(event);
   }
   res.sendStatus(200);
-  console.log(res);
 });
 exports.getAllOrders = factory.getAll(Order);
 exports.getOrder = factory.getOne(Order);
