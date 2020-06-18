@@ -189,7 +189,7 @@ function payWithPaystack(e) {
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
-    reference: document.getElementById('orderid').value,
+    orderId: document.getElementById('orderid').value,
     onClose: function() {
       alert('Window closed.');
     },
