@@ -239,7 +239,7 @@ exports.myorderinfo = catchAsync(async (req, res, next) => {
 
   const protocol = `${req.protocol}://${req.get('host')}`;
 
-  if (!order) {
+  if (!order && !cart && !product) {
     return next(new AppError('There is no order with that ID.', 404));
   }
 
