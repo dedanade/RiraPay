@@ -192,15 +192,13 @@ function payWithPaystack(e) {
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
     lastname: document.getElementById('orderid').value,
-    metadata: {
-      referrer: order_Id
-    },
+    reference: { order_Id },
     onClose: function() {
       alert('Window closed.');
     },
     callback: function(response) {
-      window.location = document.getElementById('successpage').value;
-      +response.reference;
+      window.location =
+        document.getElementById('successpage').value / +response.reference;
       alert(message);
     }
   });
