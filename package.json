@@ -17,6 +17,7 @@
     "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "clipboard": "^2.0.6",
     "compression": "^1.7.4",
     "connect-mongodb-session": "^2.3.2",
