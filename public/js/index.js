@@ -191,12 +191,10 @@ function payWithPaystack(e) {
     firstname: document.getElementById('name').value,
     reference: document.getElementById('orderid').value,
     metadata: {
-      custom_fields: [
-        {
-          orderId: document.getElementById('orderid').value,
-          value: '12323111'
-        }
-      ]
+      custom_fields: {
+        orderId: document.getElementById('orderid').value,
+        value: '12323111'
+      }
     },
     onClose: function() {
       alert('Window closed.');
