@@ -65,6 +65,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const event = req.body;
     // Do something with event
     // if (event === 'charge.success');
+    console.log(res);
     console.log(event);
   }
   res.send(200);
