@@ -44,7 +44,12 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-app.post('/mywebhook', Ordercontroler.paystackwebhook);
+app.post(
+  '/mywebhook',
+  express.raw({ type: 'application/json' }),
+  Ordercontroler.paystackwebhook
+);
+
 console.log('Got here oo');
 
 // Body parser, reading data from body into req.body
