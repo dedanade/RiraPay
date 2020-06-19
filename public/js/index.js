@@ -182,7 +182,7 @@ const paymentForm = document.getElementById('paymentForm');
 
 if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
 
-const order_Id = (document.getElementById('orderid') || {}).value.toHexString();
+const order_Id = (document.getElementById('orderid') || {}).value;
 
 function payWithPaystack(e) {
   e.preventDefault();
@@ -191,14 +191,14 @@ function payWithPaystack(e) {
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
     firstname: 'dan',
-    lastname: document.getElementById('orderid').value.toString(),
+    lastname: 'dani',
     ref: order_Id,
     onClose: function() {
       alert('Window closed.');
     },
     callback: function(response) {
-      window.location =
-        document.getElementById('successpage').value / +response.reference;
+      window.location = document.getElementById('successpage').value;
+      +response.reference;
       alert(message);
     }
   });
