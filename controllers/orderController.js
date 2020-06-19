@@ -3,7 +3,6 @@ const Order = require('./../Model/orderModel');
 // const User = require('./../Model/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
-const { findByIdAndUpdate } = require('./../Model/orderModel');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -66,7 +65,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const eventtype = event.event;
     const ordernum = event.data.reference;
     if (eventtype === 'charge.success') console.log(ordernum);
-    const order = await findByIdAndUpdate({ _id: ordernum });
+    const order = await Order.findById({ _id: ordernum });
     order.status = 'Paid';
     await order.save();
   }
