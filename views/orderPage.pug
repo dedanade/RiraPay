@@ -11,7 +11,7 @@ block content
                             -const Date = order.date.toDateString();
                             -const carttotal = cart.total.toLocaleString()
 
-                            h5#ord-text.ml-0= product.productName
+                            h5#ord-text.ml-0= order.status
                             p#ord-text
                             b Quality: 
                             = cart.qty
@@ -67,11 +67,11 @@ block content
                                             a(href='http://')  Learn More 
                                         p To make payment, click on the button below or if you prefer paying offline, click on the merchant info to talk with them.
                                 
-                                    form#paymentForm2
+                                    form#paymentFormOrderPage
                                         input#email2(type='hidden', name='email2', value= order.email)
                                         input#total2(type='hidden', name='total2', value= cart.total)
                                         input#name2(type='hidden', name='name2', value= order.name)
-                                        input#orderId(type='hidden', name='orderId', value= order._id)
+                                        input#orderIdOrderPage(type='hidden', name='orderIdOrderPage', value= order._id)
 
                                         .text-center
                                             .form-submit
@@ -111,27 +111,4 @@ block content
                                         p
                                             | Alternative Phone Number:
                                             a(href=`tel:${order.altphone}`)= order.altPhone
-                                        -
-                                            const paymentForm2 = document.getElementById('paymentForm2');
-                                            const order_Id = (document.getElementById('orderId') || {}).value;
-
-                                            if (paymentForm2) paymentForm2.addEventListener('submit', payWithPaystack, false);
-                                            function payWithPaystack(e) {
-                                                e.preventDefault();
-                                                var handler = PaystackPop.setup({
-                                                    key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
-                                                    email: document.getElementById('email2').value,
-                                                    amount: document.getElementById('total2').value * 100,
-                                                    firstname: document.getElementById('name2').value,
-                                                    ref: order_Id,
-                                                    onClose: function() {
-                                                    alert('Window closed.');
-                                                    },
-                                                    callback: function(response) {
-                                                    location.reload
-                                                    alert(message);
-                                                    }
-                                                });
-
-                                                handler.openIframe();
-                                                }
+                                    

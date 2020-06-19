@@ -204,6 +204,35 @@ function payWithPaystack(e) {
   handler.openIframe();
 }
 
+const paymentFormOrderPage = document.getElementById('paymentFormOrderPage');
+const orderIdOrderPage = (document.getElementById('orderIdOrderPage') || {})
+  .value;
+
+if (paymentFormOrderPage)
+  paymentFormOrderPage.addEventListener(
+    'submit',
+    payWithPaystackOrderPage,
+    false
+  );
+function payWithPaystackOrderPage(e) {
+  e.preventDefault();
+  var handler = PaystackPop.setup({
+    key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
+    email: document.getElementById('email2').value,
+    amount: document.getElementById('total2').value * 100,
+    firstname: document.getElementById('name2').value,
+    ref: orderIdOrderPage,
+    onClose: function() {
+      alert('Window closed.');
+    },
+    callback: function(response) {
+      location.reload;
+      alert(message);
+    }
+  });
+
+  handler.openIframe();
+}
 $('.mini-table[data-href]').on('click', function() {
   window.location = $(this).data('href');
   $(this).css({ background: 'darkgray' });
