@@ -196,8 +196,7 @@ function payWithPaystack(e) {
       alert('Window closed.');
     },
     callback: function(response) {
-      window.location =
-        document.getElementById('successpage').value / +response.reference;
+      window.location = document.getElementById('successpage').value;
       alert(message);
     }
   });

@@ -1,10 +1,9 @@
-/*eslint-disable */
-
 const crypto = require('crypto');
 const Order = require('./../Model/orderModel');
 // const User = require('./../Model/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
+const { findByIdAndUpdate } = require('./../Model/orderModel');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -64,11 +63,12 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
   if (hash === req.headers['x-paystack-signature']) {
     // Retrieve the request's body
     const event = req.body;
-    // Do something with event
-    //   const eventtype = event.event;
-    // if (eventtype === 'charger.success') console.log(`even type na ${eventtype}`);
-    // if (event === 'charge.success');
-    console.log(event);
+    const eventtype = event.event;
+    const ordernum = event.data.reference;
+    if (eventtype === 'charge.success') console.log(ordernum);
+    const order = await findByIdAndUpdate({ _id: ordernum });
+    order.status = 'Paid';
+    await order.save();
   }
   res.sendStatus(200);
 });
