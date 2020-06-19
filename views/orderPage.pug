@@ -35,14 +35,14 @@ block content
                                     b Status: 
                                     |Incomplete (You're yet to pay for this order) 
 
-                    if (order.status === 'paid')
+                    if (order.status === 'Paid')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
                                     | Paid (You have completed payment for the order. Merchant has 48 hours to ship) 
 
-                    if (order.status === 'shipped')
+                    if (order.status === 'Shipped')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
@@ -67,10 +67,12 @@ block content
                                             a(href='http://')  Learn More 
                                         p To make payment, click on the button below or if you prefer paying offline, click on the merchant info to talk with them.
                                 
-                                    form#paymentForm
-                                        input#email(type='hidden', name='email', value= order.email)
-                                        input#total(type='hidden', name='total', value= cart.total)
-                                        input#name(type='hidden', name='name', value= order.name)
+                                    form#paymentForm2
+                                        input#email2(type='hidden', name='email2', value= order.email)
+                                        input#total2(type='hidden', name='total2', value= cart.total)
+                                        input#name2(type='hidden', name='name2', value= order.name)
+                                        input#orderId(type='hidden', name='orderId', value= order._id)
+
                                         .text-center
                                             .form-submit
                                                 button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
@@ -109,3 +111,27 @@ block content
                                         p
                                             | Alternative Phone Number:
                                             a(href=`tel:${order.altphone}`)= order.altPhone
+                                        -
+                                            const paymentForm2 = document.getElementById('paymentForm2');
+                                            const order_Id = (document.getElementById('orderId') || {}).value;
+
+                                            if (paymentForm2) paymentForm2.addEventListener('submit', payWithPaystack, false);
+                                            function payWithPaystack(e) {
+                                                e.preventDefault();
+                                                var handler = PaystackPop.setup({
+                                                    key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
+                                                    email: document.getElementById('email2').value,
+                                                    amount: document.getElementById('total2').value * 100,
+                                                    firstname: document.getElementById('name2').value,
+                                                    ref: order_Id,
+                                                    onClose: function() {
+                                                    alert('Window closed.');
+                                                    },
+                                                    callback: function(response) {
+                                                    location.reload
+                                                    alert(message);
+                                                    }
+                                                });
+
+                                                handler.openIframe();
+                                                }
