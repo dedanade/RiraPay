@@ -57,7 +57,7 @@ block content
                         .d-flex.justify-content-between.mx-3
                             p.font-weight-bold Total:
                             p.font-weight-bold= `#${carttotal}`
-                input#successpage(type='hidden', name='successpage', value= `${protocol}/success/${order.id}`)
+                input#successpage(type='hidden', name='successpage', value= `/success/${order.id}`)
             form#paymentForm
                 input#email(type='hidden', name='email', value= order.email)
                 input#total(type='hidden', name='total', value= cart.total)
