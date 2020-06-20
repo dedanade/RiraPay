@@ -226,7 +226,7 @@ function payWithPaystackOrderPage(e) {
       alert('Window closed.');
     },
     callback: function(response) {
-      location.reload;
+      location.reload();
       +response.reference;
       alert(message);
     }
