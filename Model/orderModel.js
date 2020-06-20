@@ -4,7 +4,6 @@ const generate = require('meaningful-string');
 
 const orderSchema = new mongoose.Schema(
   {
-    orderID: String,
     email: {
       type: String,
       required: [true, 'Email address is Required'],
@@ -41,6 +40,7 @@ const orderSchema = new mongoose.Schema(
       min: [11, 'Your Business Phone Nmber should be up to 11'],
       max: [11, 'Your Business Phone Nmber should not be more than 11']
     },
+    orderNum: String,
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -119,16 +119,8 @@ orderSchema.pre(/^find/, function(next) {
   next();
 });
 
-orderSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'orderID',
-    select: ''
-  });
-  next();
-});
-
 orderSchema.pre('save', function(next) {
-  this.orderID = generate.random({
+  this.orderNum = generate.random({
     min: 8,
     max: 8,
     allCaps: true,

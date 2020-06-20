@@ -17,7 +17,7 @@ block content
                             = cart.qty
                             p#ord-text
                             b Order Id: 
-                            = order.orderID
+                            = order.orderNum
                             p#ord-text
                             b Date Created: 
                             =Date
@@ -72,7 +72,7 @@ block content
                                             input#email2(type='hidden', name='email2', value= order.email)
                                             input#total2(type='hidden', name='total2', value= cart.total)
                                             input#name2(type='hidden', name='name2', value= order.name)
-                                            input#newOrderID2(type='hidden', name='newOrderID2', value= order.orderID)
+                                            input#newOrderID2(type='hidden', name='newOrderID2', value= order.orderNum)
                                             input#orderIdOrderPage(type='hidden', name='orderIdOrderPage', value= order._id)
 
                                             .text-center
