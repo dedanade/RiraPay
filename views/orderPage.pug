@@ -11,13 +11,13 @@ block content
                             -const Date = order.date.toDateString();
                             -const carttotal = cart.total.toLocaleString()
 
-                            h5#ord-text.ml-0= order.status
+                            h5#ord-text.ml-0= product.productName
                             p#ord-text
                             b Quality: 
                             = cart.qty
                             p#ord-text
                             b Order Id: 
-                            = order.id
+                            = order.orderID
                             p#ord-text
                             b Date Created: 
                             =Date
@@ -47,7 +47,7 @@ block content
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
-                                    | Shipped (Order has been shipped, wait for it to be delivered) 
+                                    | Shipped (Order has been shipped, wait for it to be delivered)
                     #border-row.row.mx-1.mx-lg-5.mx-md-5.my-3
                         .col
          
@@ -61,36 +61,42 @@ block content
                                 #border-row.row.mx-1.mx-lg-5.mx-md-5
                                 .col-12.my-3
                                     .justify-content-center.my-5
+                                    if (order.status === 'Incomplete')
                                         p
                                             | This order is currently Incomplete which means you&apos;ve not paid for the product through Rirapay. 
                                             | When you pay with RiraPay, you&apos;re Guaranteed Product delivery and 7 days money-back Guarantee. 
                                             a(href='http://')  Learn More 
                                         p To make payment, click on the button below or if you prefer paying offline, click on the merchant info to talk with them.
                                 
-                                    form#paymentFormOrderPage
-                                        input#email2(type='hidden', name='email2', value= order.email)
-                                        input#total2(type='hidden', name='total2', value= cart.total)
-                                        input#name2(type='hidden', name='name2', value= order.name)
-                                        input#orderIdOrderPage(type='hidden', name='orderIdOrderPage', value= order._id)
+                                        form#paymentFormOrderPage
+                                            input#email2(type='hidden', name='email2', value= order.email)
+                                            input#total2(type='hidden', name='total2', value= cart.total)
+                                            input#name2(type='hidden', name='name2', value= order.name)
+                                            input#newOrderID2(type='hidden', name='newOrderID2', value= order.orderID)
+                                            input#orderIdOrderPage(type='hidden', name='orderIdOrderPage', value= order._id)
 
-                                        .text-center
-                                            .form-submit
-                                                button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
+                                            .text-center
+                                                .form-submit
+                                                    button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
                                     
-                                    .text-center
-                                        button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details
-                                        .justify-content-center
-                                            #merchantinfo.collapse
-                                                .card.card-body
-                                                    p Merchant Name: 
-                                                        = busUser.businessName
-                                                    p Merchant Phone Number: 
-                                                        a(href=`tel:${busUser.businessPhoneNumber}`)= busUser.businessPhoneNumber
-                                                    
-                                                    .ignore-css
-                                                        p(style='font-size: 13px; text-align: justify; margin: 0px, 0px;')
-                                                            | *Please note that RiraPay is not
-                                                            | involve in any transaction carried out offline without the prior notice of Rirapay
+                                        .text-center
+                                            button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details
+                                            .justify-content-center
+                                                #merchantinfo.collapse
+                                                    .card.card-body
+                                                        p Merchant Name: 
+                                                            = busUser.businessName
+                                                        p Merchant Phone Number: 
+                                                            a(href=`tel:${busUser.businessPhoneNumber}`)= busUser.businessPhoneNumber
+                                                        
+                                                        .ignore-css
+                                                            p(style='font-size: 13px; text-align: justify; margin: 0px, 0px;')
+                                                                | *Please note that RiraPay is not
+                                                                | involve in any transaction carried out offline without the prior notice of Rirapay
+                                    if (order.status === 'Paid')
+                                        p.mx-2.py-3.text-center Congrats, you've paid for this order. The merchant has 48 hours to ship this item. If item is not shipped within the Timeframe, kindly contact us to cancel the order and refund your money
+
+
                             #nav-deliver-info.tab-pane.fade(role='tabpanel', aria-labelledby='nav-del-tab')
                                 #border-row.row.mx-1.mx-lg-5.mx-md-5
                                 .col-12.mx-1.mx-lg-2.mx-md-2.my-5

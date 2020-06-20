@@ -191,6 +191,7 @@ function payWithPaystack(e) {
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
+    lastname: document.getElementById('newOrderID').value,
     ref: order_Id,
     onClose: function() {
       alert('Window closed.');
@@ -221,6 +222,7 @@ function payWithPaystackOrderPage(e) {
     email: document.getElementById('email2').value,
     amount: document.getElementById('total2').value * 100,
     firstname: document.getElementById('name2').value,
+    lastname: document.getElementById('newOrderID2').value,
     ref: orderIdOrderPage,
     onClose: function() {
       alert('Window closed.');

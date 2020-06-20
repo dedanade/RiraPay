@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const generate = require('meaningful-string');
 
 const orderSchema = new mongoose.Schema(
   {
+    orderID: String,
     email: {
       type: String,
       required: [true, 'Email address is Required'],
@@ -109,18 +111,29 @@ orderSchema.pre(/^find/, function(next) {
   });
   next();
 });
-// orderSchema.pre(/^find/, function(next) {
-//   this.populate({
-//     path: 'user',
-//     select: ''
-//   });
-//   next();
-// });
-
 orderSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'businessUser',
     select: ''
+  });
+  next();
+});
+
+orderSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'orderID',
+    select: ''
+  });
+  next();
+});
+
+orderSchema.pre('save', function(next) {
+  this.orderID = generate.random({
+    min: 8,
+    max: 8,
+    allCaps: true,
+    onlyNumbers: true,
+    startWith: 'R'
   });
   next();
 });
