@@ -227,6 +227,7 @@ function payWithPaystackOrderPage(e) {
     },
     callback: function(response) {
       location.reload;
+      +response.reference;
       alert(message);
     }
   });
