@@ -64,7 +64,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const event = req.body;
     const eventtype = event.event;
     const ordernum = event.data.reference;
-    if (eventtype === 'charge.success') console.log(ordernum);
+    if (eventtype === 'charge.success');
     const order = await Order.findById({ _id: ordernum });
     order.status = 'Paid';
     await order.save();
