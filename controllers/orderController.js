@@ -66,12 +66,15 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const event = req.body;
     const eventtype = event.event;
     const ordernum = event.data.reference;
-    const newtotal = event.data.amount;
+    const newtotal = event.data.amount / 100;
     if (eventtype === 'charge.success');
     const order = await Order.findById({ _id: ordernum });
     const cart = await Cart.findById(order.cart);
+
+    cart.total = newtotal;
+    await cart.save();
+
     console.log(cart);
-    console.log(newtotal);
 
     order.status = 'Paid';
     await order.save();
