@@ -74,8 +74,6 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     cart.total = newtotal;
     await cart.save();
 
-    console.log(cart);
-
     order.status = 'Paid';
     await order.save();
   }
