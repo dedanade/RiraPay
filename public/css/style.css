@@ -361,7 +361,11 @@ table {
   background-color: #01afee;
   color: white;
 }
-
+.btn-link {
+  text-decoration: none !important;
+  background-color: #01afee;
+  color: white;
+}
 @media (max-width: 728px) {
   .large-view-table {
     display: none;

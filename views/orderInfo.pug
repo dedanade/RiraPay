@@ -7,15 +7,52 @@ block content
 
     script.
         fbq('track', 'CompleteRegistration');
-  
+    section
+        .container
+            .text-center
+                img(src='#')
+                h2(style='color: black; margin-top: 30px;') You&apos;re 100% safe when you Buy with Rirapay
+
+    section#what-rira-checkout
+        .container
+            #accordion.my-5
+                .card
+                    #headingOne.card-header
+                        h2.mb-0
+                            button.btn.btn-link(data-toggle='collapse', data-target='#what_is_rira', aria-expanded='true', aria-controls='what_is_rira')
+                                | What is RiraPay? (click here to Learn More)
+                    #what_is_rira.collapse(aria-labelledby='headingOne', data-parent='#accordion')
+                        .card-body
+                            p Rirapay is an Escrow Payment that serves as an intermediary between you and a merchant. RiraPay makes you enjoy the quality of products you buy online
+                .card
+                    #headingTwo.card-header
+                        h2.mb-0
+                            button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#why__rira', aria-expanded='false', aria-controls='why__rira')
+                                | How is RiraPay better than Pay on Delivery?
+                    #why__rira.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
+                        .card-body
+                            ul
+                                li You Enjoy 48 hours shipping
+                                li 7 Days Money-back Guarantee : You have 7 days to test the Quality of the product after being delivered
+                                li Fast Refund: Not satisfied with the product? You get your money back directly into you bank account within 48 hours!
+                                li Enjoy huge discount also
+
+                            p.text-center
+                                a(href='#')  Learn More About Rirapay
+                        
     section
         -const carttotal = cart.total.toLocaleString()
         -const productprice = product.price.toLocaleString()
-        .form-container(style='margin-top: 150px; margin-bottom: 150px;')
+        -const discount = (product.discount/100) * cart.total
+        -const discountPrice = (cart.total - discount)
+        -const strdiscountprice = discountPrice.toLocaleString()
+        .form-container(style='margin-top: 50px; margin-bottom: 150px;')
             .row
                 .col-12
                     .card-body.pt-3.pb-2.mx-2.mb-5
-                        h5 Confirm Your Order Details:
+                        if (product.discount > 0)
+                            h2.text-center.mb-4=`Check Below for a ${product.discount}% discount valid for today 😄😄😄 `
+                        h4 Confirm Your Order Details:
                         .row.mt-5.mb-3.mx-3
                             .col-4
                                 p.font-weight-bold Name:
@@ -57,10 +94,14 @@ block content
                         .d-flex.justify-content-between.mx-3
                             p.font-weight-bold Total:
                             p.font-weight-bold= `#${carttotal}`
-                input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)
+
+            if (product.discount > 0) 
+                p.mx-3=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
+
+            input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)
             form#paymentForm
                 input#email(type='hidden', name='email', value= order.email)
-                input#total(type='hidden', name='total', value= cart.total)
+                input#total(type='hidden', name='total', value= discountPrice)
                 input#name(type='hidden', name='name', value= order.name)
                 input#newOrderID(type='hidden', name='newOrderID', value= order.orderNum)
                 input#orderid(type='hidden', name='orderid', value= order._id)

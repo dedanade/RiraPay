@@ -20,6 +20,9 @@ block content
                                 p.font-weight-bold Additional Info:
                                 p.mx-4= product.additionalInfo
                             .d-flex.mx-2.my-3
+                                p.font-weight-bold Discount:
+                                p.mx-4= `${product.discount}%`
+                            .d-flex.mx-2.my-3
                                 p.font-weight-bold Product link
                                 .mx-2
                                     button.btn(data-clipboard-text=`${protocol}/product/${product.slug}/${product.id}/${businessUser.id}`, style='background-color: #01afee; color: white;')

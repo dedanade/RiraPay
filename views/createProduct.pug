@@ -23,8 +23,15 @@ block content
                                     input#productStock.form-control(type='number', placeholder='Quanity Available' required='')
                             .row.mx-2.py-3
                                 .col
-                                    label(for='additionalInfo') Additional Info (Not required)
-                                    textarea#additionalInfo.form-control.rounded-0(placeholder='eg: Bluetooth Speaker with 6 hours Usage Time', rows='3')
+                                    label(for='additionalInfo') Additional Information (Not required)
+                                    input#additionalInfo.form-control(type='text', placeholder='Info buyers need to know before placing order')
+                            .row.mx-3.py-3
+                                .col-2.p-1
+                                    p I want
+                                .col-2.p-1
+                                    input#inputDiscount.form-control(type='number')
+                                .col-8.p-1
+                                    p % for every order placed with RiraPay.
                             .row
                                 .col.ms-2.py-4
                                     input#businessId(type='hidden', value= businessUser.id)

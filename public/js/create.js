@@ -7,7 +7,8 @@ export const createProduct = async (
   productName,
   price,
   stock,
-  additionalInfo
+  additionalInfo,
+  discount
 ) => {
   try {
     const res = await axios({
@@ -17,7 +18,8 @@ export const createProduct = async (
         productName,
         price,
         stock,
-        additionalInfo
+        additionalInfo,
+        discount
       }
     });
 

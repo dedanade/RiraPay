@@ -79,6 +79,14 @@ const orderSchema = new mongoose.Schema(
         type: String
       }
     ],
+    logisticName: {
+      type: String,
+      default: 'None'
+    },
+    trackingNum: {
+      type: Number,
+      default: '00000'
+    },
 
     date: { type: Date, default: Date.now }
   },

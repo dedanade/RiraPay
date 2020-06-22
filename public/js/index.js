@@ -90,8 +90,9 @@ if (createProductForm)
     const price = document.getElementById('productPrice').value;
     const stock = document.getElementById('productStock').value;
     const additionalInfo = document.getElementById('additionalInfo').value;
+    const discount = document.getElementById('inputDiscount').value;
 
-    createProduct(productName, price, stock, additionalInfo);
+    createProduct(productName, price, stock, additionalInfo, discount);
   });
 
 if (createCartinput)
