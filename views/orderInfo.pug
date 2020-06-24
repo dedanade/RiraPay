@@ -46,55 +46,35 @@ block content
         -const discount = (product.discount/100) * cart.total
         -const discountPrice = (cart.total - discount)
         -const strdiscountprice = discountPrice.toLocaleString()
-        .form-container(style='margin-top: 50px; margin-bottom: 150px;')
-            .row
-                .col-12
-                    .card-body.pt-3.pb-2.mx-2.mb-5
-                        if (product.discount > 0)
-                            h4#form-heading.mx-2.text-center.mb-5=`Wait! Don't Go. Check Below for a ${product.discount}% discount valid for today ONLY 👇👇👇`
-                        
-                        h4 Confirm Your Order Details:
-                        .row.mt-5.mb-3.mx-3
-                            .col-4
-                                p.font-weight-bold Name:
-                            .col-8
-                                p= order.name
-                        .row.my-3.mx-3
-                            .col-4
-                                p.font-weight-bold Address:
-                            .col-8
-                                p= order.address
-                        .row.my-3.mx-3
-                            .col-4
-                                p.font-weight-bold State:
-                            .col-8
-                                p= order.state
-                        .row.my-3.mx-3
-                            .col-4
-                                p.font-weight-bold Area:
-                            .col-8
-                                p= order.area
-                        .row.my-3.mx-3
-                            .col-4
-                                p.font-weight-bold Phone Number:
-                            .col-8
-                                p= order.phone
-                        .row.my-3.mx-3
-                            .col-4
-                                p.font-weight-bold Alt Phone Number:
-                            .col-8
-                                p= order.altphone
-                                if (!order.altphone)
-                                p None  
-                        .d-flex.justify-content-between.mx-3
-                            p= product.productName
-                            p= `₦${productprice}`
-                        .d-flex.justify-content-between.mx-3
-                            p Quantity
-                            p= cart.qty
-                        .d-flex.justify-content-between.mx-3
-                            p.font-weight-bold Total:
-                            p.font-weight-bold= `#${carttotal}`
+        .larger-container(style='margin-top: 50px; margin-bottom: 150px;')
+            .card-body.p-3.mx-2.my-3
+                if (product.discount > 0)
+                    h4#form-heading.mx-2.text-center.mb-5=`Wait! Don't Go. Scroll down for a ${product.discount}% discount valid for today ONLY 👇👇👇`
+                
+                h4 Confirm Your Order Details:
+                .row.my-5.mx-3
+                    .col-12
+                        p=`Name: ${order.name}  `
+                        p= `Phone: ${order.phone}`
+                        if(order.altphone)
+                            p= `AltPhone: ${order.altphone}`
+                        else
+                            p= `AltPhone: None`
+                    
+                    p.mt-3.font-weight-bold Delivery Address:
+                    .col-12
+                        p.m-auto=`${order.address}`
+                        p=`${order.area}, ${order.state}, Nigeria`
+                                
+                .d-flex.justify-content-between.mx-3
+                    p= product.productName
+                    p= `₦${productprice}`
+                .d-flex.justify-content-between.mx-3
+                    p Quantity
+                    p= cart.qty
+                .d-flex.justify-content-between.mx-3
+                    p.font-weight-bold Total:
+                    p.font-weight-bold= `#${carttotal}`
 
             if (product.discount > 0) 
                 p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
