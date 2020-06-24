@@ -55,7 +55,7 @@ router.get(
   viewController.allProducts
 );
 router.get(
-  '/myOrders',
+  '/myorders',
   authBusinessController.protectBusiness,
   viewController.allBusOrders
 );

@@ -107,7 +107,7 @@ block content
                                             
                                 .text-center.mb-3
                                     h6
-                                        a(href='/allbusorders') View All orders
+                                        a(href='/myorders') View All orders
                             if (!busOrder.length)
                                 .text-center
                                     p.mt-2(style='font-size: 1.2rem;') You don't have an order for now. Create a new product and share the link to your customers to pay through RiraPay
@@ -180,7 +180,7 @@ block content
                                             a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= mobiledate
                 .text-center.my-3
                     h6
-                        a#sign-up-button.btn(href='/allbusorders') View All orders
+                        a#sign-up-button.btn(href='/myorders') View All orders
             if (!busOrder.length)
                 .text-center
                     p.mt-2(style='font-size: 1.2rem;') You don't have an order for now. Create a new product and share the link to your customers to pay through RiraPay

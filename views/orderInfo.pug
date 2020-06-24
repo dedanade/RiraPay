@@ -51,7 +51,8 @@ block content
                 .col-12
                     .card-body.pt-3.pb-2.mx-2.mb-5
                         if (product.discount > 0)
-                            h2.text-center.mb-4=`Check Below for a ${product.discount}% discount valid for today 😄😄😄 `
+                            h4#form-heading.mx-2.text-center.mb-5=`Wait! Don't Go. Check Below for a ${product.discount}% discount valid for today ONLY 👇👇👇`
+                        
                         h4 Confirm Your Order Details:
                         .row.mt-5.mb-3.mx-3
                             .col-4
@@ -96,7 +97,7 @@ block content
                             p.font-weight-bold= `#${carttotal}`
 
             if (product.discount > 0) 
-                p.mx-3=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
+                p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
 
             input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)
             form#paymentForm
@@ -108,5 +109,5 @@ block content
 
                 .text-center
                     .form-submit
-                        button.checkout1-button.btn.btn-lg.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
-                        p When you pay for your product with RiraPay, you enjoy faster delivery and you will be sure to get your money-back within 7 days of receiving if not satisfied with the product.
+                        button#pay-btn.checkout1-button.btn.btn-lg.mt-5.mb-3(type= 'submit')= `Pay ₦${strdiscountprice}`
+                        p.mx-2 When you pay for your product with RiraPay, you enjoy faster delivery and you will be sure to get your money-back within 7 days of receiving if not satisfied with the product.
