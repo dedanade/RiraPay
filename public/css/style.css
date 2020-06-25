@@ -139,7 +139,7 @@ td a:hover {
 }
 
 @media (max-width: 992px) {
-  footer a {
+  footer #footer-text {
     width: 100%;
   }
 }
