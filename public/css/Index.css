@@ -292,10 +292,10 @@ p.header-text {
 }
 .header-text {
   color: white;
-  font-size: 40px;
+  font-size: 1.4rem;
   text-align: center;
   letter-spacing: 0.5px;
-  margin-top: 150px;
+  margin-top: 5rem;
 }
 
 .header-text-what-is {
