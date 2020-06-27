@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const BusinessUser = require('./../Model/businessUserModel');
-const sendEmail = require('./../utils/email');
+const AllBusEmail = require('./../utils/busEmail');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -41,6 +41,9 @@ exports.businesssignup = catchAsync(async (req, res, next) => {
     businessPassword: req.body.businessPassword,
     facebookPixel: req.body.facebookPixel
   });
+  const url = `${req.protocol}://${req.get('host')}/busdashboard`;
+  // console.log(url);
+  await new AllBusEmail.BusEmail(newBusinessUser, url).sendBusWelcome();
 
   createSendToken(newBusinessUser, 201, req, res);
 });

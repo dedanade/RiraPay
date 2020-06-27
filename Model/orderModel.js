@@ -105,25 +105,9 @@ orderSchema.virtual('user', {
 });
 
 orderSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'product',
-    select: ''
-  });
-  next();
-});
-
-orderSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'cart',
-    select: ''
-  });
-  next();
-});
-orderSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'businessUser',
-    select: ''
-  });
+  this.populate('cart', '');
+  this.populate('product', '-businessUser');
+  this.populate('businessUser', '-products');
   next();
 });
 

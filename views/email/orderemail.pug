@@ -1,0 +1,46 @@
+extends baseEmail
+
+block content
+  p Hi #{ordername},
+  p You've created a new #{productName} order with OrderId: #{orderNum}.
+
+  .inline-list
+    -const newtotal = total.toLocaleString()
+    -const newprice = price.toLocaleString()
+
+    p 
+      b These are the Order Details:
+    
+    ul
+      b Customer Info:
+      li Name: #{orderName}
+      li Phone: #{phone}
+      if(altPhone)
+        li AltPhone: #{altPhone}
+      else
+        li AltPhone: none
+
+    ul
+      b Delivery Address:
+      li #{address}, #{area}, #{state}, Nigeria
+    ul
+      b Order details:
+      li product price: ₦#{newprice}
+      li quanity: #{quantity}
+      li 
+        b Total: ₦#{newtotal}
+
+  p
+  b Click the button below to pay through RiraPay and unlock Amazing benefits and Discounts
+
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                    a(href=`${url}`, target='_blank') See benefits
+  p
+    b Thank you for choosing RiraPay!

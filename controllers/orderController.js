@@ -1,6 +1,10 @@
 const crypto = require('crypto');
 const Order = require('./../Model/orderModel');
+const BusinessUser = require('./../Model/businessUserModel');
+const Product = require('./../Model/productModel');
 const Cart = require('./../Model/cart');
+const AllEmail = require('./../utils/email');
+const AllBusEmail = require('./../utils/busEmail');
 
 // const User = require('./../Model/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -22,6 +26,25 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   // if (!user) req.user.id = null;
 
   const newOrder = await Order.create(req.body);
+  const order = await Order.findById(newOrder._id);
+  const busUser = await BusinessUser.findById(order.businessUser);
+  const product = await Product.findById(order.product);
+  const cart = await Cart.findById(order.cart);
+
+  const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;
+  const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
+
+  // console.log(busUser);
+  // console.log(product);
+
+  await new AllEmail.OrderEmail(order, url, product, cart).sendOrderEmail();
+  await new AllBusEmail.BusOrderEmail(
+    busUser,
+    url2,
+    product,
+    order,
+    cart
+  ).sendBusOrderEmail();
 
   res.status(201).json({
     status: 'success',
@@ -75,12 +98,29 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     if (eventtype === 'charge.success');
     const order = await Order.findById({ _id: ordernum });
     const cart = await Cart.findById(order.cart);
+    const busUser = await BusinessUser.findById(order.businessUser);
+    const product = await Product.findById(order.product);
 
     cart.total = displaytotal;
     await cart.save();
 
     order.status = 'Paid';
     await order.save();
+
+    const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;
+    const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
+
+    // console.log(busUser);
+    // console.log(product);
+
+    await new AllEmail.OrderEmail(order, url, product, cart).sendPayEmail();
+    await new AllBusEmail.BusOrderEmail(
+      busUser,
+      url2,
+      product,
+      order,
+      cart
+    ).sendBusPayEmail();
   }
   res.sendStatus(200);
 });

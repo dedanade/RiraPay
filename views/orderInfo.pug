@@ -76,7 +76,7 @@ block content
                     p.font-weight-bold Total:
                     p.font-weight-bold= `#${carttotal}`
 
-            if (product.discount > 0) 
+            if  (product.discount > 0) 
                 p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
 
             input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)

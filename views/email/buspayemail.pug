@@ -1,0 +1,47 @@
+extends baseEmail
+
+block content
+  p Hi #{businessName},
+  p= `Congratulations! You've recieved payment for your orderId: ${orderNum}.`
+
+  p 
+    b These are the Order Details:
+    .inline-list
+      -const newtotal = total.toLocaleString()
+      -const newprice = price.toLocaleString()
+   
+      ul
+        b Customer Info:
+        li Name: #{orderName}
+        li Phone Number: #{phone}
+        if(altPhone)
+          li AltPhone: #{altPhone}
+        else
+          li AltPhone: none
+
+      ul 
+        b Delivery Address:
+        li #{address}, #{area}, #{state}, Nigeria
+
+      ul
+        b Order details:
+        li Product price: #{newprice}
+        li quanity: ₦#{quantity}
+        li discount: #{discount}%
+        li 
+          b Total: ₦#{newtotal}
+    
+    p 
+    b What's Next?
+    p Make sure you ship the order within the next 48 hours and update it on the order page. Check your dashboard to learn more
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Go to your Dashboard
+  p
+    b Thank you for choosing RiraPay!

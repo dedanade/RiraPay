@@ -149,6 +149,17 @@ $('#quantity').on('keyup click', function() {
 //     qtyfield.value = parseInt(qtyfield.value) - 1;
 //   });
 
+$('.create-order-form').on('click', function() {
+  let valid = true;
+  $('[required]').each(function() {
+    if ($(this).is(':invalid') || !$(this).val()) valid = false;
+  });
+  if (valid);
+  $('.submit_order_btn').on('click', e => {
+    e.target.textContent = 'Processing...';
+  });
+});
+
 if (createOrderForm)
   createOrderForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -176,6 +187,10 @@ if (createOrderForm)
       altphone
     );
   });
+
+//
+// if (submitbtn)
+//
 
 const successpage = (document.getElementById('successpage') || {}).value;
 

@@ -95,24 +95,6 @@ businessUserSchema.pre(/^find/, function(next) {
   next();
 });
 
-// businessUserSchema.pre(/^find/, function(next) {
-//   this.populate({
-//     path: 'orders',
-//     select: ''
-//   });
-
-//   next();
-// });
-
-// businessUserSchema.pre(/^find/, function(next) {
-//   this.populate({
-//     path: 'product',
-//     select: ''
-//   });
-
-//   next();
-// });
-
 businessUserSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('businessPassword')) return next();

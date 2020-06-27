@@ -2,15 +2,15 @@ const nodemailer = require('nodemailer');
 const pug = require('pug');
 const htmlToText = require('html-to-text');
 
-class Email {
-  constructor(firstArg, url) {
-    this.to = firstArg.email;
-    this.firstName = firstArg.firstName;
+class BusEmail {
+  constructor(busUser, url) {
+    this.to = busUser.businessEmail;
+    this.businessName = busUser.businessName;
     this.url = url;
-    this.from = `RiraPay <${process.env.EMAIL_FROM}>`;
+    this.from = `RiraPay for Business <${process.env.BUSEMAIL_FROM}>`;
   }
 
-  newTransport() {
+  newBusTransport() {
     if (process.env.NODE_ENV === 'production') {
       // Sendgrid
       return nodemailer.createTransport({
@@ -31,12 +31,12 @@ class Email {
       }
     });
   }
-  // Send the actual email
 
+  // Send the actual email
   async send(template, subject) {
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      firstName: this.firstName,
+      businessName: this.businessName,
       url: this.url,
       subject
     });
@@ -50,11 +50,14 @@ class Email {
     };
 
     // 3) Create a transport and send email
-    await this.newTransport().sendMail(mailOptions);
+    await this.newBusTransport().sendMail(mailOptions);
   }
 
-  async sendWelcome() {
-    await this.send('welcome', 'Welcome to the RiraPay Family!');
+  async sendBusWelcome() {
+    await this.send(
+      'buswelcome',
+      'Welcome to the RiraPay for Business Family!'
+    );
   }
 
   async sendPasswordReset() {
@@ -65,26 +68,27 @@ class Email {
   }
 }
 
-class OrderEmail {
-  constructor(firstArg, url, product, cart) {
-    this.to = firstArg.email;
-    this.orderName = firstArg.name;
-    this.orderNum = firstArg.orderNum;
-    this.address = firstArg.address;
-    this.state = firstArg.state;
-    this.area = firstArg.area;
-    this.orderPhone = firstArg.phone;
-    this.altphone = firstArg.altPhone;
+class BusOrderEmail {
+  constructor(busUser, url, product, order, cart) {
+    this.to = busUser.businessEmail;
+    this.businessName = busUser.businessName;
+    this.orderName = order.name;
+    this.orderNum = order.orderNum;
+    this.address = order.address;
+    this.state = order.state;
+    this.area = order.area;
+    this.orderPhone = order.phone;
+    this.altphone = order.altPhone;
     this.productName = product.productName;
-    this.price = product.price;
     this.discount = product.discount;
+    this.price = product.price;
     this.total = cart.total;
     this.quantity = cart.qty;
     this.url = url;
-    this.from = `RiraPay <${process.env.EMAIL_FROM}>`;
+    this.from = `RiraPay for Business <${process.env.BUSEMAIL_FROM}>`;
   }
 
-  newTransport() {
+  newBusTransport() {
     if (process.env.NODE_ENV === 'production') {
       // Sendgrid
       return nodemailer.createTransport({
@@ -105,24 +109,25 @@ class OrderEmail {
       }
     });
   }
-  // Send the actual email
 
+  // Send the actual email
   async send(template, subject) {
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
+      businessName: this.businessName,
       orderName: this.orderName,
       orderNum: this.orderNum,
       address: this.address,
       state: this.state,
       area: this.area,
       phone: this.orderPhone,
-      price: this.price,
-      discount: this.discount,
-      total: this.total,
-      quantity: this.quantity,
       altPhone: this.altphone,
       url: this.url,
       productName: this.productName,
+      discount: this.discount,
+      price: this.price,
+      total: this.total,
+      quantity: this.quantity,
       subject
     });
     // 2) Define email options
@@ -135,25 +140,22 @@ class OrderEmail {
     };
 
     // 3) Create a transport and send email
-    await this.newTransport().sendMail(mailOptions);
+    await this.newBusTransport().sendMail(mailOptions);
   }
 
-  async sendOrderEmail() {
+  async sendBusOrderEmail() {
     await this.send(
-      'orderemail',
-      `Your ${this.productName} Order has been created`
+      'busorderemail',
+      `You've recieved a new ${this.productName} Order`
     );
   }
 
-  async sendPayEmail() {
-    await this.send(
-      'payemail',
-      `Payment for OrderId ${this.orderNum} has been confirmed`
-    );
+  async sendBusPayEmail() {
+    await this.send('buspayemail', `New payment for OrderId ${this.orderNum}`);
   }
 }
 
 module.exports = {
-  Email: Email,
-  OrderEmail: OrderEmail
+  BusEmail: BusEmail,
+  BusOrderEmail: BusOrderEmail
 };
