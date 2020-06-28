@@ -27,7 +27,8 @@ block content
         b Order details:
         li Product price: #{newprice}
         li quanity: ₦#{quantity}
-        li discount: #{discount}%
+        if(dsicount)
+            li discount: #{discount}%
         li 
           b Total: ₦#{newtotal}
     

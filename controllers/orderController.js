@@ -101,13 +101,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const busUser = await BusinessUser.findById(order.businessUser);
     const product = await Product.findById(order.product);
 
-    cart.total = displaytotal;
-    await cart.save();
-
-    order.status = 'Paid';
-    await order.save();
-
-    const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;
+    const url = `${req.protocol}://${req.get('host')}/dashboard`;
     const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
 
     // console.log(busUser);
@@ -121,6 +115,12 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
       order,
       cart
     ).sendBusPayEmail();
+
+    cart.total = displaytotal;
+    await cart.save();
+
+    order.status = 'Paid';
+    await order.save();
   }
   res.sendStatus(200);
 });

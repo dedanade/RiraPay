@@ -30,8 +30,13 @@ block content
       li 
         b Total: ₦#{newtotal}
 
-  p
-  b Click the button below to pay through RiraPay and unlock Amazing benefits and Discounts
+  if(disount) 
+    p
+    b If you pay for your order through rirapay, you enjoy #{disocunt}% discount. Click on the button below to learn more
+      
+  else
+    p
+    b Click the button below to pay through RiraPay
 
   table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
     tbody
@@ -41,6 +46,6 @@ block content
             tbody
               tr
                 td
-                    a(href=`${url}`, target='_blank') See benefits
+                    a(href=`${url}`, target='_blank') Pay Now
   p
     b Thank you for choosing RiraPay!

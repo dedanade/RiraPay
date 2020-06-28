@@ -19,9 +19,14 @@ block content
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Additional Info:
                                 p.mx-4= product.additionalInfo
-                            .d-flex.mx-2.my-3
-                                p.font-weight-bold Discount:
-                                p.mx-4= `${product.discount}%`
+                            if (product.discount)
+                                .d-flex.mx-2.my-3
+                                    p.font-weight-bold Discount:
+                                    p.mx-4= `${product.discount}%`
+                            else
+                                .d-flex.mx-2.my-3
+                                    p.font-weight-bold Discount:
+                                    p.mx-4 None
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product link
                                 .mx-2
