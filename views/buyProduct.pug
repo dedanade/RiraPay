@@ -30,12 +30,13 @@ block footer
                         .col-12.my-2
                             p.mt-4.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Price:
                             input#first_price.readonly.mx-2.mb-3(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: 600;')
-                            input#price.readonly(type='hidden', readonly value=`${product.price}`)         
+                            input#price.readonly(type='hidden', readonly value=`${product.price}`)
+                            input#product_stock.readonly(type='hidden', readonly value=`${product.stock}`)          
                         .col-12.my-2
                             p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many Pcs? 
                             //- span
                             //-     button#subtract(type = 'button') -
-                            input#quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' minlenght='1' required='' style= 'width: 30%; display: inherit;')
+                            input#quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' required='' style= 'width: 30%; display: inherit;')
                             //- span
                             //-     button#add(type = 'button') +
                             medium.form-text.mt-2.mb-3.mx-1

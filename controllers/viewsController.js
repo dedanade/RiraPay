@@ -133,7 +133,7 @@ exports.getMyProduct = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getProduct = catchAsync(async (req, res, next) => {
+exports.buyProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findOne({
     _id: req.params.productId
   });
@@ -147,7 +147,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
       new AppError('There is no product with that name and ID.', 404)
     );
   }
-  res.status(200).render('getProduct', {
+  res.status(200).render('buyProduct', {
     title: `Buy ${product.productName}`,
     product,
     businessUser

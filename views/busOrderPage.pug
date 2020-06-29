@@ -29,26 +29,46 @@ block content
 
                             h3#ord-text.price-bold=`#${carttotal}`
 
-                    - if (order.status === 'incomplete')
+                    if (order.status === 'Incomplete')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
                                     |Incomplete (Buyer is yet to complete Payment) 
 
-                    - if (order.status === 'paid')
+                    if (order.status === 'Paid')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
                                     | Paid (Buyer has completed payment for the order. You have 48 hours to ship) 
 
-                    - if (order.status === 'shipped')
+                    if (order.status === 'Shipped')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
                             .col-12
                                 p.mx-3.my-2 
                                     b Status: 
                                     | Shipped (Order has been shipped, wait for it to be delivered) 
+
+                    if (order.status === 'Delivered')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Delivered (Order has been delivered, wait for it to be reviewed within the next 7 days)
+
+                    if (order.status === 'Completed')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Completed (Order is Completed. Payment has been sent to your RiraPay )
+                    if (order.status === 'Canceled')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Canceled1 (Order has been canceled. Payment has been back to the buyer )
                     #border-row.row.mx-1.mx-lg-5.mx-md-5.my-3
                         .col
                             -const tags = order.tags.join(",");
@@ -64,10 +84,10 @@ block content
                     nav
                         .row.no-gutters
                             #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
-                                a#nav-del-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='true') Delivery Information
-                                a#nav-order-tab.nav-item.nav-link(data-toggle='tab', href='#nav-order-details', role='tab', aria-controls='nav-order-details', aria-selected='false') Order Details
+                                a#nav-del-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-order-details', role='tab', aria-controls='nav-order-details', aria-selected='true') Order Details
+                                a#nav-order-tab.nav-item.nav-link(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='false') Delivery Information
                         #nav-tabContent.tab-content
-                            #nav-deliver-info.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-del-tab')
+                            #nav-deliver-info.tab-pane.fade(role='tabpanel', aria-labelledby='nav-del-tab')
                                 #border-row.row.mx-1.mx-lg-5.mx-md-5
                                     .col-12.mx-1.mx-lg-2.mx-md-2.my-5
                                         .delivery-info
@@ -91,7 +111,53 @@ block content
                                             button.btn(data-clipboard-text=`${product.productName} ${order.name} ${order.address} ${order.state} ${order.area} ${order.phone} ${order.altPhone} `, style='background-color: #01afee; color: white;')
                                                 | Copy Everything
 
-                            #nav-order-details.tab-pane.fade(role='tabpanel', aria-labelledby='nav-order-tab')
-                                p.mx-3
-                                    | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
-                                    | You can contact the buyer to encourage them to pay or you deliver offline
+                            #nav-order-details.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-order-tab')
+                                if (order.status === 'Incomplete')
+                                    p.mx-2.text-center
+                                        | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
+                                        | You can contact the buyer to encourage them to pay or you deliver offline.
+                                
+                                if (order.status === 'Paid')
+                                    p.mx-3.text-center
+                                        | This order is order has been paid for. You have 48 hours to ship this order to avoid cancelation.
+                                        | If you've shipped the item through your logistics partner, kindly fill the details below to mark as ship.
+
+                                        form#shippingForm
+                                            input#OrderId(type='hidden', name='OrderId', value= order._id)
+                                            .row.mx-5.py-2
+                                                .col
+                                                    input#logName.form-control(type='text', placeholder='Logistics Name' required='')
+                                            .row.mx-5.py-2
+                                                .col
+                                                    input#logNum.form-control(type='text', placeholder='Tracking Number' required='')
+                                            .text-center
+                                                button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "return confirm(`You confirm all information provided are accurate and you've shipped the order? Click ok to confirm.`)") Mark as Shipped
+                                                p.small__P.mx-1 *If you're using a personal logistics partner with no tracking number, use their name and phone number respectively
+                                if (order.status === 'Shipped')
+                                    p.mx-2.text-center
+                                        | This order has been shipped and waiting for delivery confirmation.
+                                    .mx-4
+                                        p 
+                                            b Shipping information:
+                                            p Logistics Name: #{order.logisticName}
+                                            p Tracking Number: #{order.trackingNum}
+
+                                        form#deliveryForm
+                                            input#DelOrderId(type='hidden', name='DelOrderId', value= order.id)
+                                            .text-center
+                                                button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "return confirm(`Are you sure you've confirmed delivery and want to mark this order as delivered? Click ok to confirm`)") Mark as Delivered
+                                                p.small__P.mx-1 *Please make sure you've confirmed from your logistics partner or buyer that the order has been delivered before you click this button.
+                                                    |  Making a false claim might attract penalty.
+                                if (order.status === 'Delivered')
+                                    p.mx-2.text-center
+                                        | This order has been delivered. Order will be marked as completed within the next 7 days except the buyer request for cancellation.
+
+                                if (order.status === 'Completed')
+                                    p.mx-2.text-center
+                                        | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
+                                        | You can contact the buyer to encourage them to pay or you deliver offline.
+
+                                if (order.status === 'Canceled')
+                                    p.mx-2.text-center
+                                        | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
+                                        | You can contact the buyer to encourage them to pay or you deliver offline.

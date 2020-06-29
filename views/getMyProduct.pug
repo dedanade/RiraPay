@@ -30,9 +30,9 @@ block content
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product link
                                 .mx-2
-                                    button.btn(data-clipboard-text=`${protocol}/product/${product.slug}/${product.id}/${businessUser.id}`, style='background-color: #01afee; color: white;')
+                                    button.btn(data-clipboard-text=`${protocol}/buy/${product.slug}/${product.id}/${businessUser.id}`, style='background-color: #01afee; color: white;')
                                         | Copy Link
-                                    a(href= `/product/${product.slug}/${product.id}/${businessUser.id}` target="_blank")
+                                    a(href= `/buy/${product.slug}/${product.id}/${businessUser.id}` target="_blank")
                                         input.btn.ml-1( type='button' value='Preview' style='background-color: #01afee; color: white;')
                                         
                         h6.text-center.py-3

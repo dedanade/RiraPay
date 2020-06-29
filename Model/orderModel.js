@@ -70,7 +70,14 @@ const orderSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: ['Incomplete', 'Paid', 'Shipped', 'Completed', 'Canceled'],
+      enum: [
+        'Incomplete',
+        'Paid',
+        'Shipped',
+        'Delivered',
+        'Completed',
+        'Canceled'
+      ],
       default: 'Incomplete'
     },
 
@@ -84,7 +91,7 @@ const orderSchema = new mongoose.Schema(
       default: 'None'
     },
     trackingNum: {
-      type: Number,
+      type: String,
       default: '00000'
     },
 

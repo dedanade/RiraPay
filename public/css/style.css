@@ -111,7 +111,9 @@ td a:hover {
   color: black;
   margin-left: 10px;
 }
-
+.small__P {
+  font-size: 0.9rem;
+}
 @media (min-width: 600px) {
   #card-border {
     width: 50em;

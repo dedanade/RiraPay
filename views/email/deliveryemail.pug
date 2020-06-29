@@ -1,0 +1,23 @@
+extends baseEmail
+
+block content
+  p Hi #{ordername},
+  p Your #{productName} order with OrderId: #{orderNum} has been Delivered.
+
+  p
+   b If you've not received the order or have any issue, kindly reach out to us through the medium below. Thanks
+
+    p
+      b Check your Dashboard to view order
+
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+      tbody
+        tr
+          td(align='left')
+            table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+              tbody
+                tr
+                  td
+                      a(href=`${url}`, target='_blank') Go to my Dashboard
+  p
+    b Thank you for choosing RiraPay!

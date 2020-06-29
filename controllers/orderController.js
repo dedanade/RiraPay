@@ -31,6 +31,9 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   const product = await Product.findById(order.product);
   const cart = await Cart.findById(order.cart);
 
+  product.stock -= cart.qty;
+  await product.save();
+
   const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;
   const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
 
@@ -69,11 +72,60 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
       upsert: true
     }
   );
-
   res.status(200).json({
     status: 'success',
     data: {
       Updatedorder
+    }
+  });
+});
+
+exports.updateShiping = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, 'logisticName', 'trackingNum');
+
+  const Updatedshipedorder = await Order.findByIdAndUpdate(
+    req.body.OrderId,
+    filteredBody,
+    {
+      new: true
+    }
+  );
+
+  Updatedshipedorder.status = 'Shipped';
+  await Updatedshipedorder.save();
+
+  const order = await Order.findById(Updatedshipedorder._id);
+  const product = await Product.findById(order.product);
+  const cart = await Cart.findById(order.cart);
+
+  const url = `${req.protocol}://${req.get('host')}/dashboard`;
+
+  await new AllEmail.OrderEmail(order, url, product, cart).sendShipEmail();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      Updatedshipedorder
+    }
+  });
+});
+
+exports.updateDelivery = catchAsync(async (req, res, next) => {
+  const order = await Order.findById(req.params.OrderId);
+
+  order.status = 'Delivered';
+  await order.save();
+
+  const product = await Product.findById(order.product);
+  const cart = await Cart.findById(order.cart);
+
+  const url = `${req.protocol}://${req.get('host')}/dashboard`;
+
+  await new AllEmail.OrderEmail(order, url, product, cart).sendDeliveryEmail();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      order
     }
   });
 });

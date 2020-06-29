@@ -19,10 +19,7 @@ router.get(
   viewController.getorder
 );
 
-router.get(
-  '/product/:slug/:productId/:businessUserId',
-  viewController.getProduct
-);
+router.get('/buy/:slug/:productId/:businessUserId', viewController.buyProduct);
 router.get(
   '/createorder/:productId/:businessUserId/:cartId',
   viewController.createOrder

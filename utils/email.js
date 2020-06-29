@@ -80,6 +80,8 @@ class OrderEmail {
     this.discount = product.discount;
     this.total = cart.total;
     this.quantity = cart.qty;
+    this.logisticName = firstArg.logisticName;
+    this.logisticNum = firstArg.trackingNum;
     this.url = url;
     this.from = `RiraPay <${process.env.EMAIL_FROM}>`;
   }
@@ -123,6 +125,8 @@ class OrderEmail {
       altPhone: this.altphone,
       url: this.url,
       productName: this.productName,
+      logisticName: this.logisticName,
+      logisticNum: this.logisticNum,
       subject
     });
     // 2) Define email options
@@ -149,6 +153,20 @@ class OrderEmail {
     await this.send(
       'payemail',
       `Payment for OrderId ${this.orderNum} has been confirmed`
+    );
+  }
+
+  async sendShipEmail() {
+    await this.send(
+      'shipemail',
+      `Your order ${this.orderNum} has been Shipped`
+    );
+  }
+
+  async sendDeliveryEmail() {
+    await this.send(
+      'deliveryemail',
+      `DELIVERED: Your order ${this.orderNum} has been mark as delivered`
     );
   }
 }

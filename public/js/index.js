@@ -4,7 +4,13 @@ import '@babel/polyfill';
 import { login, busLogin, busLogout, logout } from './login';
 import { signup, busSignup } from './signup';
 import { createProduct, createOrder, createCart } from './create';
-import { updatePixel, updateTags, updateOrderEmails } from './update';
+import {
+  updatePixel,
+  updateTags,
+  updateOrderEmails,
+  updateShippingOrder,
+  updateDelivery
+} from './update';
 import { showAlert } from './alert';
 // import { bookOrder } from './paystack';
 
@@ -13,6 +19,8 @@ export const submitlink = (document.getElementById('submitlinkinput') || {})
 export const orderId = (document.getElementById('orderid') || {}).value;
 
 export const businessId = (document.getElementById('businessId') || {}).value;
+
+export const DelOrderId = (document.getElementById('DelOrderId') || {}).value;
 
 const loginForm = document.querySelector('.login-form');
 const busloginForm = document.querySelector('.bus-login-form');
@@ -31,6 +39,8 @@ const pixelForm = document.getElementById('pixelform');
 const tagsForm = document.getElementById('tagsform');
 const updateForm = document.getElementById('updateorderform');
 const updateFormmobile = document.getElementById('updateFormmobile');
+const updateShipingForm = document.getElementById('shippingForm');
+const updateDeliveryForm = document.getElementById('deliveryForm');
 
 // const addbtn = document.querySelector('#add');
 // const subbtn = document.querySelector('#subtract');
@@ -97,13 +107,23 @@ if (createProductForm)
 
 if (createCartinput)
   createCartinput.addEventListener('submit', e => {
-    e.preventDefault();
-    const qty = document.getElementById('quantity').value;
+    const stock = (document.getElementById('product_stock') || {}).value;
+    const qty = (document.getElementById('quantity') || {}).value;
     const total = document
       .getElementById('total')
       .value.replace('₦', ' ')
       .replace(/\D/g, '');
-    createCart(qty, total);
+
+    if (qty > stock) {
+      e.preventDefault();
+      alert(
+        `The quanity you're buying is more than what is available. Please reduce the quantity and try again`
+      );
+    } else {
+      const qty = document.getElementById('quantity').value;
+      e.preventDefault();
+      createCart(qty, total);
+    }
   });
 
 if (pixelForm)
@@ -188,6 +208,20 @@ if (createOrderForm)
     );
   });
 
+if (updateShipingForm)
+  updateShipingForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const OrderId = document.getElementById('OrderId').value;
+    const logisticName = document.getElementById('logName').value;
+    const trackingNum = document.getElementById('logNum').value;
+    updateShippingOrder(OrderId, logisticName, trackingNum);
+  });
+
+if (updateDeliveryForm)
+  updateDeliveryForm.addEventListener('submit', e => {
+    e.preventDefault();
+    updateDelivery();
+  });
 //
 // if (submitbtn)
 //

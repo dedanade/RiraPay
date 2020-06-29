@@ -1,0 +1,41 @@
+extends baseEmail
+
+block content
+  p Hi #{ordername},
+  p Your #{productName} order with OrderId: #{orderNum} has been shipped.
+
+  .inline-list
+    p 
+        b These are the Shipping Details:
+    ul
+        li Logistics Name: #{logisticName}
+        li Logistics Number: #{logisticNum}
+        li Estimated Delivery Day: Within the next 2-4 days
+
+    ul
+        b Delivery Info:
+        li Name: #{orderName}
+        li Phone: #{phone}
+        if(altPhone)
+        li Alternative Phone: #{altPhone}
+    ul
+        b Delivery Address:
+        li #{address}, #{area}, #{state}, Nigeria
+
+    p 
+        b You should expect Delivery ASAP!
+
+    p
+        b Check your Dashboard to view order
+
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+      tbody
+        tr
+          td(align='left')
+            table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+              tbody
+                tr
+                  td
+                      a(href=`${url}`, target='_blank') Go to my Dashboard
+  p
+    b Thank you for choosing RiraPay!

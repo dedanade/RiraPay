@@ -41,6 +41,8 @@ block content
                                 a(href='#')  Learn More About Rirapay
                         
     section
+        if (!product.discount)
+            -product.discount = 0;
         -const carttotal = cart.total.toLocaleString()
         -const productprice = product.price.toLocaleString()
         -const discount = (product.discount/100) * cart.total
