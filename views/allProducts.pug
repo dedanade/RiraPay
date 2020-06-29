@@ -27,14 +27,14 @@ block content
                                         -const productprice = product.price.toLocaleString()
 
 
-                                        tr.table-row(style= 'height: 60px' data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                                        tr.table-row(style= 'height: 60px' data-href=`/myproduct/${product.slug}/${product._id}`)
                                             td
-                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=Date
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=Date
                                             td
-                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=product.productName
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=product.productName
                                             td
-                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)=product.stock                                
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)=product.stock                                
                                             td
-                                                a(href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `₦${productprice}`
+                                                a(href=`/myproduct/${product.slug}/${product._id}`)= `₦${productprice}`
                             
         

@@ -9,7 +9,8 @@ import {
   updateTags,
   updateOrderEmails,
   updateShippingOrder,
-  updateDelivery
+  updateDelivery,
+  updateProduct
 } from './update';
 import { showAlert } from './alert';
 // import { bookOrder } from './paystack';
@@ -18,9 +19,9 @@ export const submitlink = (document.getElementById('submitlinkinput') || {})
   .value;
 export const orderId = (document.getElementById('orderid') || {}).value;
 
-export const businessId = (document.getElementById('businessId') || {}).value;
-
 export const DelOrderId = (document.getElementById('DelOrderId') || {}).value;
+
+export const productId = (document.getElementById('productId') || {}).value;
 
 const loginForm = document.querySelector('.login-form');
 const busloginForm = document.querySelector('.bus-login-form');
@@ -32,6 +33,8 @@ const signupForm = document.querySelector('.signup-form');
 const busSignupForm = document.querySelector('.signup-bus-form');
 
 const createProductForm = document.querySelector('.create-product-form');
+const editProductForm = document.querySelector('.edit-product-form');
+
 const createCartinput = document.querySelector('.cart-details');
 const createOrderForm = document.querySelector('.create-order-form');
 
@@ -103,6 +106,18 @@ if (createProductForm)
     const discount = document.getElementById('inputDiscount').value;
 
     createProduct(productName, price, stock, additionalInfo, discount);
+  });
+
+if (editProductForm)
+  editProductForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const productName = document.getElementById('editproductName').value;
+    const price = document.getElementById('editproductPrice').value;
+    const stock = document.getElementById('editproductStock').value;
+    const additionalInfo = document.getElementById('editadditionalInfo').value;
+    const discount = document.getElementById('editinputDiscount').value;
+
+    updateProduct(productName, price, stock, additionalInfo, discount);
   });
 
 if (createCartinput)

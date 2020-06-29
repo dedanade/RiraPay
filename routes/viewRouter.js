@@ -58,15 +58,21 @@ router.get(
 );
 
 router.get(
-  '/myorder/:productId/:orderId/:cartId',
+  '/myorder/:productId/:orderId',
   authBusinessController.protectBusiness,
   viewController.getMyorder
 );
 
 router.get(
-  '/myproduct/:slug/:productId/:businessUserId',
+  '/myproduct/:slug/:productId',
   authBusinessController.protectBusiness,
   viewController.getMyProduct
+);
+
+router.get(
+  '/edit/:slug/:productId',
+  authBusinessController.protectBusiness,
+  viewController.editProduct
 );
 
 module.exports = router;

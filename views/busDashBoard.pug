@@ -165,19 +165,19 @@ block content
                                 -const carttotal = cart.total.toLocaleString()
                                 -const mobiledate = moment(orders.date).format('DD/MMM/YY');
 
-                                .mini-table(data-href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                .mini-table(data-href=`/myorder/${product.id}/${orders._id}`)
                                     .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
                                         .col-9
                                             p.m-0 
-                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)
+                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}`)
                                                     b= `₦${carttotal}`
                                             p.m-0 
-                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.name
+                                                a(target='_blank' href=`/myorder/${product.id}/${orders._id}`)= orders.name
                                         .col-3
                                             p.m-0 
-                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= orders.status
+                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}`)= orders.status
                                             p.m-0 
-                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}/${cart._id}`)= mobiledate
+                                            a(target='_blank' href=`/myorder/${product.id}/${orders._id}`)= mobiledate
                 .text-center.my-3
                     h6
                         a#sign-up-button.btn(href='/myorders') View All orders
@@ -200,19 +200,19 @@ block content
                     -const productprice = product.price.toLocaleString()
                     - const mobiledate = moment(product.date).format('DD/MMM/YY');
 
-                    .mini-table(data-href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                    .mini-table(data-href=`/myproduct/${product.slug}/${product._id}`)
                         .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
                             .col-9
                                 p.m-0 
-                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}`)
                                         b= `${product.productName}`
                                 p.m-0 
-                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `Stock: ${product.stock}`
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}`)= `Stock: ${product.stock}`
                                 p.m-0 
-                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= `Price: ₦${productprice}`
+                                    a(target='_blank' href=`/myproduct/${product.slug}/${product._id}`)= `Price: ₦${productprice}`
                             .col-3
                                 p.mt-3
-                                a(target='_blank' href=`/myproduct/${product.slug}/${product._id}/${businessUser._id}`)= mobiledate
+                                a(target='_blank' href=`/myproduct/${product.slug}/${product._id}`)= mobiledate
                 .text-center.my-3
                     h6
                         a#sign-up-button.btn(href='/allproducts') View All Products

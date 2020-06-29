@@ -8750,7 +8750,7 @@ var createProduct = /*#__PURE__*/function () {
             if (res.data.status === 'success') {
               (0, _alert.showAlert)('success', 'Product created Successfully!');
               window.setTimeout(function () {
-                location.assign("/myproduct/".concat(productSlug, "/").concat(productId, "/").concat(_index.businessId));
+                location.assign("/myproduct/".concat(productSlug, "/").concat(productId));
               }, 1500);
             }
 
@@ -8895,7 +8895,7 @@ exports.createOrder = createOrder;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateDelivery = exports.updateShippingOrder = exports.updateOrderEmails = exports.updateTags = exports.updatePixel = void 0;
+exports.updateDelivery = exports.updateProduct = exports.updateShippingOrder = exports.updateOrderEmails = exports.updateTags = exports.updatePixel = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -9123,15 +9123,72 @@ var updateShippingOrder = /*#__PURE__*/function () {
 
 exports.updateShippingOrder = updateShippingOrder;
 
-var updateDelivery = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(getupdatedorder) {
-    var res;
+var updateProduct = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(productName, price, stock, additionalInfo, discount) {
+    var res, productSlug, updateproductid;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.prev = 0;
             _context5.next = 3;
+            return (0, _axios.default)({
+              method: 'PATCH',
+              url: "/api/v1/products/".concat(_index.productId),
+              data: {
+                productName: productName,
+                price: price,
+                stock: stock,
+                additionalInfo: additionalInfo,
+                discount: discount
+              }
+            });
+
+          case 3:
+            res = _context5.sent;
+            productSlug = res.data.data.data.slug;
+            updateproductid = res.data.data.data._id;
+
+            if (res.data.status === 'success') {
+              (0, _alert.showAlert)('success', 'Product Updated!');
+              window.setTimeout(function () {
+                location.assign("/myproduct/".concat(productSlug, "/").concat(updateproductid));
+              }, 1500);
+            }
+
+            _context5.next = 13;
+            break;
+
+          case 9:
+            _context5.prev = 9;
+            _context5.t0 = _context5["catch"](0);
+            (0, _alert.showAlert)('error', 'Opps! Unable to update product. Try again later. If the error persist, kindly contact us ASAP');
+            console.log("\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25 ".concat(_context5.t0.response.data.message));
+
+          case 13:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 9]]);
+  }));
+
+  return function updateProduct(_x7, _x8, _x9, _x10, _x11) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+exports.updateProduct = updateProduct;
+
+var updateDelivery = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(getupdatedorder) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            _context6.next = 3;
             return (0, _axios.default)({
               method: 'GET',
               url: "/api/v1/orders/deliver/".concat(_index.DelOrderId),
@@ -9141,8 +9198,7 @@ var updateDelivery = /*#__PURE__*/function () {
             });
 
           case 3:
-            res = _context5.sent;
-            console.log(res);
+            res = _context6.sent;
 
             if (res.data.status === 'success') {
               (0, _alert.showAlert)('success', 'Order has been marked as Delivered');
@@ -9151,28 +9207,28 @@ var updateDelivery = /*#__PURE__*/function () {
               }, 1500);
             }
 
-            _context5.next = 13;
+            _context6.next = 12;
             break;
 
-          case 8:
-            _context5.prev = 8;
-            _context5.t0 = _context5["catch"](0);
+          case 7:
+            _context6.prev = 7;
+            _context6.t0 = _context6["catch"](0);
             (0, _alert.showAlert)('error', 'Opps! Unable to update order. Try again later. If the error persist, kindly contact us ASAP');
             window.setTimeout(function () {
               location.reload();
             }, 1500);
-            console.log("\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25 ".concat(_context5.t0.response.data.message));
+            console.log("\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25 ".concat(_context6.t0.response.data.message));
 
-          case 13:
+          case 12:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5, null, [[0, 8]]);
+    }, _callee6, null, [[0, 7]]);
   }));
 
-  return function updateDelivery(_x7) {
-    return _ref5.apply(this, arguments);
+  return function updateDelivery(_x12) {
+    return _ref6.apply(this, arguments);
   };
 }();
 
@@ -9183,7 +9239,7 @@ exports.updateDelivery = updateDelivery;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DelOrderId = exports.businessId = exports.orderId = exports.submitlink = void 0;
+exports.productId = exports.DelOrderId = exports.orderId = exports.submitlink = void 0;
 
 require("core-js/modules/es6.array.copy-within");
 
@@ -9456,10 +9512,10 @@ var submitlink = (document.getElementById('submitlinkinput') || {}).value;
 exports.submitlink = submitlink;
 var orderId = (document.getElementById('orderid') || {}).value;
 exports.orderId = orderId;
-var businessId = (document.getElementById('businessId') || {}).value;
-exports.businessId = businessId;
 var DelOrderId = (document.getElementById('DelOrderId') || {}).value;
 exports.DelOrderId = DelOrderId;
+var productId = (document.getElementById('productId') || {}).value;
+exports.productId = productId;
 var loginForm = document.querySelector('.login-form');
 var busloginForm = document.querySelector('.bus-login-form');
 var logoutBus = document.querySelector('.logout_bus_btn');
@@ -9467,6 +9523,7 @@ var Logout = document.querySelector('.logout_btn');
 var signupForm = document.querySelector('.signup-form');
 var busSignupForm = document.querySelector('.signup-bus-form');
 var createProductForm = document.querySelector('.create-product-form');
+var editProductForm = document.querySelector('.edit-product-form');
 var createCartinput = document.querySelector('.cart-details');
 var createOrderForm = document.querySelector('.create-order-form');
 var pixelForm = document.getElementById('pixelform');
@@ -9517,6 +9574,15 @@ if (createProductForm) createProductForm.addEventListener('submit', function (e)
   var additionalInfo = document.getElementById('additionalInfo').value;
   var discount = document.getElementById('inputDiscount').value;
   (0, _create.createProduct)(productName, price, stock, additionalInfo, discount);
+});
+if (editProductForm) editProductForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var productName = document.getElementById('editproductName').value;
+  var price = document.getElementById('editproductPrice').value;
+  var stock = document.getElementById('editproductStock').value;
+  var additionalInfo = document.getElementById('editadditionalInfo').value;
+  var discount = document.getElementById('editinputDiscount').value;
+  (0, _update.updateProduct)(productName, price, stock, additionalInfo, discount);
 });
 if (createCartinput) createCartinput.addEventListener('submit', function (e) {
   var stock = (document.getElementById('product_stock') || {}).value;
@@ -9719,7 +9785,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49168" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49819" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

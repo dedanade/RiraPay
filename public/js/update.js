@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { showAlert } from './alert';
-import { orderId, DelOrderId } from './index';
+import { orderId, DelOrderId, productId } from './index';
 
 export const updatePixel = async facebookPixel => {
   try {
@@ -117,6 +117,42 @@ export const updateShippingOrder = async (
   }
 };
 
+export const updateProduct = async (
+  productName,
+  price,
+  stock,
+  additionalInfo,
+  discount
+) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: `/api/v1/products/${productId}`,
+      data: {
+        productName,
+        price,
+        stock,
+        additionalInfo,
+        discount
+      }
+    });
+    const productSlug = res.data.data.data.slug;
+    const updateproductid = res.data.data.data._id;
+    if (res.data.status === 'success') {
+      showAlert('success', 'Product Updated!');
+      window.setTimeout(() => {
+        location.assign(`/myproduct/${productSlug}/${updateproductid}`);
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert(
+      'error',
+      'Opps! Unable to update product. Try again later. If the error persist, kindly contact us ASAP'
+    );
+    console.log(`🔥🔥🔥 ${err.response.data.message}`);
+  }
+};
+
 export const updateDelivery = async getupdatedorder => {
   try {
     const res = await axios({
@@ -126,8 +162,6 @@ export const updateDelivery = async getupdatedorder => {
         getupdatedorder
       }
     });
-
-    console.log(res);
 
     if (res.data.status === 'success') {
       showAlert('success', 'Order has been marked as Delivered');

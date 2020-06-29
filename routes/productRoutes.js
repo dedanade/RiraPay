@@ -21,8 +21,8 @@ router
   .route('/:id')
   .get(productController.getProduct)
   .patch(
-    productController.updateProduct,
-    authBusinessController.protectBusiness
+    authBusinessController.protectBusiness,
+    productController.updateProduct
   )
   .delete(
     productController.deleteProduct,

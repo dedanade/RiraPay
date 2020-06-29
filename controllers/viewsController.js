@@ -126,10 +126,27 @@ exports.getMyProduct = catchAsync(async (req, res, next) => {
   }
 
   res.status(200).render('getMyProduct', {
-    title: `${product.name}`,
+    title: `${product.productName}`,
     product,
     businessUser,
     protocol
+  });
+});
+
+exports.editProduct = catchAsync(async (req, res, next) => {
+  const product = await Product.findOne({
+    _id: req.params.productId
+  });
+
+  if (!product) {
+    return next(
+      new AppError('There is no product with that name and ID.', 404)
+    );
+  }
+
+  res.status(200).render('editProduct', {
+    title: `${product.productName}`,
+    product
   });
 });
 
@@ -183,7 +200,7 @@ exports.getMyorder = catchAsync(async (req, res, next) => {
   }).populate('orders');
 
   const order = await Order.findOne({ _id: req.params.orderId });
-  const cart = await Cart.findOne({ _id: req.params.cartId });
+  const cart = await Cart.findById(order.cart);
 
   if (!product || !order) {
     return next(new AppError('There is no order with that name and ID.', 404));

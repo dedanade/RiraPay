@@ -1,7 +1,7 @@
 /* eslint-disable */
 import axios from 'axios';
 import { showAlert } from './alert';
-import { submitlink, businessId } from './index';
+import { submitlink } from './index';
 
 export const createProduct = async (
   productName,
@@ -28,7 +28,7 @@ export const createProduct = async (
     if (res.data.status === 'success') {
       showAlert('success', 'Product created Successfully!');
       window.setTimeout(() => {
-        location.assign(`/myproduct/${productSlug}/${productId}/${businessId}`);
+        location.assign(`/myproduct/${productSlug}/${productId}`);
       }, 1500);
     }
   } catch (err) {
