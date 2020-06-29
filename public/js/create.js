@@ -75,7 +75,7 @@ export const createOrder = async (
   try {
     const res = await axios({
       method: 'POST',
-      url: `/api/v1/orders/:id`,
+      url: `/api/v1/orders`,
       data: {
         businessUser,
         cart,

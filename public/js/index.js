@@ -122,23 +122,14 @@ if (editProductForm)
 
 if (createCartinput)
   createCartinput.addEventListener('submit', e => {
-    const stock = (document.getElementById('product_stock') || {}).value;
+    e.preventDefault();
     const qty = (document.getElementById('quantity') || {}).value;
     const total = document
       .getElementById('total')
       .value.replace('₦', ' ')
       .replace(/\D/g, '');
 
-    if (qty > stock) {
-      e.preventDefault();
-      alert(
-        `The quanity you're buying is more than what is available. Please reduce the quantity and try again`
-      );
-    } else {
-      const qty = document.getElementById('quantity').value;
-      e.preventDefault();
-      createCart(qty, total);
-    }
+    createCart(qty, total);
   });
 
 if (pixelForm)
