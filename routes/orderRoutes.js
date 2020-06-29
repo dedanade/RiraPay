@@ -7,7 +7,7 @@ router.route('/').get(orderController.getAllOrders);
 router.route('/deliver/:OrderId').get(orderController.updateDelivery);
 
 router
-  .route('/:id')
+  .route('/')
   .get(orderController.getOrder)
   .post(orderController.createOrder);
 

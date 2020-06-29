@@ -21,7 +21,7 @@ const filterObj = (obj, ...allowedFields) => {
 exports.createOrder = catchAsync(async (req, res, next) => {
   // const user = await User.findOne({ _id: req.user.id });
 
-  if (!req.body.businessUser) req.body.businessUser = req.params.id;
+  // if (!req.body.businessUser) req.body.businessUser = req.params.id;
   // if (!req.body.user) req.body.user = user;
   // if (!user) req.user.id = null;
 

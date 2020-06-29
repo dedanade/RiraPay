@@ -119,14 +119,16 @@ orderSchema.pre(/^find/, function(next) {
 });
 
 orderSchema.pre('save', function(next) {
-  this.orderNum = generate.random({
-    min: 8,
-    max: 8,
-    allCaps: true,
-    onlyNumbers: true,
-    startWith: 'R'
-  });
-  next();
+  if (this.isNew) {
+    this.orderNum = generate.random({
+      min: 8,
+      max: 8,
+      allCaps: true,
+      onlyNumbers: true,
+      startWith: 'R'
+    });
+    next();
+  } else next();
 });
 
 const Order = mongoose.model('Order', orderSchema);
