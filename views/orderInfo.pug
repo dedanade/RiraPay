@@ -41,8 +41,6 @@ block content
                                 a(href='#')  Learn More About Rirapay
                         
     section
-        if (!product.discount)
-            -product.discount = 0;
         -const carttotal = cart.total.toLocaleString()
         -const productprice = product.price.toLocaleString()
         -const discount = (product.discount/100) * cart.total
@@ -50,7 +48,7 @@ block content
         -const strdiscountprice = discountPrice.toLocaleString()
         .larger-container(style='margin-top: 50px; margin-bottom: 150px;')
             .card-body.p-3.mx-2.my-3
-                if (product.discount)
+                if (product.discount > 0)
                     h4#form-heading.mx-2.text-center.mb-5=`Wait! Don't Go. Scroll down for a ${product.discount}% discount valid for today ONLY 👇👇👇`
                 
                 h4 Confirm Your Order Details:
@@ -78,7 +76,7 @@ block content
                     p.font-weight-bold Total:
                     p.font-weight-bold= `#${carttotal}`
 
-            if  (product.discount) 
+            if  (product.discount > 0) 
                 p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
 
             input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)
@@ -92,4 +90,5 @@ block content
                 .text-center
                     .form-submit
                         button#pay-btn.checkout1-button.btn.btn-lg.mt-5.mb-3(type= 'submit')= `Pay ₦${strdiscountprice}`
-                        p.mx-2 When you pay for your product with RiraPay, you enjoy faster delivery and you will be sure to get your money-back within 7 days of receiving if not satisfied with the product.
+                        small.form-text.mx-2
+                            | When you pay for your product with RiraPay, you enjoy faster delivery and you will be sure to get your money-back within 7 days of receiving if not satisfied with the product.

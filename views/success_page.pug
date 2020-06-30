@@ -16,7 +16,7 @@ block content
             img(src='#', style='margin-top: 10px; padding-bottom: 30px;')
             h1.header-signup-business(style= 'font-size: 2rem;') Complete your registration to have access to your orders
     section
-        .form-container
+        .form-container.mb-5
           .row
             .col-12
               .card-wrap.mx-lg-2
@@ -44,13 +44,13 @@ block content
                         label(for='inputpassword') Password
                         input#inputpassword.form-control(type='password', placeholder='Minimum of 6 words' required='' minlength= '6')
                   .row
-                    .col.ms-2.py-2
+                    .col.ms-2
                       button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create My Account 
-                      br
-                      p.mx-3.text-center(style='font-size: 15px;')
+                      
+                      p.mx-3.text-center(style='font-size: 1rem;')
                         | By clicking the &ldquo;Create My Account&rdquo; button, you agree to RiraPay&apos;s 
                         a(href='#') Terms and Conditions
 
-                      p.text-center.py-2(style='color: black;')
+                      p.text-center(style='font-size: .9rem;')
                         | Already have an Account with this Email Address? 
                         a(href='/login') Login

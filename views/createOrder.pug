@@ -55,52 +55,50 @@ block footer
                         .row.mx-2
                             .col
                                 label(for='checkoutemail')  Your Email Address
-                                input#checkoutemail.form-control(type='email', placeholder='Adengozi21414@gmail.com' required='')
-                                medium.form-text.mt-3.mx-1
+                                input#checkoutemail.form-control(type='email', placeholder='youremail@gmail.com' required='')
+                                small.form-text.mt-3.mx-1
                                     | This Email will be used to sign up later on to track your
                                     | orders and request for refund
                                 #th-1.mt-0
 
-                                label(for='validationCustom04') State
                         .row.mx-2.py-3
                             .col-12
                                 label(for='checkoutname')  Your Name
-                                input#checkoutname.form-control(type='text', placeholder='' required='')
-                                medium.form-text.mt-1
-                                    |eg: Mr Moshood Bello
+                                input#checkoutname.form-control(type='text', placeholder='eg: Mr Moshood Bello' required='')
+            
                         .row.mx-2.py-3
                             .col
                                 label(for='checkoutaddress') Your Full Address
-                                input#checkoutaddress.form-control(type='text-area', placeholder='' required='')
-                                medium.form-text.mt-1
-                                    |eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop
+                                input#checkoutaddress.form-control(type='text-area', placeholder='eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop' required='')
+                             
                         .row.mx-2.py-3
                             .col
                                 label(for='checkoutstate') State
-                                input#checkoutstate.form-control(type='text', placeholder='' required='')
-                                medium.form-text.mt-1
-                                    |eg: Lagos, Abuja, etc
+                                input#checkoutstate.form-control(type='text', placeholder='eg: Lagos, Abuja, etc' required='')
+                               
                         .row.mx-2.py-3
                             .col
                                 label(for='checkoutarea') Area
-                                input#checkoutarea.form-control(type='text', placeholder='' required='')
-                                medium.form-text.mt-1
-                                    |eg: Oshodi, Owerri, Lekki, Garki etc
+                                input#checkoutarea.form-control(type='text', placeholder='eg: Oshodi, Owerri, Lekki, Garki etc' required='')
+                
                         .row.mx-2.py-3
                             .col
                                 div
                                 label(for='checkoutphone') Phone Number
-                                input#checkoutphone.form-control(type='number', placeholder=''  minlength= '11' maxlength= '11' required='')
-                                medium.form-text.mt-1
-                                    |eg: 07066514541
+                                .input-group
+                                    .input-group-prepend
+                                    .input-group-text +234
+                                    input#checkoutphone.form-control(type='number', placeholder='7066514541'  minlength= '11' maxlength= '11' required='')
+                                    
                         .row.mx-2.py-3
                             .col
                                 div
-                                label(for='checkoutphone2')
-                                    | Alternative Phone Number
-                                input#checkoutphone2.form-control(type='tel', placeholder='' maxlength= '11' minlength= '11')
-                                medium.form-text.mt-1
-                                    |eg: 07066514541
+                                label(for='checkoutphone2') Alternative Phone Number
+                                .input-group
+                                    .input-group-prepend
+                                    .input-group-text +234
+                                    input#checkoutphone2.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11')
+                            
                         .text-center
                             button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
                                 | Place Order
