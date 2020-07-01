@@ -15,7 +15,11 @@ body {
 
 #button-sales {
   display: inline;
-  font-weight: bold;
+  font-size: 15px;
+  margin-left: 40px;
+}
+#button-trans {
+  display: inline;
   font-size: 15px;
   margin-left: 40px;
 }

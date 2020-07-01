@@ -43,7 +43,7 @@ block content
                                                 each businessUser in orders.businessUser
 
                                                     
-                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
                                                     -const carttotal = cart.total.toLocaleString()
                                                 
 
@@ -88,7 +88,7 @@ block content
                             each product in orders.product
                                 each businessUser in orders.businessUser
                                     -const carttotal = cart.total.toLocaleString()
-                                    -const mobiledate = moment(orders.date).format('DD/MMM/YY');
+                                    -const mobiledate = moment(orders.createdAt).format('DD/MMM/YY');
 
                                     .mini-table(data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
                                         .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom

@@ -92,6 +92,7 @@ exports.updateShiping = catchAsync(async (req, res, next) => {
   );
 
   Updatedshipedorder.status = 'Shipped';
+  Updatedshipedorder.shippedAt = Date.now();
   await Updatedshipedorder.save();
 
   const order = await Order.findById(Updatedshipedorder._id);
@@ -114,6 +115,7 @@ exports.updateDelivery = catchAsync(async (req, res, next) => {
   const order = await Order.findById(req.params.OrderId);
 
   order.status = 'Delivered';
+  order.deliveredAt = Date.now();
   await order.save();
 
   const product = await Product.findById(order.product);
@@ -144,10 +146,9 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const discounttotal = event.data.amount / 100;
     const rirafee = discounttotal * 0.025; // discounted total * the 2.5 transaction fee
     const displaytotal = discounttotal - rirafee;
-    console.log(rirafee);
-    console.log(displaytotal);
 
     if (eventtype === 'charge.success');
+
     const order = await Order.findById({ _id: ordernum });
     const cart = await Cart.findById(order.cart);
     const busUser = await BusinessUser.findById(order.businessUser);
@@ -172,6 +173,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     await cart.save();
 
     order.status = 'Paid';
+    order.paidAt = Date.now();
     await order.save();
   }
   res.sendStatus(200);

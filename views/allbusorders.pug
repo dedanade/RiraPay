@@ -25,7 +25,7 @@ block content
                                         each cart in orders.cart
                                             each product in orders.product
 
-                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
                                                     -const carttotal = cart.total.toLocaleString()
 
                                                     

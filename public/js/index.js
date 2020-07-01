@@ -331,3 +331,19 @@ $(document).ready(function() {
     bInfo: true
   });
 });
+
+$('.sales-today a').click(function(e) {
+  e.preventDefault();
+  $('.sales-toggle').hide();
+  $('#button-sales').html($(this).text());
+  var toShow = $(this).attr('href');
+  $(toShow).show();
+});
+
+$('.trans-today a').click(function(e) {
+  e.preventDefault();
+  $('#button-trans').html($(this).text());
+  $('.trans-toggle').hide();
+  var toShow = $(this).attr('href');
+  $(toShow).show();
+});

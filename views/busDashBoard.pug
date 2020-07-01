@@ -29,31 +29,32 @@ block content
                         .card-body.py-5
                             h6 Sales
                             .btn-group
-                            button#button-sales.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                            a.btn#button-sales.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                                 | Today
-                            #dropdownbtn.dropdown-menu
-                                a Yesterday
-                                a This Week
-                                a This Month
-                                a Last 30 Days
-                                a Last 90 Days
-                                a All Time
-                            h3  &#x20A6;0.00
+                            #dropdownbtn.dropdown-menu.sales-today
+                                a(href='#sumOfSalesToday') Today
+                                a(href='#sumOfSalesWeek') This Week
+                                a(href='#sumOfSalesMonth') This Month
+
+                            h3#sumOfSalesToday.sales-toggle=`₦ ${salesToday}`
+                            h3#sumOfSalesWeek.sales-toggle(style='display:none')= `₦ ${salesWeek}`
+                            h3#sumOfSalesMonth.sales-toggle(style='display:none')= `₦ ${salesMonth}`                        
+                                        
                 #card2.col-12.col-md-6.col-xl-4
                     .card.border-1.shadow-sm
                         .card-body.py-5
                             h6 Transactions
                             .btn-group
-                            button#button-sales.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                            a.btn#button-trans.btn.btn-sm.dropdown-toggle.justify-content-end(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                                 | Today
-                            #dropdownbtn.dropdown-menu
-                                a Yesterday
-                                a This Week
-                                a This Month
-                                a Last 30 Days
-                                a Last 90 Days
-                                a All Time
-                            h3  &#x20A6;0.00
+                            #dropdownbtn.dropdown-menu.trans-today
+                                a(href='#sumOfTransToday') Today
+                                a(href='#sumOfTransWeek') This Week
+                                a(href='#sumOfTransMonth') This Month
+                            h3#sumOfTransToday.trans-toggle=`₦ ${salesToday}`
+                            h3#sumOfTransWeek.trans-toggle(style='display:none')= `₦ ${salesWeek}`
+                            h3#sumOfTransMonth.trans-toggle(style='display:none')= `₦ ${salesMonth}`
+                             
 
     section.large-view-table
         .large-container.mb-5
@@ -81,7 +82,7 @@ block content
                                                 each product in orders.product
                                                 
 
-                                                    -const Date = moment(orders.date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                    -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
                                                     -const carttotal = cart.total.toLocaleString()
 
                                                 
@@ -163,7 +164,7 @@ block content
                         each cart in orders.cart
                             each product in orders.product
                                 -const carttotal = cart.total.toLocaleString()
-                                -const mobiledate = moment(orders.date).format('DD/MMM/YY');
+                                -const mobiledate = moment(orders.createdAt).format('DD/MMM/YY');
 
                                 .mini-table(data-href=`/myorder/${product.id}/${orders._id}`)
                                     .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom

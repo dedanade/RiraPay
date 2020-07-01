@@ -41,11 +41,6 @@ const orderSchema = new mongoose.Schema(
       max: [11, 'Your Business Phone Nmber should not be more than 11']
     },
     orderNum: String,
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-      select: false
-    },
     businessUser: [
       {
         type: mongoose.Schema.ObjectId,
@@ -95,8 +90,12 @@ const orderSchema = new mongoose.Schema(
       default: '00000'
     },
 
-    date: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    paidAt: { type: Date, default: 0 },
+    shippedAt: { type: Date, default: 0 },
+    deliveredAt: { type: Date, default: 0 }
   },
+
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }

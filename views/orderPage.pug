@@ -8,7 +8,7 @@ block content
                 .card-block
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
-                            -const Date = order.date.toDateString();
+                            -const Date = order.createdAt.toDateString();
                             -const carttotal = cart.total.toLocaleString()
                             -const discount = (product.discount/100) * cart.total
                             -const discountPrice = (cart.total - discount)

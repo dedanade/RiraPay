@@ -1,3 +1,4 @@
+const moment = require('moment');
 const Product = require('./../Model/productModel');
 const BusinessUser = require('./../Model/businessUserModel');
 const User = require('./../Model/userModel');
@@ -41,13 +42,219 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const orders = await Order.find();
 
   const cart = await Cart.find();
+  // Date Calculation
+
+  //Today
+  const startToday = moment()
+    .startOf('day')
+    .toDate(); // set to 12:00 am today
+  const endToday = moment()
+    .endOf('day')
+    .toDate(); // set to 23:59 pm today
+
+  // This Week
+  const startWeek = moment()
+    .startOf('isoWeek')
+    .toDate(); // set to 12:00am of Monday according to ISO 8601
+  const endWeek = moment()
+    .endOf('isoWeek')
+    .toDate(); // set to 23:59 pm of Sunday
+
+  // This Month
+  const startMonth = moment()
+    .startOf('month')
+    .toDate(); // set to 12:00 for the first day of th month
+  const endMonth = moment()
+    .endOf('month')
+    .toDate(); // set to 23:59 pm of the last day of the week
+
+  // Sales Today Calculation
+  const salesorders = await Order.find({
+    _id: businessUser.orders,
+    createdAt: {
+      $gte: startToday,
+      $lte: endToday
+    }
+  });
+
+  const arraySalesOrder = [];
+
+  salesorders.forEach(e => {
+    const eachSalesToday = e.cart;
+    eachSalesToday.forEach(esales => {
+      arraySalesOrder.push(esales);
+    });
+  });
+
+  const cartSalesToday = await Cart.find({ _id: arraySalesOrder }).distinct(
+    'total'
+  );
+
+  const sumOfCartSalesToday = cartSalesToday
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
+
+  // Sales This week
+
+  const salesOrdersWeek = await Order.find({
+    _id: businessUser.orders,
+    createdAt: {
+      $gte: startWeek,
+      $lte: endWeek
+    }
+  });
+
+  const arraySalesWeek = [];
+
+  salesOrdersWeek.forEach(e => {
+    const eachSalesWeek = e.cart;
+    eachSalesWeek.forEach(esales => {
+      arraySalesWeek.push(esales);
+    });
+  });
+
+  const cartSalesWeek = await Cart.find({ _id: arraySalesWeek }).distinct(
+    'total'
+  );
+
+  const sumOfCartSalesWeek = cartSalesWeek
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
+
+  //Sales This Month
+
+  const salesOrdersMonth = await Order.find({
+    _id: businessUser.orders,
+    createdAt: {
+      $gte: startMonth,
+      $lte: endMonth
+    }
+  });
+
+  const arraySalesMonth = [];
+
+  salesOrdersMonth.forEach(e => {
+    const eachSalesMonth = e.cart;
+    eachSalesMonth.forEach(esales => {
+      arraySalesMonth.push(esales);
+    });
+  });
+
+  const cartSalesMonth = await Cart.find({ _id: arraySalesMonth }).distinct(
+    'total'
+  );
+
+  const sumOfCartSalesMonth = cartSalesMonth
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
+
+  // Transactions Today
+
+  const transactionToday = await Order.find({
+    _id: businessUser.orders,
+    status: ['Paid', 'Shipped', 'Delivered', 'Completed', 'Canceled'],
+    paidAt: {
+      $gte: startToday,
+      $lte: endToday
+    }
+  });
+
+  const ArrayTranToday = [];
+
+  transactionToday.forEach(e => {
+    const eachtrantoday = e.cart;
+    eachtrantoday.forEach(etran => {
+      ArrayTranToday.push(etran);
+    });
+  });
+
+  const cartTranToday = await Cart.find({ _id: ArrayTranToday }).distinct(
+    'total'
+  );
+
+  const sumOfcartTranToday = cartTranToday
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
+
+  // Transactions This Week
+
+  const transactionWeek = await Order.find({
+    _id: businessUser.orders,
+    status: ['Paid', 'Shipped', 'Delivered', 'Completed', 'Canceled'],
+    paidAt: {
+      $gte: startWeek,
+      $lte: endWeek
+    }
+  });
+
+  const ArrayTranWeek = [];
+
+  transactionWeek.forEach(e => {
+    const eachtranweek = e.cart;
+    eachtranweek.forEach(etran => {
+      ArrayTranWeek.push(etran);
+    });
+  });
+
+  const cartTranWeek = await Cart.find({ _id: ArrayTranWeek }).distinct(
+    'total'
+  );
+
+  const sumOfcartTranWeek = cartTranWeek
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
+
+  // Transactions This Month
+  const transactionMonth = await Order.find({
+    _id: businessUser.orders,
+    status: ['Paid', 'Shipped', 'Delivered', 'Completed', 'Canceled'],
+    paidAt: {
+      $gte: startMonth,
+      $lte: endMonth
+    }
+  });
+
+  const ArrayTranMonth = [];
+
+  transactionMonth.forEach(e => {
+    const eachtranMonth = e.cart;
+    eachtranMonth.forEach(etran => {
+      ArrayTranMonth.push(etran);
+    });
+  });
+
+  const cartTranMonth = await Cart.find({ _id: ArrayTranMonth }).distinct(
+    'total'
+  );
+
+  const sumOfcartTranMonth = cartTranMonth
+    .reduce((a, b) => {
+      return a + b;
+    }, 0)
+    .toLocaleString();
 
   res.status(200).render('busDashBoard', {
     title: 'Business DashBoard',
     product,
     orders,
     cart,
-    businessUser
+    businessUser,
+    salesToday: sumOfCartSalesToday,
+    salesWeek: sumOfCartSalesWeek,
+    salesMonth: sumOfCartSalesMonth,
+    transToday: sumOfcartTranToday,
+    transWeek: sumOfcartTranWeek,
+    transMonth: sumOfcartTranMonth
   });
 });
 
