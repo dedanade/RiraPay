@@ -52,6 +52,8 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
     .endOf('day')
     .toDate(); // set to 23:59 pm today
 
+  console.log(startToday);
+  console.log(endToday);
   // This Week
   const startWeek = moment()
     .startOf('isoWeek')
