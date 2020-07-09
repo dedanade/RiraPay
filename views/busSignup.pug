@@ -28,7 +28,10 @@ block footer
                                 .col
                                     div
                                     label(for='input-bus-phone')  Business Phone Number
-                                    input#input-bus-phone.form-control(type='tel', placeholder='eg: 07066514541' maxlength= '11' minlength= '11' required='')
+                                    .input-group
+                                        .input-group-prepend
+                                        .input-group-text +234
+                                        input#input-bus-phone.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11' required='')
                             .row.mx-1.py-3
                                 .col
                                     .password-wrap

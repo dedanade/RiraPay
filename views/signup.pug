@@ -32,7 +32,10 @@ block footer
                     .col
                       div
                         label(for='inputphonenumber')  Phone Number
-                        input#inputphonenumber.form-control(type='tel', placeholder='eg: 07066514541' maxlength= '11' minlength= '11' required='')
+                        .input-group
+                          .input-group-prepend
+                          .input-group-text +234
+                          input#inputphonenumber.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11' required='')
                   .row.mx-1.py-2
                     .col
                       .password-wrap

@@ -14,11 +14,10 @@ class Email {
     if (process.env.NODE_ENV === 'production') {
       // Sendgrid
       return nodemailer.createTransport({
-        host: 'smtp.mailtrap.io',
-        port: 2525,
+        service: 'SendGrid',
         auth: {
-          user: '52acecb7402fcd',
-          pass: '680a66ed5297bf'
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASSWORD
         }
       });
     }
@@ -90,11 +89,10 @@ class OrderEmail {
     if (process.env.NODE_ENV === 'production') {
       // Sendgrid
       return nodemailer.createTransport({
-        host: 'smtp.mailtrap.io',
-        port: 2525,
+        service: 'SendGrid',
         auth: {
-          user: '52acecb7402fcd',
-          pass: '680a66ed5297bf'
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASSWORD
         }
       });
     }
