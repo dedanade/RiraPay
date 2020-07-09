@@ -243,7 +243,7 @@ const order_Id = (document.getElementById('orderid') || {}).value;
 function payWithPaystack(e) {
   e.preventDefault();
   var handler = PaystackPop.setup({
-    key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
+    key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
     email: document.getElementById('email').value,
     amount: document.getElementById('total').value * 100,
     firstname: document.getElementById('name').value,
@@ -274,7 +274,7 @@ if (paymentFormOrderPage)
 function payWithPaystackOrderPage(e) {
   e.preventDefault();
   var handler = PaystackPop.setup({
-    key: 'pk_test_560e59a119eeba74a6c5698aae0e1b05b63a3260', // Replace with your public key
+    key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
     email: document.getElementById('email2').value,
     amount: document.getElementById('total2').value * 100,
     firstname: document.getElementById('name2').value,
