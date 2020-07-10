@@ -164,7 +164,7 @@ class OrderEmail {
   async sendDeliveryEmail() {
     await this.send(
       'deliveryemail',
-      `DELIVERED: Your order ${this.orderNum} has been mark as delivered`
+      `DELIVERED: Your order ${this.orderNum} has been marked as delivered`
     );
   }
 }
