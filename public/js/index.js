@@ -339,6 +339,7 @@ $('tr[data-href]').on('click', function() {
 $('td > a').on('click', function(e) {
   e.stopPropagation();
 });
+
 const clipboard = new ClipboardJS('.btn');
 
 clipboard.on('success', function(e) {
@@ -377,6 +378,16 @@ $('.trans-today a').click(function(e) {
   $('.trans-toggle').hide();
   var toShow = $(this).attr('href');
   $(toShow).show();
+});
+
+$('.toggle-password').click(function() {
+  $(this).toggleClass('fa-eye fa-eye-slash');
+  var input = $($(this).attr('toggle'));
+  if (input.attr('type') == 'password') {
+    input.attr('type', 'text');
+  } else {
+    input.attr('type', 'password');
+  }
 });
 
 if (selectColorOptions) {

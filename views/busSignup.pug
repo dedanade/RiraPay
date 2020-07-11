@@ -34,9 +34,9 @@ block footer
                                         input#input-bus-phone.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11' required='')
                             .row.mx-1.py-3
                                 .col
-                                    .password-wrap
-                                    label(for='input-bus-password') Password
+                                    label.control-label(for='input-bus-password') Password
                                     input#input-bus-password.form-control(type='password', placeholder='Minimum of 6 words' minlength= '6' required='')
+                                    span.fa.fa-fw.fa-eye.view-password-icon.toggle-password(toggle='#input-bus-password')
                             
                             .row.mx-1.py-3
                                 .col.ms-2.py-2

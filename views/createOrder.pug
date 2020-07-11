@@ -11,13 +11,20 @@ block footer
                             h5#th-1.card-title.my-4 Order Summary
                             ul.list-group
                             -const carttotal = cart.total.toLocaleString()
-                                li.d-flex.justify-content-between
-                                    .my-0
-                                        p Product 
-                                        p.mt-3= product.productName
-                                    div.my-0
-                                        p Quantity
-                                        p.text-center.mt-3= cart.qty
+                                li.d-flex.justify-content-between.my-0
+                                    p Product
+                                    p= product.productName
+                                li.d-flex.justify-content-between.my-0
+                                    if(cart.colour)
+                                        p Colour
+                                        p.text-center= cart.colour
+                                li.d-flex.justify-content-between.my-0
+                                    if(cart.size)
+                                        p Size
+                                        p.text-center= cart.size
+                                li.d-flex.justify-content-between.my-0
+                                    p Quantity
+                                    p.text-center= cart.qty
                                 li.d-flex.justify-content-between.lh-condensed.mt-3(style='border-top: 1px solid black;')
                                     div
                                         p Subtotal

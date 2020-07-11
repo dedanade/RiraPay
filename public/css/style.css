@@ -57,6 +57,15 @@ body {
   text-align: center;
   margin-top: 30px;
 }
+
+.view-password-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+}
+
 h6 {
   display: inline;
 }
