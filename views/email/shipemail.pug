@@ -24,7 +24,11 @@ block content
     ul
         b Items:
         li #{productName}
-        li quantity: #{quantity}
+        if (colour)
+          li Colour: #{colour}
+        if (size)
+          li Size: #{size}
+        li Quantity: #{quantity}
 
     p 
         b You should expect Delivery ASAP!

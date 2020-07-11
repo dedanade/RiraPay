@@ -45,6 +45,9 @@ const updateFormmobile = document.getElementById('updateFormmobile');
 const updateShipingForm = document.getElementById('shippingForm');
 const updateDeliveryForm = document.getElementById('deliveryForm');
 
+const selectColorOptions = document.querySelector('.selectColorOptions');
+const selectSizeOptions = document.querySelector('.selectSizeOptions');
+
 // const addbtn = document.querySelector('#add');
 // const subbtn = document.querySelector('#subtract');
 // const qtyfield = document.querySelector('#quantity');
@@ -104,8 +107,18 @@ if (createProductForm)
     const stock = document.getElementById('productStock').value;
     const additionalInfo = document.getElementById('additionalInfo').value;
     const discount = document.getElementById('inputDiscount').value;
+    const colours = document.getElementById('color-tags').value;
+    const sizes = document.getElementById('size-tags').value;
 
-    createProduct(productName, price, stock, additionalInfo, discount);
+    createProduct(
+      productName,
+      price,
+      stock,
+      additionalInfo,
+      discount,
+      colours,
+      sizes
+    );
   });
 
 if (editProductForm)
@@ -116,8 +129,18 @@ if (editProductForm)
     const stock = document.getElementById('editproductStock').value;
     const additionalInfo = document.getElementById('editadditionalInfo').value;
     const discount = document.getElementById('editinputDiscount').value;
+    const colours = document.getElementById('edit-color-tags').value;
+    const sizes = document.getElementById('edit-size-tags').value;
 
-    updateProduct(productName, price, stock, additionalInfo, discount);
+    updateProduct(
+      productName,
+      price,
+      stock,
+      additionalInfo,
+      discount,
+      colours,
+      sizes
+    );
   });
 
 if (createCartinput)
@@ -129,7 +152,15 @@ if (createCartinput)
       .value.replace('₦', ' ')
       .replace(/\D/g, '');
 
-    createCart(qty, total);
+    const colourSelect = document.getElementById('selectColours');
+    if (colourSelect) {
+      var colour = colourSelect.options[colourSelect.selectedIndex].value;
+    }
+    const sizeSelect = document.getElementById('selectSizes');
+    if (sizeSelect) {
+      var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+    }
+    createCart(qty, total, colour, size);
   });
 
 if (pixelForm)
@@ -347,3 +378,29 @@ $('.trans-today a').click(function(e) {
   var toShow = $(this).attr('href');
   $(toShow).show();
 });
+
+if (selectColorOptions) {
+  const selectColours = document.getElementById('selectColours');
+  const coloursValue = document.getElementById('productColours').value;
+  const coloursOptions = coloursValue.split(',');
+  for (var i = 0; i < coloursOptions.length; i++) {
+    var opt = coloursOptions[i];
+    var el = document.createElement('option');
+    el.textContent = opt;
+    el.value = opt;
+    selectColours.appendChild(el);
+  }
+}
+
+if (selectSizeOptions) {
+  const selectSizes = document.getElementById('selectSizes');
+  const sizesValue = document.getElementById('productSizes').value;
+  const sizesOptions = sizesValue.split(',');
+  for (var i = 0; i < sizesOptions.length; i++) {
+    var opt = sizesOptions[i];
+    var el = document.createElement('option');
+    el.textContent = opt;
+    el.value = opt;
+    selectSizes.appendChild(el);
+  }
+}

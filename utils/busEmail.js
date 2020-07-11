@@ -83,6 +83,8 @@ class BusOrderEmail {
     this.price = product.price;
     this.total = cart.total;
     this.quantity = cart.qty;
+    this.colour = cart.colour;
+    this.size = cart.size;
     this.url = url;
     this.from = `RiraPay for Business <${process.env.BUSEMAIL_FROM}>`;
   }
@@ -126,6 +128,8 @@ class BusOrderEmail {
       price: this.price,
       total: this.total,
       quantity: this.quantity,
+      colour: this.colour,
+      size: this.size,
       subject
     });
     // 2) Define email options

@@ -5,32 +5,47 @@ block content
         section
             .form-container(style= 'margin-top: 150px;')
                 form.create-product-form
-                        .text-center.py-4
-                            h3.pt-3 Create a New Product
-                        .row.mx-2.py-3
-                            .col
-                                label(for='productName') Product Name (Required)
-                                input#productName.form-control(type='text', placeholder='eg: Bluetooth Speaker' required='')
-                        .row.mx-2.py-3
-                            .col
-                                label(for='productPrice') Price (required)
+                    .text-center.py-4
+                        h3.pt-3 Create a New Product
+                    .row.mx-2.py-3
+                        .col
+                            label(for='productName') Product Name (Required)
+                            input#productName.form-control(type='text', placeholder='eg: Bluetooth Speaker' required='')
+                    .row.mx-2.py-3
+                        .col
+                            label(for='productPrice') Price (required)
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
                                 input#productPrice.form-control(type='number', placeholder='Price of your Product' required='')
-                        .row.mx-2.py-3
-                            .col
-                                label(for='productStock') Quantity Availabe (required)
-                                input#productStock.form-control(type='number', placeholder='Quanity Available' required='')
-                        .row.mx-2.py-3
-                            .col
-                                label(for='additionalInfo') Additional Information (Not required)
-                                input#additionalInfo.form-control(type='text', placeholder='Info buyers need to know before placing order')
-                        .row.mx-3.py-3
-                            .col
-                                label(for='#inputDiscount') Discount for RiraPay orders
-                                .input-group.w-50
-                                    input#inputDiscount.form-control(type='number', placeholder='eg: 20')
-                                    .input-group-append
+                    .row.mx-2.py-3
+                        .col
+                            label(for='productStock') Quantity Availabe (required)
+                            input#productStock.form-control(type='number', placeholder='Quanity Available' required='')
+                    .row.mx-2.py-3
+                        .col
+                            label(for='additionalInfo') Additional Information 
+                            textarea#additionalInfo.form-control(type='text', placeholder='Info buyers need to know before placing order')
+                    .row.mx-3.py-3
+                        .col
+                            label(for='#inputDiscount') Discount for RiraPay orders
+                            .input-group.w-50
+                                input#inputDiscount.form-control(type='number', placeholder='eg: 20')
+                                .input-group-append
                                     .input-group-text %
-                                small.form-text
-                                    | We reconmend giving out more than 10% discount for order placed with RiraPay.
-                        .text-center
-                            button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create Product 
+                            small.form-text We reconmend giving out more than 10% discount for order placed with RiraPay.
+                    p.mx-3.mt-4 
+                        b Variants(Optional):
+                    .row.mx-3.my-4
+                        .col
+                            label(for='color-tags').my-2 Color
+                            input#color-tags.form-control(style= 'width: 25rem; height: 4rem;' type='text', value=''  data-role='tagsinput' )
+                            small.form-text Seperate each color with comma.
+                    .row.mx-3.mb-5
+                        .col
+                            label(for='size-tags').my-2 Size
+                            input#size-tags.form-control( type='text', value='' data-role='tagsinput',)
+                            small.form-text Seperate each size with comma.
+
+                    .text-center
+                        button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create Product 

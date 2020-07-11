@@ -31,7 +31,21 @@ block content
                                     input#editinputDiscount.form-control(type='number', value= product.discount)
                                     .input-group-append
                                     .input-group-text %
-                                
-                            input#productId(type='hidden', value= product._id)
+                        p.mx-3.mt-4 
+                            b Variants(Optional):
+                        .row.mx-3.my-4
+                            .col
+                                -const newProductColours = product.colours.join(',');
+                                label(for='edit-color-tags').my-2 Color
+                                input#edit-color-tags.form-control(style= 'width: 25rem; height: 4rem;' type='text', value=newProductColours  data-role='tagsinput' )
+                                small.form-text Seperate each color with comma.
+                        .row.mx-3.mb-5
+                            .col
+                                -const newProductSizes = product.sizes.join(',');
+                                label(for='edit-size-tags').my-2 Size
+                                input#edit-size-tags.form-control( type='text', value=newProductSizes data-role='tagsinput',)
+                                small.form-text Seperate each size with comma.
+
+                                input#productId(type='hidden', value= product._id)
                         .text-center
                             button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') update

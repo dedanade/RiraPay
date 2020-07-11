@@ -93,6 +93,12 @@ block content
                                         .delivery-info
                                         p Product Name: #{product.productName}
 
+                                        if (cart.colour)
+                                            p Color:  #{cart.colour}
+
+                                        if (cart.size)
+                                            p Colour:  #{cart.size}
+
                                         p  Name: #{order.name}
                             
                                         p  Address: #{order.address}
@@ -101,12 +107,13 @@ block content
                                         
                                         p City:  #{ order.area}
                                         
-                                        p
-                                            | Phone: 
+                                        p Phone: 
                                             a(href=`tel:${order.phone}`)= order.phone 
-                                        p
-                                            | Alternative Phone Number:
-                                            a(href=`tel:${order.altphone}`)= order.altPhone
+                                        if (order.altphone)
+                                            p
+                                                | Alternative Phone Number:
+                                                a(href=`tel:${order.altphone}`)= order.altPhone
+
                                         .text-center
                                             button.btn(data-clipboard-text=`${product.productName} ${order.name} ${order.address} ${order.state} ${order.area} ${order.phone} ${order.altPhone} `, style='background-color: #01afee; color: white;')
                                                 | Copy Everything

@@ -27,6 +27,27 @@ block content
                                 .d-flex.mx-2.my-3
                                     p.font-weight-bold Discount:
                                     p.mx-4 None
+                            
+                            if (product.colours != "")
+                                .selectColorOptions
+                                    .d-flex.mx-2.my-3
+                                        p.font-weight-bold Colours:
+                                        -const newProductColours = product.colours.join(',');
+                                        input#productColours(type='hidden', name='productColours', value= newProductColours)
+                                        select#selectColours.form-control.ml-1.w-50
+                                            
+                            if (product.sizes != "")
+                                .selectSizeOptions
+                                    .d-flex.mx-2.my-3
+                                        -const newProductSizes = product.sizes.join(',');
+                                        input#productSizes(type='hidden', name='productSizes', value= newProductSizes)
+                                        p.font-weight-bold Size:
+                                        select#selectSizes.form-control.ml-1.w-50
+                                            
+                            
+                                    
+
+                                
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product link
                                 .mx-2

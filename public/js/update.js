@@ -122,7 +122,9 @@ export const updateProduct = async (
   price,
   stock,
   additionalInfo,
-  discount
+  discount,
+  colours,
+  sizes
 ) => {
   try {
     const res = await axios({
@@ -133,7 +135,9 @@ export const updateProduct = async (
         price,
         stock,
         additionalInfo,
-        discount
+        discount,
+        colours,
+        sizes
       }
     });
     const productSlug = res.data.data.data.slug;

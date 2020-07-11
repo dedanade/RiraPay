@@ -8,7 +8,9 @@ const cartShcema = new mongoose.Schema({
   total: {
     type: Number,
     required: [true, 'Cart Total is Required']
-  }
+  },
+  colour: String,
+  size: String
 });
 
 const Cart = mongoose.model('Cart', cartShcema);

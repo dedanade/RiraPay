@@ -27,6 +27,10 @@ block content
         b Order details:
         li Product price: ₦#{newprice}
         li quanity: #{quantity}
+        if (colour)
+          li Colour: #{colour}
+        if (size)
+          li Size: #{size}
         li 
           b Total: ₦#{newtotal}
 

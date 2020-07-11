@@ -28,6 +28,10 @@ block content
         b Order details:
         li Product price: ₦#{newprice}
         li quantity: #{quantity}
+        if (colour)
+          li Colour: #{colour}
+        if (size)
+          li Size: #{size}
         if (discount > 0)
             li discount: #{discount}%
         li 

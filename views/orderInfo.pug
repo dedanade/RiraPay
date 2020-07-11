@@ -69,6 +69,14 @@ block content
                 .d-flex.justify-content-between.mx-3
                     p= product.productName
                     p= `₦${productprice}`
+                if (cart.colour)
+                    .d-flex.justify-content-between.mx-3
+                        p Colour
+                        p= cart.colour
+                if (cart.size)
+                    .d-flex.justify-content-between.mx-3
+                        p Size
+                        p= cart.size
                 .d-flex.justify-content-between.mx-3
                     p Quantity
                     p= cart.qty

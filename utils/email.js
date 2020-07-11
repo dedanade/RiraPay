@@ -79,6 +79,8 @@ class OrderEmail {
     this.discount = product.discount;
     this.total = cart.total;
     this.quantity = cart.qty;
+    this.colour = cart.colour;
+    this.size = cart.size;
     this.logisticName = firstArg.logisticName;
     this.logisticNum = firstArg.trackingNum;
     this.url = url;
@@ -120,6 +122,8 @@ class OrderEmail {
       discount: this.discount,
       total: this.total,
       quantity: this.quantity,
+      colour: this.colour,
+      size: this.size,
       altPhone: this.altphone,
       url: this.url,
       productName: this.productName,

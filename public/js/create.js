@@ -8,7 +8,9 @@ export const createProduct = async (
   price,
   stock,
   additionalInfo,
-  discount
+  discount,
+  colours,
+  sizes
 ) => {
   try {
     const res = await axios({
@@ -19,7 +21,9 @@ export const createProduct = async (
         price,
         stock,
         additionalInfo,
-        discount
+        discount,
+        colours,
+        sizes
       }
     });
 
@@ -36,14 +40,16 @@ export const createProduct = async (
   }
 };
 
-export const createCart = async (qty, total) => {
+export const createCart = async (qty, total, colour, size) => {
   try {
     const res = await axios({
       method: 'POST',
       url: '/api/v1/products/cart',
       data: {
         qty,
-        total
+        total,
+        colour,
+        size
       }
     });
 

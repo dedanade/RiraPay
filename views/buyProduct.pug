@@ -33,14 +33,32 @@ block footer
                             input#price.readonly(type='hidden', readonly value=`${product.price}`)
                             input#product_stock.readonly(type='hidden', readonly value=`${product.stock}`)          
                         .col-12.my-2
-                            p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many Pcs? 
+                            p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many? 
                             //- span
                             //-     button#subtract(type = 'button') -
                             input#quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' required='' style= 'width: 30%; display: inherit;')
                             //- span
                             //-     button#add(type = 'button') +
-                            medium.form-text.mt-2.mb-3.mx-1
+                            small.form-text.mt-2.mb-3.mx-1
                                 | (Type how many Quantity you want)
+                        if (product.colours != "")
+                            .col-6.my-2.px-2
+                                .selectColorOptions
+                                        p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Colour
+                                        -const newProductColours = product.colours.join(',');
+                                        input#productColours(type='hidden', name='productColours', value= newProductColours)
+                                        select#selectColours.form-control(required='')
+                                            option(selected='', disabled='', value='') Choose Colour
+                                           
+                        if (product.sizes != "")
+                            .col-6.my-2.px-2
+                                .selectSizeOptions
+                                    p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Size
+                                    -const newProductSizes = product.sizes.join(',');
+                                    input#productSizes(type='hidden', name='productSizes', value= newProductSizes)
+                                    select#selectSizes.form-control(required='')
+                                        option(selected='', disabled='', value='') Choose Size
+                                        
                         .col-12.my-2
                             p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 500;') Total
                             input#total.readonly.font-weight-bold.mx-2(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: bold;')
