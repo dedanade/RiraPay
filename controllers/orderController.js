@@ -174,6 +174,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
 
     order.status = 'Paid';
     order.paidAt = Date.now();
+    order.createdAt = Date.now();
     await order.save();
   }
   res.sendStatus(200);
