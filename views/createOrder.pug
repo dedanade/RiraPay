@@ -48,17 +48,11 @@ block footer
                 .card.border-2.box-shadow-1.py-5.mx-lg-1
                     .card.wrap.border-0
                     form.create-order-form
-                        .row.mx-2
-                            .col
+                       
                                 
-                                 input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
-                        .row.mx-2
-                            .col
-                                 input#cart(type='hidden', name='cart', value= cart.id)
-                        .row.mx-2
-                            .col
-                                
-                                 input#product_id(type='hidden', name='product_id', value= product.id)
+                        input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
+                        input#cart(type='hidden', name='cart', value= cart.id)
+                        input#product_id(type='hidden', name='product_id', value= product.id)
                         .row.mx-2
                             .col
                                 label(for='checkoutemail')  Your Email Address

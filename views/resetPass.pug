@@ -1,0 +1,36 @@
+extends base
+block Indexcss
+block script
+block content
+block header
+block footer
+
+      section
+        .container
+          .text-center
+            img(style='font-weight: bold; margin-top: 100px; margin-bottom: 20px;' src='#')
+            h4
+              | New Password for Personal Account
+        .form-container
+          .row.mx-lg-4
+            .col
+              .card-wrap
+                form.reset-pass-form
+                    .row.mx-2.my-3
+                        .col
+                            label New Password
+                            input#reset-password.form-control(type='password', placeholder='Minimum 6 words' required='')
+                            span.fa.fa-fw.fa-eye.view-password-icon.toggle-password(toggle='#reset-password')
+                    .row.mx-2.my3
+                        .col
+                            label Confirm New Password
+                            input#reset-confirm-password.form-control(type='password', placeholder='Minimum of 6 words' required='')
+                            span.fa.fa-fw.fa-eye.view-password-icon.toggle-password(toggle='#reset-confirm-password')
+                    .text-center
+                        button#sign-up-button.btn.btn-lg.mt-3(type='submit') Submit
+                    .mt-3
+                    .text-center
+                        p
+                        | Token Invalid or Expired? 
+                        a(href='/password') Request a new One
+                    input#forgotPassToken(type='hidden', value= token)

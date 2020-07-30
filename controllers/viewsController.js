@@ -278,6 +278,34 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.busForgotPass = catchAsync(async (req, res, next) => {
+  res.status(200).render('busForgotPass', {
+    title: 'Retrieve your Password'
+  });
+});
+
+exports.forgotPass = catchAsync(async (req, res, next) => {
+  res.status(200).render('forgotPass', {
+    title: 'Retrieve your Password'
+  });
+});
+
+exports.busResetPassword = catchAsync(async (req, res, next) => {
+  const { token } = req.params;
+  res.status(200).render('busResetPass', {
+    title: 'New Password',
+    token
+  });
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  const { token } = req.params;
+  res.status(200).render('resetPass', {
+    title: 'New Password',
+    token
+  });
+});
+
 exports.busLogin = catchAsync(async (req, res, next) => {
   res.status(200).render('busLogin', {
     title: 'Login Business Account'

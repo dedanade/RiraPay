@@ -61,7 +61,7 @@ class BusEmail {
 
   async sendPasswordReset() {
     await this.send(
-      'passwordReset',
+      'busForgotPassEmail',
       'Your password reset token (valid for only 10 minutes)'
     );
   }

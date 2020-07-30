@@ -2,7 +2,14 @@
 
 import '@babel/polyfill';
 import { login, busLogin, busLogout, logout } from './login';
-import { signup, busSignup } from './signup';
+import {
+  signup,
+  busSignup,
+  forgotPassword,
+  resetPassword,
+  busForgotPassword,
+  busResetPassword
+} from './signup';
 import { createProduct, createOrder, createCart } from './create';
 import {
   updatePixel,
@@ -17,6 +24,11 @@ import { showAlert } from './alert';
 
 export const submitlink = (document.getElementById('submitlinkinput') || {})
   .value;
+
+export const token = (document.getElementById('forgotPassToken') || {}).value;
+export const busToken = (document.getElementById('forgotBusPassToken') || {})
+  .value;
+
 export const orderId = (document.getElementById('orderid') || {}).value;
 
 export const DelOrderId = (document.getElementById('DelOrderId') || {}).value;
@@ -31,6 +43,12 @@ const Logout = document.querySelector('.logout_btn');
 
 const signupForm = document.querySelector('.signup-form');
 const busSignupForm = document.querySelector('.signup-bus-form');
+
+const forgotForm = document.querySelector('.forgot-form');
+const resetPassForm = document.querySelector('.reset-pass-form');
+
+const busForgotForm = document.querySelector('.bus-forgot-form');
+const resetBusPassForm = document.querySelector('.reset-bus-pass-form');
 
 const createProductForm = document.querySelector('.create-product-form');
 const editProductForm = document.querySelector('.edit-product-form');
@@ -97,6 +115,44 @@ if (busSignupForm)
       businessPhoneNumber,
       businessPassword
     );
+  });
+
+if (forgotForm)
+  forgotForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('forgot-email').value;
+    forgotPassword(email);
+  });
+
+if (resetPassForm)
+  resetPassForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const password = document.getElementById('reset-password').value;
+    const confirmPassword = document.getElementById('reset-confirm-password')
+      .value;
+    if (password != confirmPassword) {
+      alert('New and confirm password must be the same');
+    } else resetPassword(password);
+  });
+
+if (busForgotForm)
+  busForgotForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const businessEmail = document.getElementById('bus-forgot-email').value;
+    busForgotPassword(businessEmail);
+  });
+
+if (resetBusPassForm)
+  resetBusPassForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const businessPassword = document.getElementById('reset-bus-password')
+      .value;
+    const confirmPassword = document.getElementById(
+      'reset-bus-confirm-password'
+    ).value;
+    if (businessPassword != confirmPassword) {
+      alert('New and confirm password must be the same');
+    } else busResetPassword(businessPassword);
   });
 
 if (createProductForm)

@@ -9,6 +9,9 @@ router.get('/', viewController.homepage);
 
 router.get('/login', viewController.login);
 
+router.get('/password', viewController.forgotPass);
+router.get('/resetPassword/:token', viewController.resetPassword);
+
 router.get('/signup', viewController.signup);
 
 router.get('/dashboard', authController.protect, viewController.getDashboard);
@@ -32,6 +35,10 @@ router.get('/success/:orderId', viewController.getsuccesspage);
 router.get('/business', viewController.busHomepage);
 
 router.get('/buslogin', viewController.busLogin);
+
+router.get('/buspassword', viewController.busForgotPass);
+
+router.get('/busresetpassword/:token', viewController.busResetPassword);
 
 router.get('/bussignup', viewController.busSignup);
 

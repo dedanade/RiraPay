@@ -120,7 +120,7 @@ exports.forgotBusinessPassword = catchAsync(async (req, res, next) => {
   });
   if (!businessUser) {
     return next(
-      new AppError('There is no businessUser with email address.', 404)
+      new AppError('There is no businessUser with that email address.', 404)
     );
   }
 
@@ -131,16 +131,17 @@ exports.forgotBusinessPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to businessUser's email
   const resetURL = `${req.protocol}://${req.get(
     'host'
-  )}/api/v1/businessUsers/resetPassword/${resetToken}`;
+  )}/busresetpassword/${resetToken}`;
 
   // const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
   try {
-    // await new AllBusEmail.BusEmail(businessUser, resetURL).sendBusWelcome();
+    await new AllBusEmail.BusEmail(businessUser, resetURL).sendPasswordReset();
 
     res.status(200).json({
       status: 'success',
-      message: 'Token sent to email!'
+      message: 'Token sent to email!',
+      email: businessUser.businessEmail
     });
   } catch (err) {
     businessUser.passwordResetToken = undefined;
