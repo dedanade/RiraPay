@@ -80,7 +80,7 @@ userSchema.set('toJSON', { virtuals: true });
 
 userSchema.plugin(uniqueValidator, {
   message:
-    'Error, {PATH} must be unique. Try another or Login if you have an account '
+    ' Your {PATH} must be unique. Try another or Login if you have an account '
 });
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified

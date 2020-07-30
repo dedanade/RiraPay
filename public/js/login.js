@@ -63,6 +63,7 @@ export const busLogout = async () => {
   } catch (err) {
     showAlert('error', 'Unable to Log out right now. Try again later');
   }
+  console.log(`🔥🔥 ${err.response.data.message}`);
 };
 
 export const logout = async () => {
@@ -81,4 +82,5 @@ export const logout = async () => {
   } catch (err) {
     showAlert('error', 'Unable to Log out right now. Try again later');
   }
+  console.log(`🔥🔥 ${err.response.data.message}`);
 };

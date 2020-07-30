@@ -36,9 +36,6 @@ body {
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
-  padding: 2rem 2rem;
-  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   width: fit-content;
 }
 .alert--success {
@@ -46,6 +43,11 @@ body {
 }
 .alert--error {
   background-color: #eb4d4b;
+}
+
+.hideAlert {
+  font-weight: bold;
+  margin-left: 0.5rem;
 }
 
 .error_title {

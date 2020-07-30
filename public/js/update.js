@@ -27,9 +27,6 @@ export const updatePixel = async facebookPixel => {
       'success',
       'Your Pixel has been Updated. Refresh this page and check your facebook pixel Helper Extention'
     );
-    window.setTimeout(() => {
-      location.reload();
-    }, 1500);
     console.log(err.response.data.message);
   }
 };
@@ -76,9 +73,6 @@ export const updateOrderEmails = async orders => {
       'error',
       'It seems we cannot find any order with your email Address. If you think this is an error, kindly contact us'
     );
-    window.setTimeout(() => {
-      location.reload();
-    }, 1500);
     console.log(`🔥🔥🔥 ${err.response.data.message}`);
   }
 };
@@ -110,9 +104,6 @@ export const updateShippingOrder = async (
       'error',
       'Opps! Unable to update order. Try again later. If the error persist, kindly contact us ASAP'
     );
-    window.setTimeout(() => {
-      location.reload();
-    }, 1500);
     console.log(`🔥🔥🔥 ${err.response.data.message}`);
   }
 };
@@ -178,9 +169,6 @@ export const updateDelivery = async getupdatedorder => {
       'error',
       'Opps! Unable to update order. Try again later. If the error persist, kindly contact us ASAP'
     );
-    window.setTimeout(() => {
-      location.reload();
-    }, 1500);
     console.log(`🔥🔥🔥 ${err.response.data.message}`);
   }
 };

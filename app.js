@@ -55,20 +55,6 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-// // Prevent parameter pollution
-// app.use(
-//   hpp({
-//     whitelist: [
-//       'duration',
-//       'ratingsQuantity',
-//       'ratingsAverage',
-//       'maxGroupSize',
-//       'difficulty',
-//       'price'
-//     ]
-//   })
-// );
-
 app.use(express.json());
 
 app.use(compression());
