@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const enforce = require('express-sslify');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
@@ -29,6 +30,10 @@ app.locals.moment = require('moment');
 
 app.use(express.static(path.join(__dirname, 'public')));
 // Set security HTTP headers
+if (process.env.NODE_ENV === 'production') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 app.use(helmet());
 
 // 1) MIDDLEWARES
