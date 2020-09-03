@@ -4,104 +4,75 @@ block content
 block header
 block footer
         section
-            .summary_container
-                .card.border-1.box-shadow-1
-                    .card.wrap
-                        .card-body(style='background-color:#eee;')
-                            h5#th-1.card-title.my-4 Order Summary
-                            ul.list-group
-                            -const carttotal = cart.total.toLocaleString()
-                                li.d-flex.justify-content-between.my-0
-                                    p Product
-                                    p= product.productName
-                                li.d-flex.justify-content-between.my-0
-                                    if(cart.colour)
-                                        p Colour
-                                        p.text-center= cart.colour
-                                li.d-flex.justify-content-between.my-0
-                                    if(cart.size)
-                                        p Size
-                                        p.text-center= cart.size
-                                li.d-flex.justify-content-between.my-0
-                                    p Quantity
-                                    p.text-center= cart.qty
-                                li.d-flex.justify-content-between.lh-condensed.mt-3(style='border-top: 1px solid black;')
-                                    div
-                                        p Subtotal
-                                    p= `₦${carttotal}`
-                                li.d-flex.justify-content-between.lh-condensed
-                                    div
-                                        p Tax
-                                    p.text-muted #0
-                                li.d-flex.justify-content-between.lh-condensed.mb-3
-                                    div
-                                        p Delivery Fee
-                                    p.text-muted Free
-                                li.d-flex.justify-content-between.lh-condensed(style=' font-weight: bold; border-top: 1px solid black;')
-                                    div
-                                        p Total
-                                    p= `₦${carttotal}`
-        section
-            .form-container.my-5
+            .form-container
                 .text-center.my-3
                     h6#form-heading Fill in your Delivery Details
-                .card.border-2.box-shadow-1.py-5.mx-lg-1
-                    .card.wrap.border-0
-                    form.create-order-form
-                       
-                                
-                        input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
-                        input#cart(type='hidden', name='cart', value= cart.id)
-                        input#product_id(type='hidden', name='product_id', value= product.id)
-                        .row.mx-2
-                            .col
-                                label(for='checkoutemail')  Your Email Address
-                                input#checkoutemail.form-control(type='email', placeholder='youremail@gmail.com' required='')
-                                small.form-text.mt-3.mx-1
-                                    | This Email will be used to sign up later on to track your
-                                    | orders and request for refund
-                                #th-1.mt-0
+                .card.border-2.box-shadow-1.py-2.mx-lg-1
+                    .card.wrap.border-0  
+                        form.create-order-form     
+                            input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
+                            input#cart(type='hidden', name='cart', value= cart.id)
+                            input#product_id(type='hidden', name='product_id', value= product.id)
+                            .row.mx-2
+                                .col
+                                    label(for='checkoutemail')  Your Email Address
+                                    input#checkoutemail.form-control(type='email', placeholder='youremail@gmail.com' required='')
+                                    small.form-text.mt-3.mx-1
+                                        | This Email will be used to sign up later on to track your
+                                        | orders and request for refund
+                                    #th-1.mt-0
 
-                        .row.mx-2.py-3
-                            .col-12
-                                label(for='checkoutname')  Your Name
-                                input#checkoutname.form-control(type='text', placeholder='eg: Mr Moshood Bello' required='')
-            
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutaddress') Your Full Address
-                                input#checkoutaddress.form-control(type='text-area', placeholder='eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop' required='')
-                             
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutstate') State
-                                input#checkoutstate.form-control(type='text', placeholder='eg: Lagos, Abuja, etc' required='')
-                               
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutarea') Area
-                                input#checkoutarea.form-control(type='text', placeholder='eg: Oshodi, Owerri, Lekki, Garki etc' required='')
+                            .row.mx-2.py-3
+                                .col-12
+                                    label(for='checkoutname')  Your Name
+                                    input#checkoutname.form-control(type='text', placeholder='eg: Mr Moshood Bello' required='')
                 
-                        .row.mx-2.py-3
-                            .col
-                                div
-                                label(for='checkoutphone') Phone Number
-                                .input-group
-                                    .input-group-prepend
-                                    .input-group-text +234
-                                    input#checkoutphone.form-control(type='number', placeholder='7066514541'  minlength= '11' maxlength= '11' required='')
-                                    
-                        .row.mx-2.py-3
-                            .col
-                                div
-                                label(for='checkoutphone2') Alternative Phone Number
-                                .input-group
-                                    .input-group-prepend
-                                    .input-group-text +234
-                                    input#checkoutphone2.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11')
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='checkoutaddress') Your Full Address
+                                    input#checkoutaddress.form-control(type='text-area', placeholder='eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop' required='')
+                                
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='checkoutstate') State
+                                    input#checkoutstate.form-control(type='text', placeholder='eg: Lagos, Abuja, etc' required='')
+                                
+                            .row.mx-2.py-3
+                                .col
+                                    label(for='checkoutarea') Area
+                                    input#checkoutarea.form-control(type='text', placeholder='eg: Oshodi, Owerri, Lekki, Garki etc' required='')
+                    
+                            .row.mx-2.py-3
+                                .col
+                                    div
+                                    label(for='checkoutphone') Phone Number
+                                    .input-group
+                                        .input-group-prepend
+                                        .input-group-text +234
+                                        input#checkoutphone.form-control(type='number', placeholder='7066514541'  minlength= '11' maxlength= '11' required='')
+                                        
+                            .row.mx-2.py-3
+                                .col
+                                    div
+                                    label(for='checkoutphone2') Alternative Phone Number
+                                    .input-group
+                                        .input-group-prepend
+                                        .input-group-text +234
+                                        input#checkoutphone2.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11')
+                            .row.mx-2.my-4
+                                .col
+                                    ul.list-group
+                                    -const carttotal = cart.total.toLocaleString()
+                                        li.d-flex.justify-content-between.my-0
+                                            p= `${product.productName} x ${cart.qty}`
+                                            b= `#${carttotal}`
+                                    ul.list-group
+                                        li.d-flex.justify-content-between.my-0
+                                            p Shipping
+                                            b Free
                             
-                        .text-center
-                            button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
-                                | Place Order
+                            .text-center
+                                button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
+                                    | Place Order
 
                         

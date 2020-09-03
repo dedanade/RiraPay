@@ -49,10 +49,13 @@ block content
         .larger-container(style='margin-top: 50px; margin-bottom: 150px;')
             .card-body.p-3.mx-2.my-3
                 if (product.discount > 0)
-                    h4#form-heading.mx-2.text-center.mb-5=`Wait! Don't Go. Scroll down for a ${product.discount}% discount valid for today ONLY 👇👇👇`
+                    p#form-heading.text-center.mb-5=`Wait! Don't Go. Scroll down for a ${product.discount}% discount valid for today ONLY 👇👇👇`
+                else
+                    p#form-heading.text-center.mb-5= `Scroll down to make payment to Validate Order. All payments are secured by RiraPay`
+
                 
                 h4 Confirm Your Order Details:
-                .row.my-5.mx-3
+                .row.my-3.mx-3
                     .col-12
                         p=`Name: ${order.name}  `
                         p= `Phone: ${order.phone}`

@@ -262,20 +262,22 @@ $('#quantity').on('keyup click', function() {
 //     qtyfield.value = parseInt(qtyfield.value) - 1;
 //   });
 
-$('.create-order-form').on('click', function() {
-  let valid = true;
-  $('[required]').each(function() {
-    if ($(this).is(':invalid') || !$(this).val()) valid = false;
-  });
-  if (valid);
-  $('.submit_order_btn').on('click', e => {
-    e.target.textContent = 'Processing...';
-  });
-});
+// $('.create-order-form').on('click', function() {
+//   let valid = true;
+//   $('[required]').each(function() {
+//     if ($(this).is(':invalid') || !$(this).val()) valid = false;
+//   });
+//   if (valid);
+//   $('.submit_order_btn').on('click', e => {
+//     e.target.textContent = 'Processing...';
+//   });
+// });
 
 if (createOrderForm)
   createOrderForm.addEventListener('submit', e => {
     e.preventDefault();
+    e.srcElement[10].textContent = 'Processing...';
+
     const businessUser = document.getElementById('businessUser').value;
     const cart = document.getElementById('cart').value;
     const product = document.getElementById('product_id').value;
