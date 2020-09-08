@@ -245,6 +245,8 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
     }, 0)
     .toLocaleString();
 
+  console.log('Got to Trasaction Page');
+
   res.status(200).render('busDashBoard', {
     title: 'Business DashBoard',
     product,
