@@ -52,8 +52,6 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
     .endOf('day')
     .toDate(); // set to 23:59 pm today
 
-  console.log(startToday);
-  console.log(endToday);
   // This Week
   const startWeek = moment()
     .startOf('isoWeek')
@@ -78,21 +76,28 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
       $lte: endToday
     }
   });
-
   const arraySalesOrder = [];
 
   salesorders.forEach(e => {
     const eachSalesToday = e.cart;
     eachSalesToday.forEach(esales => {
-      arraySalesOrder.push(esales);
+      arraySalesOrder.push(esales.total);
     });
   });
 
-  const cartSalesToday = await Cart.find({ _id: arraySalesOrder }).distinct(
-    'total'
-  );
+  // const cartSalesToday = await Cart.find(
+  //   { _id: arraySalesOrder },
+  //   'total -_id'
+  // );
 
-  const sumOfCartSalesToday = cartSalesToday
+  // // const cartesalles = cartSalesToday.map(e => {
+  // //   console.log(e);
+  // //   return e.cart;
+  // // });
+
+  // console.log(cartesalles);
+
+  const sumOfCartSalesToday = arraySalesOrder
     .reduce((a, b) => {
       return a + b;
     }, 0)
@@ -113,15 +118,11 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   salesOrdersWeek.forEach(e => {
     const eachSalesWeek = e.cart;
     eachSalesWeek.forEach(esales => {
-      arraySalesWeek.push(esales);
+      arraySalesWeek.push(esales.total);
     });
   });
 
-  const cartSalesWeek = await Cart.find({ _id: arraySalesWeek }).distinct(
-    'total'
-  );
-
-  const sumOfCartSalesWeek = cartSalesWeek
+  const sumOfCartSalesWeek = arraySalesWeek
     .reduce((a, b) => {
       return a + b;
     }, 0)
@@ -142,15 +143,11 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   salesOrdersMonth.forEach(e => {
     const eachSalesMonth = e.cart;
     eachSalesMonth.forEach(esales => {
-      arraySalesMonth.push(esales);
+      arraySalesMonth.push(esales.total);
     });
   });
 
-  const cartSalesMonth = await Cart.find({ _id: arraySalesMonth }).distinct(
-    'total'
-  );
-
-  const sumOfCartSalesMonth = cartSalesMonth
+  const sumOfCartSalesMonth = arraySalesMonth
     .reduce((a, b) => {
       return a + b;
     }, 0)
@@ -172,19 +169,13 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   transactionToday.forEach(e => {
     const eachtrantoday = e.cart;
     eachtrantoday.forEach(etran => {
-      ArrayTranToday.push(etran);
+      ArrayTranToday.push(etran.total);
     });
   });
 
-  const cartTranToday = await Cart.find({ _id: ArrayTranToday }).distinct(
-    'total'
-  );
-
-  const sumOfcartTranToday = cartTranToday
-    .reduce((a, b) => {
-      return a + b;
-    }, 0)
-    .toLocaleString();
+  const sumOfcartTranToday = ArrayTranToday.reduce((a, b) => {
+    return a + b;
+  }, 0).toLocaleString();
 
   // Transactions This Week
 
@@ -202,19 +193,13 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   transactionWeek.forEach(e => {
     const eachtranweek = e.cart;
     eachtranweek.forEach(etran => {
-      ArrayTranWeek.push(etran);
+      ArrayTranWeek.push(etran.total);
     });
   });
 
-  const cartTranWeek = await Cart.find({ _id: ArrayTranWeek }).distinct(
-    'total'
-  );
-
-  const sumOfcartTranWeek = cartTranWeek
-    .reduce((a, b) => {
-      return a + b;
-    }, 0)
-    .toLocaleString();
+  const sumOfcartTranWeek = ArrayTranWeek.reduce((a, b) => {
+    return a + b;
+  }, 0).toLocaleString();
 
   // Transactions This Month
   const transactionMonth = await Order.find({
@@ -231,21 +216,13 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   transactionMonth.forEach(e => {
     const eachtranMonth = e.cart;
     eachtranMonth.forEach(etran => {
-      ArrayTranMonth.push(etran);
+      ArrayTranMonth.push(etran.total);
     });
   });
 
-  const cartTranMonth = await Cart.find({ _id: ArrayTranMonth }).distinct(
-    'total'
-  );
-
-  const sumOfcartTranMonth = cartTranMonth
-    .reduce((a, b) => {
-      return a + b;
-    }, 0)
-    .toLocaleString();
-
-  console.log('Got to Trasaction Page');
+  const sumOfcartTranMonth = ArrayTranMonth.reduce((a, b) => {
+    return a + b;
+  }, 0).toLocaleString();
 
   res.status(200).render('busDashBoard', {
     title: 'Business DashBoard',

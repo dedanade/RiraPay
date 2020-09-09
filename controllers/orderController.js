@@ -72,6 +72,8 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     const rirafee = discounttotal * 0.025; // discounted total * the 2.5 transaction fee
     const displaytotal = discounttotal - rirafee;
 
+    console.log(event);
+
     if (eventtype === 'charge.success');
 
     const order = await Order.findById({ _id: ordernum });
