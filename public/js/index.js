@@ -473,3 +473,31 @@ if (selectSizeOptions) {
     selectSizes.appendChild(el);
   }
 }
+
+var x = (document.getElementById('hidden_description') || {}).innerText;
+$('#display_description').html(x);
+
+// $(window).on(function() {
+//   if ($(this).scrollTop() >= $('#place_order').offset().top) {
+//     $('body').css('background-color', 'red');
+//     // }else {
+//     //   $('#navigation').removeClass("nav-hide");
+//   }
+// });
+
+const waypoint = new Waypoint({
+  element: document.getElementById('place_order'),
+  handler: function(direction) {
+    $('#place_order_float_btn').hide();
+    console.log(direction);
+    if (direction === 'up') $('#place_order_float_btn').show();
+  }
+});
+
+// $('#place_order').bind('inview', function(event, visible) {
+//   if (visible == true) {
+//     console.log('in view');
+//   } else {
+//     console.log('in view');
+//   }
+// });

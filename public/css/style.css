@@ -210,6 +210,80 @@ label {
   color: white;
   width: 12em;
 }
+
+#place_order_float_btn {
+  background-color: #0eb574;
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  width: 12em;
+  animation: haha 5s infinite;
+}
+@keyframes haha {
+  0%,
+  100% {
+    background: blue;
+  }
+  10% {
+    background: red;
+  }
+  40% {
+    background: purple;
+  }
+  70% {
+    background: orange;
+  }
+}
+
+#place_order_float_btn {
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .checkout1-button {
   background-color: #01afee;
   color: white;

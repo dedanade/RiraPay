@@ -15,6 +15,7 @@ block content
                             .form-group.mx-3.mb-2
                                 label.sr-only(for='pixelId')
                                 input#pixelId.form-control(type='number', min='11', value=businessUser.facebookPixel)
+                                a(href=`/purchasepixel/${businessUser.id}`) Test your Pixel
                             button.btn.btn-primary.ml-3(type='submit') Update
         section
         .container

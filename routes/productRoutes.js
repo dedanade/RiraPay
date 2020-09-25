@@ -12,7 +12,7 @@ router
 
   .post(
     authBusinessController.protectBusiness,
-    productController.createProduct
+    productController.createNewProduct
   );
 
 router.route('/cart').post(productController.createCart);

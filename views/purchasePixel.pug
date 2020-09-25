@@ -1,0 +1,17 @@
+extends base
+
+block header
+block Indexcss
+block footer
+block content
+
+    script.
+        fbq('track', 'Purchase');
+    script.
+        fbq('track', 'Lead');
+    script.
+        fbq('track', 'CompleteRegistration');
+    section
+        .error_title
+            h1 Firing your Pixel... Check Your Facebook Pixel Helper
+            h3 Go back After Confirmation

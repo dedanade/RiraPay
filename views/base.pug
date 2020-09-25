@@ -1,68 +1,79 @@
 doctype html
 html
-    head
-        // Global site tag (gtag.js) - Google Analytics
-        script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-172258577-1')
-        script.
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-172258577-1');
+  head
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-172258577-1')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-172258577-1');
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    // Bootstrap CSS
+    
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css')
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel='stylesheet' href='/css/bootstrap-tagsinput.css')
+    block Indexcss
+      link(rel='stylesheet' href='/css/Index.css')
 
-        // Required meta tags
-        meta(charset='utf-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-        // Bootstrap CSS
-        
-        link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
-        link(rel='stylesheet' href='https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css')
-        link(rel='stylesheet' href='/css/style.css')
-        link(rel='stylesheet' href='/css/bootstrap-tagsinput.css')
-        block Indexcss
-          link(rel='stylesheet' href='/css/Index.css')
+    // Font Awesome CSS
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css', integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    i.fas.fa-mobile-android-alt
 
-        // Font Awesome CSS
-        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css', integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ', crossorigin='anonymous')
-        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-        i.fas.fa-mobile-android-alt
-        
-        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
-        script(src='https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js')
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js")
-        script(src='//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js')
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js')
-        script(src='https://js.paystack.co/v1/inline.js')
+    // Summernote Css
+    link(href='https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css', rel='stylesheet')
 
-        block script
-          script.
-            pixel= #{businessUser.facebookPixel}
-            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-            document,'script','https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', `${pixel}`); // Insert your pixel ID here.
-            fbq('track', 'PageView');
-          noscript
-            img(height='1', width='1', style='display:none', src=`https://www.facebook.com/tr?id=${pixel}&ev=PageView&noscript=1`)
-        
-        title RiraPay| #{title}
-    body 
-        block header
-          include _header
+    // Trumbowyg Css
+    //- link(rel='stylesheet', href='/trumbowyg/dist/ui/trumbowyg.min.css')
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script.
+      window.jQuery || document.write('script src="js/vendor/jquery-3.4.1.min.js"')
+    // Import Trumbowyg
+    //- script(src='trumbowyg/dist/trumbowyg.min.js')
+    script(src='https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js")
+    script(src='//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js')
+    script(src='https://js.paystack.co/v1/inline.js')
+    
 
-        block content
-          h1 This is a placeholder heading
+    block script
+      script.
+        pixel= #{businessUser.facebookPixel}
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', `${pixel}`); // Insert your pixel ID here.
+        fbq('track', 'PageView');
+      noscript
+        img(height='1', width='1', style='display:none', src=`https://www.facebook.com/tr?id=${pixel}&ev=PageView&noscript=1`)
+    
+    title RiraPay| #{title}
+  body 
+    block header
+      include _header
 
-        block footer
-          include _footer
+    block content
+      h1 This is a placeholder heading
 
-// Optional JavaScript
-//- script(src= '/js/dashBoard.js')
-script(src= '/js/bundle.js')
-script(src= '/js/bootstrap-tagsinput.js')
+    block footer
+      include _footer
 
+    // Optional JavaScript
+    //- script(src= '/js/dashBoard.js')
+    script(src= '/js/bundle.js')
+    script(src= '/js/bootstrap-tagsinput.js')
+    script(src='https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js')
 
-// jQuery first, then Popper.js, then Bootstrap JS
-script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
-script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+    // jQuery first, then Popper.js, then Bootstrap JS
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')

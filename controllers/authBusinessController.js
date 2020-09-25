@@ -95,8 +95,14 @@ exports.protectBusiness = catchAsync(async (req, res, next) => {
 
   // 3) Check if user still exists
   const currentBusinessUser = await BusinessUser.findById(decoded.id);
+
   if (!currentBusinessUser) {
-    res.redirect('/buslogin');
+    if (process.env.NODE_ENV === 'production') {
+      res.redirect('/buslogin');
+    } else
+      return next(
+        new AppError('You need to Login before creating a Product!', 401)
+      );
   }
 
   // 4) Check if user changed password after the token was issued

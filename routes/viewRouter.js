@@ -82,4 +82,6 @@ router.get(
   viewController.editProduct
 );
 
+router.get('/purchasepixel/:businessUserId', viewController.purchasePixel);
+
 module.exports = router;

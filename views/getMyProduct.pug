@@ -16,9 +16,6 @@ block content
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product Stock:
                                 p.mx-5= product.stock
-                            .d-flex.mx-2.my-3
-                                p.font-weight-bold Additional Info:
-                                p.mx-4= product.additionalInfo
                             if (product.discount > 0)
                                 .d-flex.mx-2.my-3
                                     p.font-weight-bold Discount:
@@ -44,9 +41,9 @@ block content
                                         p.font-weight-bold Size:
                                         select#selectSizes.form-control.ml-1.w-50
                                             
-                            
-                                    
-
+                            .d-flex.mx-2.my-3
+                                p.font-weight-bold Description:
+                                p.mx-4 Click Preview to see Description
                                 
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product link

@@ -1,4 +1,5 @@
 const moment = require('moment');
+// const newEscape = require('escape-html');
 const Product = require('./../Model/productModel');
 const BusinessUser = require('./../Model/businessUserModel');
 const User = require('./../Model/userModel');
@@ -360,6 +361,8 @@ exports.editProduct = catchAsync(async (req, res, next) => {
     );
   }
 
+  // const newEdit = product.additionalInfo.html();
+
   res.status(200).render('editProduct', {
     title: `${product.productName}`,
     product
@@ -380,6 +383,11 @@ exports.buyProduct = catchAsync(async (req, res, next) => {
       new AppError('There is no product with that name and ID.', 404)
     );
   }
+
+  // const newDescription = (product.additionalInfo);
+  // console.log(newDescription);
+
+  // const newEscape = new newEscape();
   res.status(200).render('buyProduct', {
     title: `Buy ${product.productName}`,
     product,
@@ -511,6 +519,17 @@ exports.getsuccesspage = catchAsync(async (req, res, next) => {
   res.status(200).render('success_page', {
     title: 'Success Page',
     order,
+    businessUser
+  });
+});
+
+exports.purchasePixel = catchAsync(async (req, res, next) => {
+  const businessUser = await BusinessUser.findById({
+    _id: req.params.businessUserId
+  });
+
+  res.status(200).render('purchasePixel', {
+    title: 'Check purchase Pixel',
     businessUser
   });
 });
