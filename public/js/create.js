@@ -35,7 +35,7 @@ export const createProduct = async (
       showAlert('success', 'Product created Successfully!');
       window.setTimeout(() => {
         location.assign(`/myproduct/${productSlug}/${productId}`);
-      }, 150000000);
+      }, 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
