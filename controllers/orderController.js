@@ -30,8 +30,9 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   const busUser = await BusinessUser.findById(order.businessUser);
   const product = await Product.findById(order.product);
   const cart = await Cart.findById(order.cart);
-
-  product.stock -= cart.qty;
+  if (product.price > 0) {
+    product.stock -= cart.qty;
+  }
   await product.save();
 
   const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;

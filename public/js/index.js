@@ -1,6 +1,7 @@
 /*eslint-disable */
 
 import '@babel/polyfill';
+import qs from 'qs';
 import { login, busLogin, busLogout, logout } from './login';
 import {
   signup,
@@ -65,6 +66,7 @@ const updateDeliveryForm = document.getElementById('deliveryForm');
 
 const selectColorOptions = document.querySelector('.selectColorOptions');
 const selectSizeOptions = document.querySelector('.selectSizeOptions');
+const selectPriceOptions = document.querySelector('.selectPriceOptions');
 
 // const addbtn = document.querySelector('#add');
 // const subbtn = document.querySelector('#subtract');
@@ -158,30 +160,49 @@ if (resetBusPassForm)
 if (createProductForm)
   createProductForm.addEventListener('submit', e => {
     e.preventDefault();
+
     const productName = document.getElementById('productName').value;
-    const price = document.getElementById('productPrice').value;
+    const price = document.getElementById('productPrice').value || 0;
     const stock = document.getElementById('productStock').value;
     const additionalInfo = document.getElementById('additionalInfo').value;
     const discount = document.getElementById('inputDiscount').value;
     const colours = document.getElementById('color-tags').value;
     const sizes = document.getElementById('size-tags').value;
 
-    createProduct(
-      productName,
-      price,
-      stock,
-      additionalInfo,
-      discount,
-      colours,
-      sizes
-    );
+    const promoQty = document.getElementById('promoQty').value || 0;
+    const promoPrice = document.getElementById('promoPrice').value || 0;
+
+    const promoQty2 = document.getElementById('promoQty2').value || 0;
+    const promoPrice2 = document.getElementById('promoPrice2').value || 0;
+
+    const promoQty3 = document.getElementById('promoQty3').value || 0;
+    const promoPrice3 = document.getElementById('promoPrice3').value || 0;
+
+    const promoQty4 = document.getElementById('promoQty4').value || 0;
+    const promoPrice4 = document.getElementById('promoPrice4').value || 0;
+
+    const promoPriceQty = `${promoQty} = ${promoPrice} Naira, ${promoQty2} = ${promoPrice2} Naira, ${promoQty3} = ${promoPrice3} Naira, ${promoQty4} = ${promoPrice4} Naira`;
+
+    if (price > 0 && promoPriceQty.split(',')[0] != '0 = 0 Naira') {
+      alert(`You can't use one Price and Varient at the same time`);
+    } else
+      createProduct(
+        productName,
+        price,
+        stock,
+        additionalInfo,
+        discount,
+        colours,
+        sizes,
+        promoPriceQty
+      );
   });
 
 if (editProductForm)
   editProductForm.addEventListener('submit', e => {
     e.preventDefault();
     const productName = document.getElementById('editproductName').value;
-    const price = document.getElementById('editproductPrice').value;
+    const price = (document.getElementById('editproductPrice') || 0).value;
     const stock = document.getElementById('editproductStock').value;
     const additionalInfo = document.getElementById('editadditionalInfo').value;
     const discount = document.getElementById('editinputDiscount').value;
@@ -202,12 +223,23 @@ if (editProductForm)
 if (createCartinput)
   createCartinput.addEventListener('submit', e => {
     e.preventDefault();
-    const qty = (document.getElementById('quantity') || {}).value;
-    const total = document
-      .getElementById('total')
-      .value.replace('₦', ' ')
-      .replace(/\D/g, '');
+    const one_Order_price = document.querySelector('.place_order_one_price');
 
+    if (one_Order_price) {
+      var productQty = document.getElementById('show_Product_Quantity').value;
+      var productTotal = document
+        .getElementById('show_Product_total')
+        .value.replace('₦', ' ')
+        .replace(/\D/g, '');
+    }
+    const select_order_price = document.querySelector(
+      '.place_order_select_price'
+    );
+
+    if (select_order_price) {
+      var productQty = document.getElementById('selectPromoPrice').value;
+      var productTotal = productQty.split('=')[1].split(' ')[1];
+    }
     const colourSelect = document.getElementById('selectColours');
     if (colourSelect) {
       var colour = colourSelect.options[colourSelect.selectedIndex].value;
@@ -216,7 +248,28 @@ if (createCartinput)
     if (sizeSelect) {
       var size = sizeSelect.options[sizeSelect.selectedIndex].value;
     }
-    createCart(qty, total, colour, size);
+    createCart(productQty, productTotal, colour, size);
+  });
+
+// let productTotal = ProductQty.split('=')[1].split(' ')[1];
+// // const total = `That's ₦${productTotal.toLocaleString()}`;
+// // $('#show_Product_total').val(total);
+// console.log(productTotal);
+$('#show_Product_Quantity').on('keyup click', function() {
+  const tot = $('#product_price_hidden').val() * this.value;
+  const total = `That's ₦${tot.toLocaleString()}`;
+  $('#show_Product_total').val(total);
+  console.log('hereee');
+});
+
+const show_product_Price_Qty = document.querySelector('#selectPromoPrice');
+
+if (show_product_Price_Qty)
+  show_product_Price_Qty.addEventListener('change', e => {
+    e.preventDefault();
+    var productTotal = e.target.value.split('=')[1].split(' ')[1];
+    const total = `That's ₦${parseInt(productTotal).toLocaleString()}`;
+    $('#show_Product_total').val(total);
   });
 
 if (pixelForm)
@@ -246,12 +299,6 @@ if (updateFormmobile)
     const orders = document.getElementById('ordersemail').value;
     updateOrderEmails(orders);
   });
-
-$('#quantity').on('keyup click', function() {
-  const tot = $('#price').val() * this.value;
-  const total = `That's ₦${tot.toLocaleString()}`;
-  $('#total').val(total);
-});
 
 // if (addbtn)
 //   addbtn.addEventListener('click', () => {
@@ -447,7 +494,24 @@ $('.toggle-password').click(function() {
     input.attr('type', 'password');
   }
 });
+if (selectPriceOptions) {
+  const selectPromoPrice = document.getElementById('selectPromoPrice');
+  const promoQtyPriceValue = document.getElementById('inputPromoQtyPrice')
+    .value;
 
+  // console.log(promoQtyPriceValue);
+  const PromoQtyArray = promoQtyPriceValue.split(',');
+  const newPromoQtyArray = PromoQtyArray.slice(' 0 = 0 Niara', 2);
+  // console.log(newPromoQtyArray);
+
+  for (var i = 0; i < newPromoQtyArray.length; i++) {
+    var opt = newPromoQtyArray[i];
+    var el = document.createElement('option');
+    el.textContent = opt;
+    el.value = opt;
+    selectPromoPrice.appendChild(el);
+  }
+}
 if (selectColorOptions) {
   const selectColours = document.getElementById('selectColours');
   const coloursValue = document.getElementById('productColours').value;
@@ -474,30 +538,57 @@ if (selectSizeOptions) {
   }
 }
 
+const productPriceTypeForm = document.querySelector('#productPriceType');
+
+if (productPriceTypeForm)
+  productPriceTypeForm.addEventListener('change', function() {
+    if (this.value === 'onePriceForm') {
+      document.getElementById(`onePriceForm`).style.display = 'block';
+      document.getElementById(`promoPriceForm`).style.display = 'none';
+    }
+
+    if (this.value === 'promoPriceForm') {
+      document.getElementById(`onePriceForm`).style.display = 'none';
+      document.getElementById(`promoPriceForm`).style.display = 'block';
+    }
+  });
+// $(function() {
+//   $('#productPriceType').change(function() {
+//     $('.' + $(this).val()).show();
+//   });
+// });
+
 var x = (document.getElementById('hidden_description') || {}).innerText;
 $('#display_description').html(x);
 
 // $(window).on(function() {
 //   if ($(this).scrollTop() >= $('#place_order').offset().top) {
 //     $('body').css('background-color', 'red');
-//     // }else {
-//     //   $('#navigation').removeClass("nav-hide");
+//   } else {
+//     $('#navigation').removeClass('nav-hide');
 //   }
 // });
 
-const waypoint = new Waypoint({
-  element: document.getElementById('place_order'),
-  handler: function(direction) {
-    $('#place_order_float_btn').hide();
-    console.log(direction);
-    if (direction === 'up') $('#place_order_float_btn').show();
-  }
-});
+// const waypoint = new Waypoint({
+//   element: document.getElementById('place_order'),
+//   handler: function(direction) {
+//     $('#place_order_float_btn').hide();
+//     console.log(direction);
+//     if (direction === 'up') $('#place_order_float_btn').show();
+//   }
+// });
 
 // $('#place_order').bind('inview', function(event, visible) {
 //   if (visible == true) {
 //     console.log('in view');
 //   } else {
 //     console.log('in view');
+//   }
+// });
+
+// $(document).ready(function() {
+//   if ($('#place_order').style.visibility == 'visible') {
+//     // $('#place_order_float_btn').hide();
+//     console.log('here');
 //   }
 // });

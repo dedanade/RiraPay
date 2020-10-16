@@ -55,6 +55,7 @@
     "promisify": "0.0.3",
     "pug": "^2.0.4",
     "pug-bootstrap": "0.0.16",
+    "qs": "^6.9.4",
     "ratelimit": "0.0.4",
     "slugify": "^1.4.0",
     "sudo": "^1.0.3",

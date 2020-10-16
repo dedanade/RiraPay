@@ -9,8 +9,8 @@ block footer
     
 
     section
-        .text-center
-            a#place_order_float_btn.btn.btn-lg.mb-2(href="#place_order") Place Order
+        //- .text-center
+        //-     a#place_order_float_btn.btn.btn-lg.mb-2(href="#place_order") Place Order
         .container.mt-5(style = 'marging-top: 30px; margin-bottom: 200px;')
             h4#form-heading.mx-2.mb-3
                 | Place Order for your 
@@ -21,23 +21,36 @@ block footer
                         -const productprice = product.price.toLocaleString()
                         #hidden_description(style = 'display: none')
                             != product.additionalInfo
-                        #display_description.mt-5(style = 'display: contents;')  
+                        #display_description.mt-5(style = 'display: contents;')
+                        input#product_price_hidden(type='hidden', value=`${product.price}`)
+  
+                        if (product.price > 0)        
+                            .place_order_one_price
+                                .col-12.my-2
+                                    p.mt-4.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Price:
+                                    input#first_price.readonly.mx-2.mb-3(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: 600;')
+                                    input#product_stock.readonly(type='hidden', readonly value=`${product.stock}`)          
+                                .col-12.my-2
+                                    p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many? 
+                                    //- span
+                                    //-     button#subtract(type = 'button') -
+                                    input#show_Product_Quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' required='' style= 'width: 30%; display: inherit;')
+                                    //- span
+                                    //-     button#add(type = 'button') +
+                                    small.form-text.mt-2.mb-3.mx-1
+                                        | (Type how many Quantity you want)
+                        else
+                            .place_order_select_price
+                                .selectPriceOptions
+                                    .col-lg-8.my-2.px-2
+                                        .d-flex.mx-2.my-1
+                                            p.font-weight-bold How Many?:
+                                        -const newPromoQtyPrice = product.promoQtyPrice.join(',');
+                                        //- -console.log(newPromoQtyPrice);
+                                        input#inputPromoQtyPrice(type='hidden', name='productColours', value= newPromoQtyPrice)
+                                        select#selectPromoPrice.form-control(required='')
+                                            option(selected='', disabled='', value='') Choose Quantity
                             
-                    #place_order
-                        .col-12.my-2
-                            p.mt-4.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Price:
-                            input#first_price.readonly.mx-2.mb-3(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: 600;')
-                            input#price.readonly(type='hidden', readonly value=`${product.price}`)
-                            input#product_stock.readonly(type='hidden', readonly value=`${product.stock}`)          
-                        .col-12.my-2
-                            p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many? 
-                            //- span
-                            //-     button#subtract(type = 'button') -
-                            input#quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' required='' style= 'width: 30%; display: inherit;')
-                            //- span
-                            //-     button#add(type = 'button') +
-                            small.form-text.mt-2.mb-3.mx-1
-                                | (Type how many Quantity you want)
                         if (product.colours != "")
                             .col-6.my-2.px-2
                                 .selectColorOptions
@@ -46,7 +59,7 @@ block footer
                                         input#productColours(type='hidden', name='productColours', value= newProductColours)
                                         select#selectColours.form-control(required='')
                                             option(selected='', disabled='', value='') Choose Colour
-                                           
+                                            
                         if (product.sizes != "")
                             .col-6.my-2.px-2
                                 .selectSizeOptions
@@ -58,7 +71,7 @@ block footer
                                         
                         .col-12.my-2
                             p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 500;') Total
-                            input#total.readonly.font-weight-bold.mx-2(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: bold;')
+                            input#show_Product_total.readonly.font-weight-bold.mx-2(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: bold;')
                     .text-center
                         input#submitlinkinput(type='hidden', value=`${product.id}/${businessUser.id}`)
                         button#checkout1-button.btn.btn-lg.mt-3.mb-5( type='submit') Continue

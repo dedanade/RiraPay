@@ -13,8 +13,9 @@ const productSchema = new mongoose.Schema(
     additionalInfo: String,
     price: {
       type: Number,
-      required: [true, 'Product Price is Required']
+      default: 0
     },
+    promoQtyPrice: [String],
     images: [String],
     colours: [String],
     sizes: [String],
@@ -22,6 +23,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+
     createdAt: {
       type: Date,
       default: Date.now(),

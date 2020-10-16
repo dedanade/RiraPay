@@ -65,6 +65,12 @@ block footer
                             .col
                                 ul.list-group
                                 -const carttotal = cart.total.toLocaleString()
+                                if (product.price <= 0)
+                                    -const cartQty = cart.qty.split('=')[0];
+                                    li.d-flex.justify-content-between.my-0
+                                        p= `${product.productName} x ${cartQty}`
+                                        b= `#${carttotal}`
+                                else    
                                     li.d-flex.justify-content-between.my-0
                                         p= `${product.productName} x ${cart.qty}`
                                         b= `#${carttotal}`

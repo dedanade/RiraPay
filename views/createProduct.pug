@@ -11,23 +11,63 @@ block script
                     h3.pt-3 Create a New Product
                 .row.mx-2.py-3
                     .col
-                        label(for='productName') Product Name (Required)
-                        input#productName.form-control(type='text', placeholder='eg: Bluetooth Speaker' required='')
+                        input#productName.form-control(type='text', placeholder='Product Name' required='')
                 .row.mx-2.py-3
                     .col
-                        label(for='productPrice') Price (required)
-                        .input-group
-                            .input-group-prepend
-                                .input-group-text ₦
-                            input#productPrice.form-control(type='number', placeholder='Price of your Product' required='')
-                .row.mx-2.py-3
-                    .col
-                        label(for='productStock') Quantity Availabe (required)
-                        input#productStock.form-control(type='number', placeholder='Quanity Available' required='')
+                        input#productStock.form-control(type='number', placeholder='Quantity Available' required='')
                 .row.mx-2.py-3
                     .col
                         |Description
                         textarea#additionalInfo.form-control(name='editordata', )
+                p.mx-3.mt-4 
+                    b Pricing:
+                p.mx-4.mt-3.mb-2
+                    b Type:
+                .row.mx-2.py-3
+                    .col-8
+                        select#productPriceType.form-control
+                            option#oneProductPrice(selected='', value='onePriceForm') One Price
+                            option#varientProductPrice( value='promoPriceForm') Varient Prices
+                #onePriceForm
+                    .row.mx-2.py-3
+                        .col-8
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
+                                input#productPrice.form-control(type='number', placeholder='Price')
+                #promoPriceForm(style= 'display: none;')
+                    .row.mx-2.py-3
+                        .col-7
+                            input#promoQty.form-control(type='text', placeholder='Quantity 1')
+                        .col-5
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
+                                input#promoPrice.form-control(type='number', placeholder='Price 1' )
+                    .row.mx-2.py-3
+                        .col-7
+                            input#promoQty2.form-control(type='text', placeholder='Quanity 2' )
+                        .col-5
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
+                                input#promoPrice2.form-control(type='number', placeholder='Price 2')
+                    .row.mx-2.py-3
+                        .col-7
+                            input#promoQty3.form-control(type='text', placeholder='Quanity 3')
+                        .col-5
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
+                                input#promoPrice3.form-control(type='number', placeholder='Price 3')
+                    .row.mx-2.py-3
+                        .col-7
+                            input#promoQty4.form-control(type='text', placeholder='Quanity 4')
+                        .col-5
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text ₦
+                                input#promoPrice4.form-control(type='number', placeholder='Price 4')
                 .row.mx-3.py-3
                     .col
                         label(for='#inputDiscount') Discount for RiraPay orders
@@ -56,3 +96,9 @@ block script
                 $(document).ready(function() {
                     $('#additionalInfo').summernote();
                     });
+                
+                //- function changeFunc() {
+                //- var selectBox = document.getElementById('productPriceType');
+                //- var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                //- document.getElementById(`#${selectedValue}`).style.display = "block";
+                //- }

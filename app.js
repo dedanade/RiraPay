@@ -26,6 +26,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.locals.escape = require('html-escaper');
 app.locals.moment = require('moment');
+app.locals.qs = require('qs');
 app.locals.unescape = require('html-escaper');
 
 // 1) GLOBAL MIDDLEWARES

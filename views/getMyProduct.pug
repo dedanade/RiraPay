@@ -10,9 +10,18 @@ block content
                     .card.border-0.box-shadow
                         .card-block
                             h5= product.productName
-                            .d-flex.mx-2.mb-3.mt-5
-                                p.font-weight-bold Product Price:
-                                p.mx-5= `₦${productprice}`
+                            if (product.price > 0)
+                                .d-flex.mx-2.mb-3.mt-5
+                                    p.font-weight-bold Product Price:
+                                    p.mx-5= `₦${productprice}`
+                            else
+                                .selectPriceOptions
+                                    .d-flex.mx-2.my-3
+                                        p.font-weight-bold Price:
+                                        -const newPromoQtyPrice = product.promoQtyPrice.join(',');
+                                        input#inputPromoQtyPrice(type='hidden', name='productColours', value= newPromoQtyPrice)
+                                        select#selectPromoPrice.form-control.ml-1.w-50
+
                             .d-flex.mx-2.my-3
                                 p.font-weight-bold Product Stock:
                                 p.mx-5= product.stock
@@ -25,10 +34,12 @@ block content
                                     p.font-weight-bold Discount:
                                     p.mx-4 None
                             
+    
                             if (product.colours != "")
                                 .selectColorOptions
                                     .d-flex.mx-2.my-3
                                         p.font-weight-bold Colours:
+                                        -console.log(product.colours);
                                         -const newProductColours = product.colours.join(',');
                                         input#productColours(type='hidden', name='productColours', value= newProductColours)
                                         select#selectColours.form-control.ml-1.w-50

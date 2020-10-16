@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const cartShcema = new mongoose.Schema({
   qty: {
-    type: Number,
+    type: String,
     required: [true, 'Product Quantity is required']
   },
   total: {

@@ -10,7 +10,8 @@ export const createProduct = async (
   additionalInfo,
   discount,
   colours,
-  sizes
+  sizes,
+  promoQtyPrice
 ) => {
   try {
     const res = await axios({
@@ -23,7 +24,8 @@ export const createProduct = async (
         additionalInfo,
         discount,
         colours,
-        sizes
+        sizes,
+        promoQtyPrice
       }
     });
 
@@ -33,7 +35,7 @@ export const createProduct = async (
       showAlert('success', 'Product created Successfully!');
       window.setTimeout(() => {
         location.assign(`/myproduct/${productSlug}/${productId}`);
-      }, 1500);
+      }, 150000000);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);

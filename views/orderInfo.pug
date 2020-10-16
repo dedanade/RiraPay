@@ -68,9 +68,9 @@ block content
                     .col-12
                         p.m-auto=`${order.address}`
                         p=`${order.area}, ${order.state}, Nigeria`
-                                
-                .d-flex.justify-content-between.mx-3
-                    p= product.productName
+                if (product.price > 0)             
+                    .d-flex.justify-content-between.mx-3
+                        p= product.productName
                     p= `₦${productprice}`
                 if (cart.colour)
                     .d-flex.justify-content-between.mx-3
@@ -80,9 +80,16 @@ block content
                     .d-flex.justify-content-between.mx-3
                         p Size
                         p= cart.size
-                .d-flex.justify-content-between.mx-3
-                    p Quantity
-                    p= cart.qty
+                if (product.price <= 0)
+                    -const cartQty = cart.qty.split('=')[0];
+                    .d-flex.justify-content-between.mx-3
+                        p Quantity
+                        p= cartQty
+                else
+                    .d-flex.justify-content-between.mx-3
+                        p Quantity
+                        p= cart.qty
+
                 .d-flex.justify-content-between.mx-3
                     p.font-weight-bold Total:
                     p.font-weight-bold= `#${carttotal}`
