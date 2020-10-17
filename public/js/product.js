@@ -52,13 +52,31 @@ export const editProductInput = e => {
   const colours = document.getElementById('edit-color-tags').value;
   const sizes = document.getElementById('edit-size-tags').value;
 
-  updateProduct(
-    productName,
-    price,
-    stock,
-    additionalInfo,
-    discount,
-    colours,
-    sizes
-  );
+  const promoQty = document.getElementById('editPromoQty').value || 0;
+  const promoPrice = document.getElementById('editPromoPrice').value || 0;
+
+  const promoQty2 = document.getElementById('editPromoQty2').value || 0;
+  const promoPrice2 = document.getElementById('editPromoPrice2').value || 0;
+
+  const promoQty3 = document.getElementById('editPromoQty3').value || 0;
+  const promoPrice3 = document.getElementById('editPromoPrice3').value || 0;
+
+  const promoQty4 = document.getElementById('editPromoQty4').value || 0;
+  const promoPrice4 = document.getElementById('editPromoPrice4').value || 0;
+
+  const promoPriceQty = `${promoQty} = ${promoPrice} Naira, ${promoQty2} = ${promoPrice2} Naira, ${promoQty3} = ${promoPrice3} Naira, ${promoQty4} = ${promoPrice4} Naira`;
+
+  if (price > 0 && promoPriceQty.split(',')[0] != '0 = 0 Naira') {
+    alert(`You can't use one Price and Varient at the same time`);
+  } else
+    updateProduct(
+      productName,
+      price,
+      stock,
+      additionalInfo,
+      discount,
+      colours,
+      sizes,
+      promoPriceQty
+    );
 };

@@ -334,20 +334,31 @@ if (selectSizeOptions) {
   }
 }
 
-const productPriceTypeForm = document.querySelector('#productPriceType');
+// const productPriceTypeForm = document.querySelector('#productPriceType');
 
-if (productPriceTypeForm)
-  productPriceTypeForm.addEventListener('change', function() {
-    if (this.value === 'onePriceForm') {
-      document.getElementById(`onePriceForm`).style.display = 'block';
-      document.getElementById(`promoPriceForm`).style.display = 'none';
-    }
+// if (productPriceTypeForm)
+//   productPriceTypeForm.addEventListener('click change', e => {
+//     console.log(this.value);
+//     if (this.value === 'onePriceForm') {
+//       document.getElementById(`onePriceForm`).style.display = 'block';
+//       document.getElementById(`promoPriceForm`).style.display = 'none';
+//     }
+//     if (this.value === 'promoPriceForm') {
+//       document.getElementById(`onePriceForm`).style.display = 'none';
+//       document.getElementById(`promoPriceForm`).style.display = 'block';
+//     }
+//   });
 
-    if (this.value === 'promoPriceForm') {
-      document.getElementById(`onePriceForm`).style.display = 'none';
-      document.getElementById(`promoPriceForm`).style.display = 'block';
-    }
-  });
+$('#productPriceType').on('change', function() {
+  if (this.value === 'onePriceForm') {
+    $('#onePriceForm').show();
+    $('#promoPriceForm').hide();
+  }
+  if (this.value === 'promoPriceForm') {
+    $('#promoPriceForm').show();
+    $('#onePriceForm').hide();
+  }
+});
 
 var x = (document.getElementById('hidden_description') || {}).innerText;
 $('#display_description').html(x);
