@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const Order = require('./../Model/orderModel');
 const BusinessUser = require('./../Model/businessUserModel');
 const Product = require('./../Model/productModel');
-const Cart = require('./../Model/cart');
+// const Cart = require('./../Model/cart');
 const AllEmail = require('./../utils/email');
 const AllBusEmail = require('./../utils/busEmail');
 
@@ -26,12 +26,12 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   // if (!user) req.user.id = null;
 
   const newOrder = await Order.create(req.body);
+
   const order = await Order.findById(newOrder._id);
   const busUser = await BusinessUser.findById(order.businessUser);
   const product = await Product.findById(order.product);
-  const cart = await Cart.findById(order.cart);
   if (product.price > 0) {
-    product.stock -= cart.qty;
+    product.stock -= order.qty;
   }
   await product.save();
 
@@ -41,13 +41,12 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   // console.log(busUser);
   // console.log(product);
 
-  await new AllEmail.OrderEmail(order, url, product, cart).sendOrderEmail();
+  await new AllEmail.OrderEmail(order, url, product).sendOrderEmail();
   await new AllBusEmail.BusOrderEmail(
     busUser,
     url2,
     product,
-    order,
-    cart
+    order
   ).sendBusOrderEmail();
 
   res.status(201).json({
@@ -78,7 +77,6 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     if (eventtype === 'charge.success');
 
     const order = await Order.findById({ _id: ordernum });
-    const cart = await Cart.findById(order.cart);
     const busUser = await BusinessUser.findById(order.businessUser);
     const product = await Product.findById(order.product);
 
@@ -88,18 +86,15 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     // console.log(busUser);
     // console.log(product);
 
-    await new AllEmail.OrderEmail(order, url, product, cart).sendPayEmail();
+    await new AllEmail.OrderEmail(order, url, product).sendPayEmail();
     await new AllBusEmail.BusOrderEmail(
       busUser,
       url2,
       product,
-      order,
-      cart
+      order
     ).sendBusPayEmail();
 
-    cart.total = displaytotal;
-    await cart.save();
-
+    order.total = displaytotal;
     order.status = 'Paid';
     order.paidAt = Date.now();
     order.createdAt = Date.now();
@@ -148,11 +143,11 @@ exports.updateShiping = catchAsync(async (req, res, next) => {
 
   const order = await Order.findById(Updatedshipedorder._id);
   const product = await Product.findById(order.product);
-  const cart = await Cart.findById(order.cart);
+  // const cart = await Cart.findById(order.cart);
 
   const url = `${req.protocol}://${req.get('host')}/dashboard`;
 
-  await new AllEmail.OrderEmail(order, url, product, cart).sendShipEmail();
+  await new AllEmail.OrderEmail(order, url, product).sendShipEmail();
 
   res.status(200).json({
     status: 'success',
@@ -170,11 +165,11 @@ exports.updateDelivery = catchAsync(async (req, res, next) => {
   await order.save();
 
   const product = await Product.findById(order.product);
-  const cart = await Cart.findById(order.cart);
+  // const cart = await Cart.findById(order.cart);
 
   const url = `${req.protocol}://${req.get('host')}/dashboard`;
 
-  await new AllEmail.OrderEmail(order, url, product, cart).sendDeliveryEmail();
+  await new AllEmail.OrderEmail(order, url, product).sendDeliveryEmail();
   res.status(200).json({
     status: 'success',
     data: {

@@ -41,28 +41,16 @@ const orderSchema = new mongoose.Schema(
       max: [11, 'Your Business Phone Nmber should not be more than 11']
     },
     orderNum: String,
-    businessUser: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'BusinessUser',
-        required: [true, 'BusinessUser is required']
-      }
-    ],
-
-    cart: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Cart',
-        required: [true, 'Cart is required']
-      }
-    ],
-    product: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Product',
-        required: [true, 'Product is required']
-      }
-    ],
+    qty: {
+      type: String,
+      required: [true, 'Product Quantity is required']
+    },
+    total: {
+      type: Number,
+      required: [true, 'Product Total is Required']
+    },
+    colour: String,
+    size: String,
     status: {
       type: String,
       enum: [
@@ -93,9 +81,30 @@ const orderSchema = new mongoose.Schema(
     createdAt: { type: Date, default: Date.now },
     paidAt: { type: Date, default: 0 },
     shippedAt: { type: Date, default: 0 },
-    deliveredAt: { type: Date, default: 0 }
-  },
+    deliveredAt: { type: Date, default: 0 },
 
+    businessUser: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'BusinessUser',
+        required: [true, 'BusinessUser is required']
+      }
+    ],
+
+    cart: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Cart'
+      }
+    ],
+    product: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product',
+        required: [true, 'Product is required']
+      }
+    ]
+  },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }

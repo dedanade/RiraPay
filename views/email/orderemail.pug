@@ -5,8 +5,13 @@ block content
   p You've created a new #{productName} order with OrderId: #{orderNum}.
 
   .inline-list
+    
     -const newtotal = total.toLocaleString()
-    -const newprice = price.toLocaleString()
+    
+    if (price > 0) 
+      -var newprice = price.toLocaleString()
+    else
+      -var newprice = newtotal;
 
     p 
       b These are the Order Details:

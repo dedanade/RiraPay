@@ -9,15 +9,15 @@ block content
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
                             - const Date = order.createdAt.toDateString();
-                            - const carttotal = cart.total.toLocaleString()
+                            - const ordertotal = order.total.toLocaleString()
                             - const productPrice = product.price.toLocaleString()
 
 
 
                             h5#ord-text.ml-0= product.productName
                             p#ord-text
-                            b Quality: 
-                            = cart.qty
+                            b Quantity: 
+                            = order.qty
                             p#ord-text
                             b Order Id: 
                             = order.orderNum
@@ -29,7 +29,7 @@ block content
                             =product.additionalInfo
                             
 
-                            h3#ord-text.price-bold=`#${carttotal}`
+                            h3#ord-text.price-bold=`#${ordertotal}`
 
                     if (order.status === 'Incomplete')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
@@ -94,14 +94,14 @@ block content
                                     .col-12.mx-1.mx-lg-2.mx-md-2.my-5
                                         .delivery-info
                                         p Product Name: #{product.productName}
-                                        p Quantity: #{cart.qty}
-                                        p= `Total: ₦${carttotal}`
+                                        p Quantity: #{order.qty}
+                                        p= `Total: ₦${ordertotal}`
 
-                                        if (cart.colour)
-                                            p Color:  #{cart.colour}
+                                        if (order.colour)
+                                            p Color:  #{order.colour}
 
-                                        if (cart.size)
-                                            p Colour:  #{cart.size}
+                                        if (order.size)
+                                            p Colour:  #{order.size}
 
                                         p  Name: #{order.name}
                             
@@ -120,7 +120,7 @@ block content
                                         if (!order.altphone)
                                             -order.altphone = 'None';
                                         
-                                        - const copiedInfo= `Product Name: ${product.productName}\nQuantity: ${cart.qty}\nAmount Receiving: ₦${carttotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
+                                        - const copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
                                         .text-center
                                             button.btn(data-clipboard-text=`${copiedInfo}`
                                             style='background-color: #01afee; color: white;')

@@ -68,7 +68,7 @@ class BusEmail {
 }
 
 class BusOrderEmail {
-  constructor(busUser, url, product, order, cart) {
+  constructor(busUser, url, product, order) {
     this.to = busUser.businessEmail;
     this.businessName = busUser.businessName;
     this.orderName = order.name;
@@ -81,10 +81,10 @@ class BusOrderEmail {
     this.productName = product.productName;
     this.discount = product.discount;
     this.price = product.price;
-    this.total = cart.total;
-    this.quantity = cart.qty;
-    this.colour = cart.colour;
-    this.size = cart.size;
+    this.total = order.total;
+    this.quantity = order.qty;
+    this.colour = order.colour;
+    this.size = order.size;
     this.url = url;
     this.from = `RiraPay for Business <${process.env.BUSEMAIL_FROM}>`;
   }

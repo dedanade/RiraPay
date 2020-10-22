@@ -9,15 +9,15 @@ block content
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
                         #pro-descirpt.col-12
                             -const Date = order.createdAt.toDateString();
-                            -const carttotal = cart.total.toLocaleString()
-                            -const discount = (product.discount/100) * cart.total
-                            -const discountPrice = (cart.total - discount)
+                            -const ordertotal = order.total.toLocaleString()
+                            -const discount = (product.discount/100) * order.total
+                            -const discountPrice = (order.total - discount)
                             -const strdiscountprice = discountPrice.toLocaleString()
 
                             h5#ord-text.ml-0= product.productName
                             p#ord-text
                             b Quality: 
-                            = cart.qty
+                            = order.qty
                             p#ord-text
                             b Order Id: 
                             = order.orderNum
@@ -29,7 +29,7 @@ block content
                             =product.additionalInfo
                             
 
-                            h3#ord-text.price-bold=`#${carttotal}`
+                            h3#ord-text.price-bold=`#${ordertotal}`
 
                     if (order.status === 'Incomplete')
                         #border-row.row.mx-1.mx-lg-5.mx-md-5
@@ -71,7 +71,7 @@ block content
                                             a(href='http://')  Learn More 
                                         p To make payment, click on the button below or if you prefer paying offline, click on the merchant info to talk with them.
                                         if (product.discount > 0) 
-                                            p.mx-1.mt-5=`Your ${product.discount}% is still valid if you pay with RiraPay Now! You're paying ₦${strdiscountprice} instead of ₦${carttotal}`
+                                            p.mx-1.mt-5=`Your ${product.discount}% is still valid if you pay with RiraPay Now! You're paying ₦${strdiscountprice} instead of ₦${ordertotal}`
 
                                         form#paymentFormOrderPage
                                             input#email2(type='hidden', name='email2', value= order.email)
@@ -82,7 +82,7 @@ block content
 
                                             .text-center
                                                 .form-submit
-                                                    button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit') Pay Now
+                                                    button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit')= `Pay ₦${strdiscountprice} Now`
                                     
                                         .text-center
                                             button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details

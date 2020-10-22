@@ -6,81 +6,126 @@ block footer
     script.
         fbq('track', 'AddToCart');
     section
-        .form-container
-            .text-center.my-3
-                h6#form-heading Fill in your Delivery Details
-            .card.border-2.box-shadow-1.py-2.mx-lg-1
-                .card.wrap.border-0  
-                    form.create-order-form     
-                        input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
-                        input#cart(type='hidden', name='cart', value= cart.id)
-                        input#product_id(type='hidden', name='product_id', value= product.id)
-                        .row.mx-2
-                            .col
-                                label(for='checkoutemail')  Your Email Address
-                                input#checkoutemail.form-control(type='email', placeholder='youremail@gmail.com' required='')
-                                small.form-text.mt-3.mx-1
-                                    | This Email will be used to sign up later on to track your
-                                    | orders and request for refund
-                                #th-1.mt-0
+        .text-center
+            img(src="#")
+    section
+        h4#form-heading.mx-2.mb-2.mt-5
+            | Place Order for your 
+            b= product.productName
+        .order_form_container(style = 'margin-top: 30px; margin-bottom: 200px;')
+            .card.border-0.box-shadow-1
+                form.create-order-form
+                    .row.mx-2.mx-lg-4.pb-5.mt-5
+                        -const productprice = product.price.toLocaleString()
+                        #hidden_description(style = 'display: none')
+                            != product.additionalInfo
+                        #display_description.mt-5(style = 'display: contents;')
+                        input#product_price_hidden(type='hidden', value=`${product.price}`)
+  
+                        if (product.price > 0)        
+                            .place_order_one_price
+                                .col-12.my-2
+                                    p.mt-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Price:
+                                    input#first_price.readonly.mx-2.mb-3(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: 600;')
+                                    input#product_stock.readonly(type='hidden', readonly value=`${product.stock}`)          
+                                .col-12.my-2
+                                    p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') How many?
+                                    //- span
+                                    //-     button#subtract(type = 'button') -
+                                    input#show_Product_Quantity.form-control.my-2.mx-2(type='number', value=`1` min='1' required='' style= 'width: 30%; display: inherit;')
+                                    //- span
+                                    //-     button#add(type = 'button') +
+                                    small.form-text.mt-2.mb-3.mx-1
+                                        | (Type how many Quantity you want)
+                        else
+                            .place_order_select_price
+                                .selectPriceOptions
+                                    .col-lg-8.my-2.px-2
+                                        .d-flex.mx-2.my-1
+                                            p.font-weight-bold How Many?
+                                        -const newPromoQtyPrice = product.promoQtyPrice.join(',');
+                                        //- -console.log(newPromoQtyPrice);
+                                        input#inputPromoQtyPrice(type='hidden', name='productColours', value= newPromoQtyPrice)
+                                        select#selectPromoPrice.form-control(required='')
+                                            option(selected='', disabled='', value='') Choose Quantity
+                            
+                        if (product.colours != "")
+                            .col-6.my-2.px-2
+                                .selectColorOptions
+                                        p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Colour
+                                        -const newProductColours = product.colours.join(',');
+                                        input#productColours(type='hidden', name='productColours', value= newProductColours)
+                                        select#selectColours.form-control(required='')
+                                            option(selected='', disabled='', value='') Choose Colour
+                                            
+                        if (product.sizes != "")
+                            .col-6.my-2.px-2
+                                .selectSizeOptions
+                                    p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 400;') Size
+                                    -const newProductSizes = product.sizes.join(',');
+                                    input#productSizes(type='hidden', name='productSizes', value= newProductSizes)
+                                    select#selectSizes.form-control(required='')
+                                        option(selected='', disabled='', value='') Choose Size
+                                        
+                        .col-12.my-2
+                            p.my-2.mb-0.mx-2(style = 'font-size: 1.2rem; font-weight: 500;') Total
+                            input#show_Product_total.readonly.font-weight-bold.mx-2(type='text', readonly value=`₦${productprice}` style= 'border: none; width: fit-content; font-size: 1.5rem; font-weight: bold;')
+                    //- .text-center
+                    //-     input#submitlinkinput(type='hidden', value=`${product.id}/${businessUser.id}`)
+                    //-     button#checkout1-button.btn.btn-lg.mt-3.mb-5( type='submit') Continue
+                    .text-center.my-3
+                        h6#form-heading Fill in your Delivery Details
+                    .card.border-2.box-shadow-1.py-2.mx-lg-1
+                        .card.wrap.border-0  
+                            form.create-order-form     
+                                input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
+                                //- input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
 
-                        .row.mx-2.py-3
-                            .col-12
-                                label(for='checkoutname')  Your Name
-                                input#checkoutname.form-control(type='text', placeholder='eg: Mr Moshood Bello' required='')
-            
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutaddress') Your Full Address
-                                input#checkoutaddress.form-control(type='text-area', placeholder='eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop' required='')
-                            
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutstate') State
-                                input#checkoutstate.form-control(type='text', placeholder='eg: Lagos, Abuja, etc' required='')
-                            
-                        .row.mx-2.py-3
-                            .col
-                                label(for='checkoutarea') Area
-                                input#checkoutarea.form-control(type='text', placeholder='eg: Oshodi, Owerri, Lekki, Garki etc' required='')
-                
-                        .row.mx-2.py-3
-                            .col
-                                div
-                                label(for='checkoutphone') Phone Number
-                                .input-group
-                                    .input-group-prepend
-                                    .input-group-text +234
-                                    input#checkoutphone.form-control(type='number', placeholder='7066514541'  minlength= '11' maxlength= '11' required='')
+                                //- input#cart(type='hidden', name='cart', value= cart.id)
+                                input#product_id(type='hidden', name='product_id', value= product.id)
+                                .row.mx-2.py-4
+                                    .col
+                                        input#checkoutemail.form-control(type='email', placeholder='Your Email Address' required='')
+                                        small.form-text.mt-3.mx-1
+                                            | This Email will be used to sign up later on to track your
+                                            | orders and request for refund
+                                        #th-1.mt-0
+
+                                .row.mx-2.py-4
+                                    .col-12
+                                        input#checkoutname.form-control(type='text', placeholder=' Your Name' required='')
+                    
+                                .row.mx-2.py-3
+                                    .col
+                                        textarea#checkoutaddress.form-control(type='text', placeholder='Full Address eg: 20, chinedu moses street, beside delux supermaket, balogun bus-stop' required='')
                                     
-                        .row.mx-2.py-3
-                            .col
-                                div
-                                label(for='checkoutphone2') Alternative Phone Number
-                                .input-group
-                                    .input-group-prepend
-                                    .input-group-text +234
-                                    input#checkoutphone2.form-control(type='tel', placeholder='7066514541' maxlength= '11' minlength= '11')
-                        .row.mx-2.my-4
-                            .col
-                                ul.list-group
-                                -const carttotal = cart.total.toLocaleString()
-                                if (product.price <= 0)
-                                    -const cartQty = cart.qty.split('=')[0];
-                                    li.d-flex.justify-content-between.my-0
-                                        p= `${product.productName} x ${cartQty}`
-                                        b= `#${carttotal}`
-                                else    
-                                    li.d-flex.justify-content-between.my-0
-                                        p= `${product.productName} x ${cart.qty}`
-                                        b= `#${carttotal}`
-                                ul.list-group
-                                    li.d-flex.justify-content-between.my-0
-                                        p Shipping
-                                        b Free
-                        
-                        .text-center
-                            button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
-                                | Place Order
+                                .row.mx-2.py-3
+                                    .col-6
+                                        input#checkoutstate.form-control(type='text', placeholder='State' required='')
+                                    .col-6
+                                        input#checkoutarea.form-control(type='text', placeholder=' Area eg: Oshodi, Owerri, Lekki, Garki etc' required='')
+                                .row.mx-2.py-3
+                                    .col
+                                        .input-group
+                                            .input-group-prepend
+                                            .input-group-text +234
+                                            input#checkoutphone.form-control(type='number', placeholder='Phone Number'  minlength= '11' maxlength= '11' required='')
+                                            
+                                .row.mx-2.py-3
+                                    .col
+                                        .input-group
+                                            .input-group-prepend
+                                            .input-group-text +234
+                                            input#checkoutphone2.form-control(type='tel', placeholder='Second Phone Number' maxlength= '11' minlength= '11')
+                                .row.mx-2.my-4
+                                    .col
+                                        ul.list-group
+                                            li.d-flex.justify-content-between.my-0
+                                                p Shipping
+                                                b Free
+                                
+                                .text-center
+                                    button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
+                                        | Place Order
 
                         

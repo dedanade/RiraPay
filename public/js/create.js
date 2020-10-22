@@ -69,7 +69,6 @@ export const createCart = async (qty, total, colour, size) => {
 
 export const createOrder = async (
   businessUser,
-  cart,
   product,
   name,
   email,
@@ -78,7 +77,10 @@ export const createOrder = async (
   area,
   phone,
   altphone,
-  user
+  qty,
+  total,
+  colour,
+  size
 ) => {
   try {
     const res = await axios({
@@ -86,7 +88,6 @@ export const createOrder = async (
       url: `/api/v1/orders`,
       data: {
         businessUser,
-        cart,
         product,
         name,
         email,
@@ -95,7 +96,10 @@ export const createOrder = async (
         area,
         phone,
         altphone,
-        user
+        qty,
+        total,
+        colour,
+        size
       }
     });
 

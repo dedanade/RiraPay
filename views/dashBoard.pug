@@ -36,30 +36,29 @@ block content
                                 th Amount
 
                             tbody
+                                -console.log(user.orders);
+                                each orders in user.orders.reverse().slice(0, 10)
+                                    each product in orders.product
+                                        each businessUser in orders.businessUser
 
-                                    each orders in user.orders.reverse().slice(0, 10)
-                                        each cart in orders.cart
-                                            each product in orders.product
-                                                each businessUser in orders.businessUser
+                                            
+                                            -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                            -const orderTotal = orders.total.toLocaleString()
+                                        
 
-                                                    
-                                                    -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
-                                                    -const carttotal = cart.total.toLocaleString()
-                                                
-
-                                                    tr.table-row(style= 'height: 65px' data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
-                                                    
-                                                        td
-                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=Date
-                                                                                                
-                                                        td
-                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= product.productName
-                                                        td
-                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
-                                                        td
-                                                            a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=businessUser.businessName                              
-                                                        td
-                                                             a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=`₦${carttotal}`
+                                            tr.table-row(style= 'height: 65px' data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                            
+                                                td
+                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=Date
+                                                                                        
+                                                td
+                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= product.productName
+                                                td
+                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                                td
+                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=businessUser.businessName                              
+                                                td
+                                                        a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=`₦${orderTotal}`
                     p=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
                     h6
                         .text-center
@@ -84,25 +83,24 @@ block content
                             input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
                             button#sign-up-button.btn.btn-sm.my-0(type='submit') Refresh Orders 
                     each orders in user.orders.slice(0, 10)
-                        each cart in orders.cart
-                            each product in orders.product
-                                each businessUser in orders.businessUser
-                                    -const carttotal = cart.total.toLocaleString()
-                                    -const mobiledate = moment(orders.createdAt).format('DD/MMM/YY');
+                        each product in orders.product
+                            each businessUser in orders.businessUser
+                                -const orderTotal = orders.total.toLocaleString()
+                                -const mobiledate = moment(orders.createdAt).format('DD/MMM/YY');
 
-                                    .mini-table(data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
-                                        .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
-                                            .col-9
-                                                p.m-0 
-                                                    a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)
-                                                        b= `₦${carttotal}`
-                                                p.m-0 
-                                                    a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)=product.productName 
-                                            .col-3
-                                                p.m-0 
-                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
-                                                p.m-0 
-                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= mobiledate
+                                .mini-table(data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                    .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
+                                        .col-9
+                                            p.m-0 
+                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                                    b= `₦${orderTotal}`
+                                            p.m-0 
+                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)=product.productName 
+                                        .col-3
+                                            p.m-0 
+                                            a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                            p.m-0 
+                                            a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= mobiledate
                     p.my-3.mx-2=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
                     
                     .text-center.my-3

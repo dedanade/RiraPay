@@ -7,10 +7,15 @@ block content
   p 
     b These are the Order Details:
     .inline-list
-      -
-        const newprice = price.toLocaleString()
-        const newdiscount = (discount/100) * total
-        const discountPrice = (total - newdiscount).toLocaleString()
+      
+      if (price > 0)
+        -var newprice = price.toLocaleString()
+        -var newdiscount = (discount/100) * total
+        -var discountPrice = (total - newdiscount).toLocaleString()
+      else
+        -var newprice = total.toLocaleString()
+        -var newdiscount = (discount/100) * total
+        -var discountPrice = (total - newdiscount).toLocaleString()  
       ul
         b Customer Info:
         li Name: #{orderName}

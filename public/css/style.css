@@ -305,6 +305,17 @@ label {
   margin-left: auto;
   max-width: 35rem;
 }
+.order_form_container {
+  background-color: white;
+  width: 100%;
+  padding-bottom: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 40rem;
+}
+.form-control {
+  height: calc(1.8em + 0.75rem + 2px);
+}
 .larger-container {
   background-color: white;
   width: 100%;
@@ -433,8 +444,10 @@ table {
 }
 .btn-link {
   text-decoration: none !important;
-  background-color: #01afee;
-  color: white;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: white;
 }
 @media (max-width: 728px) {
   .large-view-table {

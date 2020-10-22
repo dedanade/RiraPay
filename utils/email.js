@@ -65,7 +65,7 @@ class Email {
 }
 
 class OrderEmail {
-  constructor(firstArg, url, product, cart) {
+  constructor(firstArg, url, product) {
     this.to = firstArg.email;
     this.orderName = firstArg.name;
     this.orderNum = firstArg.orderNum;
@@ -77,10 +77,10 @@ class OrderEmail {
     this.productName = product.productName;
     this.price = product.price;
     this.discount = product.discount;
-    this.total = cart.total;
-    this.quantity = cart.qty;
-    this.colour = cart.colour;
-    this.size = cart.size;
+    this.total = firstArg.total;
+    this.quantity = firstArg.qty;
+    this.colour = firstArg.colour;
+    this.size = firstArg.size;
     this.logisticName = firstArg.logisticName;
     this.logisticNum = firstArg.trackingNum;
     this.url = url;

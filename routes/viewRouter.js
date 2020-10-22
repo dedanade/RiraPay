@@ -22,11 +22,8 @@ router.get(
   viewController.getorder
 );
 
-router.get('/buy/:slug/:productId/:businessUserId', viewController.buyProduct);
-router.get(
-  '/createorder/:productId/:businessUserId/:cartId',
-  viewController.createOrder
-);
+router.get('/buy/:businessUserId/:productId/', viewController.buyProduct);
+router.get('/buy/:slug/:productId/:businessUserId', viewController.createOrder);
 router.get('/orderInfo/:orderId', viewController.myorderinfo);
 router.get('/success/:orderId', viewController.getsuccesspage);
 

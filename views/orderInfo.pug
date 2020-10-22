@@ -12,48 +12,47 @@ block content
             .text-center
                 img(src='#')
                 h2(style='color: black; margin-top: 30px;') You&apos;re 100% safe when you Buy with Rirapay
-
-    section#what-rira-checkout
-        .container
-            #accordion.my-5
-                .card
-                    #headingOne.card-header
-                        h2.mb-0
-                            button.btn.btn-link(data-toggle='collapse', data-target='#what_is_rira', aria-expanded='true', aria-controls='what_is_rira')
-                                | What is RiraPay? (click here to Learn More)
-                    #what_is_rira.collapse(aria-labelledby='headingOne', data-parent='#accordion')
-                        .card-body
-                            p Rirapay is an Escrow Payment that serves as an intermediary between you and a merchant. RiraPay makes you enjoy the quality of products you buy online
-                .card
-                    #headingTwo.card-header
-                        h2.mb-0
-                            button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#why__rira', aria-expanded='false', aria-controls='why__rira')
-                                | How is RiraPay better than Pay on Delivery?
-                    #why__rira.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
-                        .card-body
-                            ul
-                                li You Enjoy 48 hours shipping
-                                li 7 Days Money-back Guarantee : You have 7 days to test the Quality of the product after being delivered
-                                li Fast Refund: Not satisfied with the product? You get your money back directly into you bank account within 48 hours!
-                                li Enjoy huge discount also
-
-                            p.text-center
-                                a(href='/')  Learn More About Rirapay
                         
     section
-        -const carttotal = cart.total.toLocaleString()
-        -const productprice = product.price.toLocaleString()
-        -const discount = (product.discount/100) * cart.total
-        -const discountPrice = (cart.total - discount)
+        -const orderTotal = order.total.toLocaleString()
+        -const discount = (product.discount/100) * order.total
+        -const discountPrice = (order.total - discount)
         -const strdiscountprice = discountPrice.toLocaleString()
-        .larger-container(style='margin-top: 50px; margin-bottom: 150px;')
-            .card-body.p-3.mx-2.my-3
-                if (product.discount > 0)
-                    p#form-heading.text-center.mb-5=`Wait! Don't Go. Scroll down for a ${product.discount}% discount valid for today ONLY 👇👇👇`
-                else
-                    p#form-heading.text-center.mb-5= `Scroll down to make payment to Validate Order. All payments are secured by RiraPay`
+        if (product.price > 0)
+            -var productprice = product.price.toLocaleString()
+        else 
+            -var productprice = orderTotal.toLocaleString()
 
-                
+        .larger-container(style='margin-top: 50px; margin-bottom: 150px;')
+            .card-body.p-3.mx-2.mb-3.pt-0
+                p#form-heading.text-center.mb-5(style='font-size: 1.4rem;')= `Do you know with RiraPay, you enjoy faster delivery and 7 days Money-Back Guaranteed if this product doesn't work as described? Scroll down to learn More`
+
+                section#what-rira-checkout
+                    #accordion.my-5
+                        .card
+                            #headingOne.card-header.p-1
+                                h2.mb-0.text-center(style = 'background-color: white')
+                                    button.btn.btn-link(data-toggle='collapse', data-target='#what_is_rira', aria-expanded='true', aria-controls='what_is_rira')
+                                        .text-center
+                                            | What is RiraPay? (click here)
+                            #what_is_rira.collapse(aria-labelledby='headingOne', data-parent='#accordion')
+                                .card-body
+                                    p Rirapay is a Middleman that serves as an intermediary between you and a merchant. RiraPay makes you enjoy the quality of products you buy online
+                        .card
+                            #headingTwo.card-header.p-1
+                                h2.mb-0.text-center(style = 'background-color: white')
+                                    button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#why__rira', aria-expanded='false', aria-controls='why__rira')
+                                        | How is RiraPay better than Pay on Delivery?(click here)
+                            #why__rira.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
+                                .card-body
+                                    ul
+                                        li You Enjoy 48 hours shipping
+                                        li 7 Days Money-back Guarantee : You have 7 days to test the Quality of the product after being delivered
+                                        li Fast Refund: Not satisfied with the product? You get your money back directly into you bank account within 48 hours!
+                                        li Enjoy huge discount also
+
+                                    p.text-center
+                                        a(href='/')  Learn More About Rirapay
                 h4 Confirm Your Order Details:
                 .row.my-3.mx-3
                     .col-12
@@ -68,34 +67,28 @@ block content
                     .col-12
                         p.m-auto=`${order.address}`
                         p=`${order.area}, ${order.state}, Nigeria`
-                if (product.price > 0)             
-                    .d-flex.justify-content-between.mx-3
-                        p= product.productName
+                             
+                .d-flex.justify-content-between.mx-3
+                    p= product.productName
                     p= `₦${productprice}`
-                if (cart.colour)
+                if (order.colour)
                     .d-flex.justify-content-between.mx-3
                         p Colour
-                        p= cart.colour
-                if (cart.size)
+                        p= order.colour
+                if (order.size)
                     .d-flex.justify-content-between.mx-3
                         p Size
-                        p= cart.size
-                if (product.price <= 0)
-                    -const cartQty = cart.qty.split('=')[0];
-                    .d-flex.justify-content-between.mx-3
-                        p Quantity
-                        p= cartQty
-                else
-                    .d-flex.justify-content-between.mx-3
-                        p Quantity
-                        p= cart.qty
+                        p= order.size
+                .d-flex.justify-content-between.mx-3
+                    p Quantity
+                    p= order.qty
 
                 .d-flex.justify-content-between.mx-3
                     p.font-weight-bold Total:
-                    p.font-weight-bold= `#${carttotal}`
+                    p.font-weight-bold= `#${orderTotal}`
 
             if  (product.discount > 0) 
-                p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${carttotal}`
+                p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${orderTotal}`
 
             input#successpage(type='hidden', name='successpage', value= `/success/${order._id}`)
             form#paymentForm
@@ -107,6 +100,10 @@ block content
 
                 .text-center
                     .form-submit
-                        button#pay-btn.checkout1-button.btn.btn-lg.mt-5.mb-3(type= 'submit')= `Pay ₦${strdiscountprice}`
-                        small.form-text.mx-2
-                            | When you pay for your product with RiraPay, you enjoy faster delivery and you will be sure to get your money-back within 7 days of receiving if not satisfied with the product.
+                        button#pay-btn.checkout1-button.btn.btn-lg.mt-3.my-0(type= 'submit')= `Pay ₦${strdiscountprice}`
+                    small.form-text.mx-2.mb-3.mt-0 Enjoy 100% Buyer Protection
+            form#not_interested_form
+                .text-center
+                    button.btn.btn-lg#notBtn.mt-3.mb-0(type= 'submit' style='background-color: aliceblue;')= `I want Pay On Delivery`
+                    small.form-text.mx-2.mb-3.mt-0 Click if you want Pay on delivery
+                            

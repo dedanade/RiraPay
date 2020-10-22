@@ -5,7 +5,6 @@ export const createOrderInput = e => {
   e.preventDefault();
 
   const businessUser = document.getElementById('businessUser').value;
-  const cart = document.getElementById('cart').value;
   const product = document.getElementById('product_id').value;
   const name = document.getElementById('checkoutname').value;
   const email = document.getElementById('checkoutemail').value;
@@ -15,39 +14,20 @@ export const createOrderInput = e => {
   const phone = document.getElementById('checkoutphone').value;
   const altphone = document.getElementById('checkoutphone2').value;
 
-  createOrder(
-    businessUser,
-    cart,
-    product,
-    name,
-    email,
-    address,
-    state,
-    area,
-    phone,
-    altphone
-  );
-  e.srcElement[10].textContent = 'Processing...';
-};
-
-export const createCartInput = e => {
-  e.preventDefault();
   const one_Order_price = document.querySelector('.place_order_one_price');
 
   if (one_Order_price) {
     var productQty = document.getElementById('show_Product_Quantity').value;
-    var productTotal = document
+    const total = document
       .getElementById('show_Product_total')
       .value.replace('₦', ' ')
       .replace(/\D/g, '');
-  }
-  const select_order_price = document.querySelector(
-    '.place_order_select_price'
-  );
-
-  if (select_order_price) {
-    var productQty = document.getElementById('selectPromoPrice').value;
-    var productTotal = productQty.split('=')[1].split(' ')[1];
+    var productTotal = parseInt(total);
+  } else {
+    var productQtyValue = document.getElementById('selectPromoPrice').value;
+    var productQty = productQtyValue.split('=')[0].replace(/^\s+|\s+$/gm, '');
+    const total = productQtyValue.split('=')[1].split(' ')[1];
+    var productTotal = parseInt(total);
   }
   const colourSelect = document.getElementById('selectColours');
   if (colourSelect) {
@@ -57,5 +37,51 @@ export const createCartInput = e => {
   if (sizeSelect) {
     var size = sizeSelect.options[sizeSelect.selectedIndex].value;
   }
-  createCart(productQty, productTotal, colour, size);
+  console.log(productQty);
+  createOrder(
+    businessUser,
+    product,
+    name,
+    email,
+    address,
+    state,
+    area,
+    phone,
+    altphone,
+    productQty,
+    productTotal,
+    colour,
+    size
+  );
+  e.srcElement[10].textContent = 'Processing...';
 };
+
+// export const createCartInput = e => {
+//   e.preventDefault();
+//   const one_Order_price = document.querySelector('.place_order_one_price');
+
+//   if (one_Order_price) {
+//     var productQty = document.getElementById('show_Product_Quantity').value;
+//     var productTotal = document
+//       .getElementById('show_Product_total')
+//       .value.replace('₦', ' ')
+//       .replace(/\D/g, '');
+//   }
+//   const select_order_price = document.querySelector(
+//     '.place_order_select_price'
+//   );
+
+//   if (select_order_price) {
+//     var productQty = document.getElementById('selectPromoPrice').value;
+//     var productTotal = productQty.split('=')[1].split(' ')[1];
+//   }
+//   const colourSelect = document.getElementById('selectColours');
+//   if (colourSelect) {
+//     var colour = colourSelect.options[colourSelect.selectedIndex].value;
+//   }
+//   const sizeSelect = document.getElementById('selectSizes');
+//   if (sizeSelect) {
+//     var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+//   }
+//   createCart(productQty, productTotal, colour, size);
+// };

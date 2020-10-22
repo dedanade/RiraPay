@@ -403,13 +403,9 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   const businessUser = await BusinessUser.findById({
     _id: req.params.businessUserId
   });
-  const cart = await Cart.findById({
-    _id: req.params.cartId
-  });
 
   res.status(200).render('createOrder', {
     title: 'Create your Order',
-    cart,
     product,
     businessUser
   });
