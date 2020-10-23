@@ -1,0 +1,60 @@
+extends base
+block Indexcss
+block header
+block footer
+block content
+
+    //- script.
+    //-   fbq('track', 'AddPaymentInfo', {
+    //-     currency: 'USD',
+    //-   });
+
+  
+    section
+        .container
+          .text-center
+            img(src='#').mt-2.mb-5
+            div
+                span(style= 'font-size: 7rem; color: #0d5e7e;').mt-4.fas.fa-check-circle
+            h3.header-signup-business.mt-2(style= 'font-size: 1.7rem;') Your Order has been Successfully Created and will be delivered through Pay On Delivery. Thanks!
+
+    section
+        .form-container.mb-5
+            .row
+                .text-center
+                    h5.mx-3.py-3 Meanwhile, to learn more about RiraPay's product/services, kindly complete your registration below for Free.
+                .col-12
+                    .card-wrap.mx-lg-2
+                        form.signup-form
+                            .row.mx-2.py-3
+                                .col
+                                    |First Name
+                                    input#inputfirstname.form-control(type='text', placeholder='First Name' value= `${order.name}` required='')
+                            .row.mx-2.py-3
+                                .col
+                                    |Last Name
+                                    input#inputlastname.form-control(type='text', placeholder='Last Name' required='')
+                            .row.mx-2.py-3
+                                .col
+                                    |Email Address
+                                    input#inputemail.form-control(type='text', readonly='' value=`${order.email}` required='')
+                            .row.mx-2.py-3
+                                .col
+                                    |Phone Number
+                                    input#inputphonenumber.form-control(type='tel', placeholder='eg: 07066514541' value= `${order.phone}` maxlength= '11' minlength= '11' required='' )
+                            .row.mx-2.py-3
+                                .col
+                                    .password-wrap
+                                        | Password
+                                        input#inputpassword.form-control(type='password', placeholder='Minimum of 6 words' required='' minlength= '6')
+                            .row
+                                .col.ms-2
+                                    button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') Create My Account 
+                                
+                                p.mx-3.text-center(style='font-size: 1rem;')
+                                    | By clicking the &ldquo;Create My Account&rdquo; button, you agree to RiraPay&apos;s 
+                                    a(href='#') Terms and Conditions
+
+                                p.mx-3.text-center(style='font-size: 1rem;')
+                                    | Already have an Account with this Email Address? 
+                                    a(href='/login') Login

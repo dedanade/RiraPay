@@ -26,6 +26,7 @@ router.get('/buy/:businessUserId/:productId/', viewController.buyProduct);
 router.get('/buy/:slug/:productId/:businessUserId', viewController.createOrder);
 router.get('/orderInfo/:orderId', viewController.myorderinfo);
 router.get('/success/:orderId', viewController.getsuccesspage);
+router.get('/pod/:orderId', viewController.getPodPage);
 
 // Business Routes
 

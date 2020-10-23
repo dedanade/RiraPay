@@ -104,6 +104,6 @@ block content
                     small.form-text.mx-2.mb-3.mt-0 Enjoy 100% Buyer Protection
             form#not_interested_form
                 .text-center
-                    button.btn.btn-lg#notBtn.mt-3.mb-0(type= 'submit' style='background-color: aliceblue;')= `I want Pay On Delivery`
+                    a.btn.btn-lg#notBtn.mt-3.mb-0(href=`/pod/${order._id}`  style='background-color: aliceblue;')= `I want Pay On Delivery`
                     small.form-text.mx-2.mb-3.mt-0 Click if you want Pay on delivery
                             

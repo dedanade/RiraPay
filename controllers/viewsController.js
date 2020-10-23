@@ -16,7 +16,7 @@ exports.getDashboard = catchAsync(async (req, res, next) => {
 
   const orders = await Order.find();
 
-  const cart = await Cart.find();
+  // const cart = await Cart.find();
 
   const raworderemails = await Order.find({ email: user.email }).distinct(
     '_id'
@@ -29,7 +29,6 @@ exports.getDashboard = catchAsync(async (req, res, next) => {
     user,
     orders,
     product,
-    cart,
     orderemails
   });
 });
@@ -80,23 +79,8 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const arraySalesOrder = [];
 
   salesorders.forEach(e => {
-    const eachSalesToday = e.cart;
-    eachSalesToday.forEach(esales => {
-      arraySalesOrder.push(esales.total);
-    });
+    arraySalesOrder.push(e.total);
   });
-
-  // const cartSalesToday = await Cart.find(
-  //   { _id: arraySalesOrder },
-  //   'total -_id'
-  // );
-
-  // // const cartesalles = cartSalesToday.map(e => {
-  // //   console.log(e);
-  // //   return e.cart;
-  // // });
-
-  // console.log(cartesalles);
 
   const sumOfCartSalesToday = arraySalesOrder
     .reduce((a, b) => {
@@ -117,10 +101,7 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const arraySalesWeek = [];
 
   salesOrdersWeek.forEach(e => {
-    const eachSalesWeek = e.cart;
-    eachSalesWeek.forEach(esales => {
-      arraySalesWeek.push(esales.total);
-    });
+    arraySalesWeek.push(e.total);
   });
 
   const sumOfCartSalesWeek = arraySalesWeek
@@ -142,10 +123,7 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const arraySalesMonth = [];
 
   salesOrdersMonth.forEach(e => {
-    const eachSalesMonth = e.cart;
-    eachSalesMonth.forEach(esales => {
-      arraySalesMonth.push(esales.total);
-    });
+    arraySalesMonth.push(e.total);
   });
 
   const sumOfCartSalesMonth = arraySalesMonth
@@ -168,10 +146,7 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const ArrayTranToday = [];
 
   transactionToday.forEach(e => {
-    const eachtrantoday = e.cart;
-    eachtrantoday.forEach(etran => {
-      ArrayTranToday.push(etran.total);
-    });
+    ArrayTranToday.push(e.total);
   });
 
   const sumOfcartTranToday = ArrayTranToday.reduce((a, b) => {
@@ -192,10 +167,7 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const ArrayTranWeek = [];
 
   transactionWeek.forEach(e => {
-    const eachtranweek = e.cart;
-    eachtranweek.forEach(etran => {
-      ArrayTranWeek.push(etran.total);
-    });
+    ArrayTranWeek.push(e.total);
   });
 
   const sumOfcartTranWeek = ArrayTranWeek.reduce((a, b) => {
@@ -215,10 +187,7 @@ exports.getBusDashboard = catchAsync(async (req, res, next) => {
   const ArrayTranMonth = [];
 
   transactionMonth.forEach(e => {
-    const eachtranMonth = e.cart;
-    eachtranMonth.forEach(etran => {
-      ArrayTranMonth.push(etran.total);
-    });
+    ArrayTranMonth.push(e.total);
   });
 
   const sumOfcartTranMonth = ArrayTranMonth.reduce((a, b) => {
@@ -495,17 +464,6 @@ exports.getsuccesspage = catchAsync(async (req, res, next) => {
     _id: req.params.orderId
   });
 
-  // Order.findByIdAndUpdate(
-  //   req.params.orderId,
-  //   { status: 'Paid' },
-  //   { new: true }
-  // );
-  // order.status = 'Paid';
-  // await order.save();
-  // const cart = await Cart.findById(order.cart);
-
-  // const product = await Cart.findById(order.product);
-
   const businessUser = await BusinessUser.findById(order.businessUser);
 
   if (!order) {
@@ -514,6 +472,24 @@ exports.getsuccesspage = catchAsync(async (req, res, next) => {
 
   res.status(200).render('success_page', {
     title: 'Success Page',
+    order,
+    businessUser
+  });
+});
+
+exports.getPodPage = catchAsync(async (req, res, next) => {
+  const order = await Order.findById({
+    _id: req.params.orderId
+  });
+
+  const businessUser = await BusinessUser.findById(order.businessUser);
+
+  if (!order) {
+    return next(new AppError('There is no order with that ID.', 404));
+  }
+
+  res.status(200).render('podOrder', {
+    title: 'Pod Page',
     order,
     businessUser
   });
