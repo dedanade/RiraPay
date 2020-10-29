@@ -22,13 +22,10 @@ block content
 
                                 tbody
                                     each orders in businessUser.orders
-                                        each cart in orders.cart
-                                            each product in orders.product
+                                        each product in orders.product
 
-                                                    -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
-                                                    -const carttotal = cart.total.toLocaleString()
-
-                                                    
+                                                -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                                                -const orderTotal = orders.total.toLocaleString()                                                    
 
                                                     tr.table-row(style= 'height: 65px' data-href=`/myorder/${product.id}/${orders._id}`)
                                                     
@@ -42,7 +39,7 @@ block content
                                                         td
                                                             a(href=`/myorder/${product.id}/${orders._id}`)=orders.name                              
                                                         td
-                                                            a(href=`/myorder/${product.id}/${orders._id}`)=`₦${carttotal}`
+                                                            a(href=`/myorder/${product.id}/${orders._id}`)=`₦${orderTotal}`
                                                         td(colspan='2')
                                                             a(href=`/myorder/${product.id}/${orders._id}`)=orders.tags
 
