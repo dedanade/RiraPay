@@ -37,7 +37,6 @@ export const createOrderInput = e => {
   if (sizeSelect) {
     var size = sizeSelect.options[sizeSelect.selectedIndex].value;
   }
-  console.log(productQty);
   createOrder(
     businessUser,
     product,
@@ -53,7 +52,7 @@ export const createOrderInput = e => {
     colour,
     size
   );
-  e.srcElement[10].textContent = 'Processing...';
+  e.submitter.innerText = 'Processing...';
 };
 
 // export const createCartInput = e => {

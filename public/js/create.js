@@ -109,7 +109,7 @@ export const createOrder = async (
       showAlert('success', 'Your Order details was created Successfully!');
       window.setTimeout(() => {
         location.assign(`/orderInfo/${orderId}`);
-      }, 1500);
+      }, 1000);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
