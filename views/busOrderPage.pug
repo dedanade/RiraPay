@@ -112,15 +112,18 @@ block content
                                         p City:  #{ order.area}
                                         
                                         p Phone: 
-                                            a(href=`tel:${order.phone}`)= order.phone 
+                                            a(href=`tel:${order.phone}`)= order.phone
+
                                         if (order.altphone)
                                             p
                                                 | Alternative Phone Number:
                                                 a(href=`tel:${order.altphone}`)= order.altPhone
-                                        if (!order.altphone)
-                                            -order.altphone = 'None';
                                         
-                                        - const copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
+                                        if (order.altPhone)
+                                            -var copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
+                                        else
+                                            -var copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}`;
+                                            
                                         .text-center
                                             button.btn(data-clipboard-text=`${copiedInfo}`
                                             style='background-color: #01afee; color: white;')
