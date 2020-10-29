@@ -54,38 +54,38 @@ block content
                                     p.text-center
                                         a(href='/')  Learn More About Rirapay
                 h4 Confirm Your Order Details:
-                .row.my-3.mx-3
+                .row.mx-3
                     .col-12
-                        p=`Name: ${order.name}  `
-                        p= `Phone: ${order.phone}`
+                        p.m-1.small=`Name: ${order.name}  `
+                        p.m-1.small= `Phone: ${order.phone}`
                         if(order.altphone)
-                            p= `AltPhone: ${order.altphone}`
+                            p.m-1.small= `Altp.m-1.smallhone: ${order.altphone}`
                         else
-                            p= `AltPhone: None`
+                            p.m-1.small= `AltPhone: None`
                     
-                    p.mt-3.font-weight-bold Delivery Address:
+                    h5.m-1 Delivery Address:
                     .col-12
-                        p.m-auto=`${order.address}`
-                        p=`${order.area}, ${order.state}, Nigeria`
+                        p.m-1.small=`${order.address}`
+                        p.m-1.small=`${order.area}, ${order.state}, Nigeria`
                              
-                .d-flex.justify-content-between.mx-3
-                    p= product.productName
-                    p= `₦${productprice}`
+                .d-flex.justify-content-between.mx-3.my-2
+                    p.m-1.small= product.productName
+                    p.m-1.small= `₦${productprice}`
                 if (order.colour)
                     .d-flex.justify-content-between.mx-3
-                        p Colour
-                        p= order.colour
+                        p.m-1.small Colour
+                        p.m-1.small= order.colour
                 if (order.size)
                     .d-flex.justify-content-between.mx-3
-                        p Size
-                        p= order.size
+                        p.m-1.small Size
+                        p.m-1.small= order.size
                 .d-flex.justify-content-between.mx-3
-                    p Quantity
-                    p= order.qty
+                    p.m-1.small Quantity
+                    p.m-1.small= order.qty
 
                 .d-flex.justify-content-between.mx-3
-                    p.font-weight-bold Total:
-                    p.font-weight-bold= `#${orderTotal}`
+                    p.m-1.small.font-weight-bold Total:
+                    p.m-1.small.font-weight-bold= `#${orderTotal}`
 
             if  (product.discount > 0) 
                 p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${orderTotal}`
