@@ -104,6 +104,6 @@ block content
                     small.form-text.mx-2.mb-3.mt-0 Enjoy 100% Buyer Protection
             form#not_interested_form
                 .text-center
-                    a.btn.btn-lg#notBtn.mt-3.mb-0(href=`/pod/${order._id}`  style='background-color: aliceblue;')= `I want Pay On Delivery`
-                    small.form-text.mx-2.mb-3.mt-0 Click if you want Pay on delivery
+                    a.btn.btn-lg#notBtn.mt-3.mb-0(href=`/pod/${order._id}`  style='background-color: aliceblue;')= `I want Pay On Delivery(₦${orderTotal})`
+                    small.form-text.mx-2.mb-3.mt-0= `Note: You're paying ₦${orderTotal} for pay on delivery. Click if you want.`
                             

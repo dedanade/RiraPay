@@ -74,6 +74,7 @@ block content
                                             th Product Name
                                             th Status
                                             th Customer
+                                            th State
                                             th Amount
                                             th Tags
 
@@ -97,7 +98,9 @@ block content
                                                     td
                                                         a(href=`/myorder/${product.id}/${orders._id}`)= orders.status
                                                     td
-                                                        a(href=`/myorder/${product.id}/${orders._id}`)=orders.name                              
+                                                        a(href=`/myorder/${product.id}/${orders._id}`)=orders.name
+                                                    td
+                                                        a(href=`/myorder/${product.id}/${orders._id}`)=orders.state                             
                                                     td
                                                         a(href=`/myorder/${product.id}/${orders._id}`)=`₦${orderTotal}`
                                                     td(colspan='2')

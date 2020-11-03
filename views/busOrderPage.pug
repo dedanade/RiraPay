@@ -84,8 +84,8 @@ block content
 
                                 
                     nav
-                        .row.no-gutters
-                            #nav-tab.nav.nav-tabs.nav-justified.mx-5.my-5(role='tablist')
+                        .row
+                            #nav-tab.nav.nav-tabs.nav-justified.mx-auto.my-5(role='tablist')
                                 a#nav-del-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-order-details', role='tab', aria-controls='nav-order-details', aria-selected='true') Order Details
                                 a#nav-order-tab.nav-item.nav-link(data-toggle='tab', href='#nav-deliver-info', role='tab', aria-controls='nav-deliver-info', aria-selected='false') Delivery Information
                         #nav-tabContent.tab-content
@@ -120,18 +120,19 @@ block content
                                                 a(href=`tel:${order.altphone}`)= order.altPhone
                                         
                                         if (order.altPhone)
-                                            -var copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
+                                            -var copiedInfo= `Product Name: ${product.productName}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nPhone Number: ${order.phone}\nAlternative Number: ${order.altPhone}`;
                                         else
-                                            -var copiedInfo= `Product Name: ${product.productName}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nPhone Number: ${order.phone}`;
+                                            -var copiedInfo= `Product Name: ${product.productName}\nName: ${order.name}\nAddress: ${order.address}\nState: ${order.state}\nArea: ${order.area}\nQuantity: ${order.qty}\nAmount Receiving: ₦${ordertotal}\nPhone Number: ${order.phone}`;
                                             
                                         .text-center
                                             button.btn(data-clipboard-text=`${copiedInfo}`
                                             style='background-color: #01afee; color: white;')
                                                 | Copy Everything
-
+                                        .text-center.my-3
+                                            button#checkout1-button.btn.my-2(data-sharer='whatsapp', data-title="" data-url=`${copiedInfo}`) Share on Whatsapp
                             #nav-order-details.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-order-tab')
                                 if (order.status === 'Incomplete')
-                                    p.mx-2.text-center
+                                    p.mx-3.text-center
                                         | This order is currently Incomplete which means Buyer has not paid for the product through Rirapay.
                                         | You can contact the buyer to encourage them to pay or you deliver offline.
                                 
