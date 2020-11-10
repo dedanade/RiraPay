@@ -1,4 +1,6 @@
 const crypto = require('crypto');
+const moment = require('moment');
+const AppError = require('./../utils/appError');
 const Order = require('./../Model/orderModel');
 const BusinessUser = require('./../Model/businessUserModel');
 const Product = require('./../Model/productModel');
@@ -19,11 +21,31 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.createOrder = catchAsync(async (req, res, next) => {
-  // const user = await User.findOne({ _id: req.user.id });
+  const twoMinutesAgo = moment()
+    .subtract(2, 'minute')
+    .format();
 
-  // if (!req.body.businessUser) req.body.businessUser = req.params.id;
-  // if (!req.body.user) req.body.user = user;
-  // if (!user) req.user.id = null;
+  const duplicateOrder = await Order.find({
+    email: req.body.email,
+    phone: req.body.phone,
+    address: req.body.address,
+    createdAt: {
+      $gte: twoMinutesAgo
+    }
+  });
+
+  if (duplicateOrder && duplicateOrder.length) {
+    const arrayDuplicateOrder = [];
+
+    duplicateOrder.forEach(e => {
+      arrayDuplicateOrder.push(e.id);
+    });
+
+    const duplicateOrderId = arrayDuplicateOrder.toString();
+    if (process.env.NODE_ENV === 'production') {
+      res.redirect(`/orderinfo/${duplicateOrderId}`);
+    } else return next(new AppError('Duplicate Order!', 401));
+  }
 
   const newOrder = await Order.create(req.body);
 
