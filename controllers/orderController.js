@@ -35,16 +35,17 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   });
 
   if (duplicateOrder && duplicateOrder.length) {
-    const arrayDuplicateOrder = [];
+    return next(new AppError('Duplicate Order!', 401));
 
-    duplicateOrder.forEach(e => {
-      arrayDuplicateOrder.push(e.id);
-    });
+    // const arrayDuplicateOrder = [];
+    // duplicateOrder.forEach(e => {
+    //   arrayDuplicateOrder.push(e.id);
+    // });
 
-    const duplicateOrderId = arrayDuplicateOrder.toString();
-    if (process.env.NODE_ENV === 'production') {
-      res.redirect(`/orderinfo/${duplicateOrderId}`);
-    } else return next(new AppError('Duplicate Order!', 401));
+    // const duplicateOrderId = arrayDuplicateOrder.toString();
+    // if (process.env.NODE_ENV === 'production') {
+    //   res.redirect(`/orderinfo/${duplicateOrderId}`);
+    // } else
   }
 
   const newOrder = await Order.create(req.body);
