@@ -43,8 +43,9 @@ exports.createOrder = catchAsync(async (req, res, next) => {
     const duplicateOrderId = arrayDuplicateOrder.toString();
     if (process.env.NODE_ENV === 'production') {
       return next(
-        new AppError('Duplicate Order!', 401),
-        res.redirect(`/orderinfo/${duplicateOrderId}`)
+        new AppError('Duplicate Order!', 401).res.redirect(
+          `/orderinfo/${duplicateOrderId}`
+        )
       );
     }
     return next(new AppError('Duplicate Order!', 401));
