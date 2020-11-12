@@ -39,7 +39,6 @@ block content
                                 .selectColorOptions
                                     .d-flex.mx-2.my-3
                                         p.font-weight-bold Colours:
-                                        -console.log(product.colours);
                                         -const newProductColours = product.colours.join(',');
                                         input#productColours(type='hidden', name='productColours', value= newProductColours)
                                         select#selectColours.form-control.ml-1.w-50

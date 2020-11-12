@@ -104,7 +104,6 @@ $('#show_Product_Quantity').on('keyup click', function() {
   const tot = $('#product_price_hidden').val() * this.value;
   const total = `That's ₦${tot.toLocaleString()}`;
   $('#show_Product_total').val(total);
-  console.log('hereee');
 });
 
 const show_product_Price_Qty = document.querySelector('#selectPromoPrice');

@@ -36,7 +36,6 @@ block content
                                 th Amount
 
                             tbody
-                                -console.log(user.orders);
                                 each orders in user.orders.reverse().slice(0, 10)
                                     each product in orders.product
                                         each businessUser in orders.businessUser
