@@ -42,7 +42,7 @@ block content
                                 .input-group
                                     .input-group-prepend
                                         .input-group-text ₦
-                                    input#productPrice.form-control(type='number', placeholder='Price' value=product.price)
+                                    input#editproductPrice.form-control(type='number', placeholder='Price' value=product.price)
                     -const promoPriceArray = product.promoQtyPrice.join(',').replace(/Naira/g, '').replace(/\s/g, "").split(',');
                     -const newPromoPriceArray = promoPriceArray.filter(e => e !== '0=0');
                     -const promoPricesQty = newPromoPriceArray.join(',').replace(/=/g, ",").split(',')
@@ -140,15 +140,22 @@ block content
                             label(for='edit-size-tags').my-2 Size
                             input#edit-size-tags.form-control( type='text', value=newProductSizes data-role='tagsinput',)
                             small.form-text Seperate each size with comma.
-
-                            input#productId(type='hidden', value= product._id)
+                    if (product.codOption === true)
+                        .row.mx-3.mb-5
+                            .col.ml-3(style = 'font-size: 1rem')
+                                input#edit_cod_Check_Option.form-check-input(type='checkbox')
+                                | I don't want COD option
+                                input#productId(type='hidden', value= product._id)
+                    else
+                        .row.mx-3.mb-5
+                            .col.ml-3(style = 'font-size: 1rem')
+                                input#edit_cod_Check_Option.form-check-input(type='checkbox' checked='')
+                                | I don't want COD option
+                                input#productId(type='hidden', value= product._id)
                     .text-center
                         button#sign-up-button.btn.btn-lg.my-1.mx-auto.d-block(type='submit') update
                         
                 script.
-                    $(document).ready(function() {
-                        $('#editadditionalInfo').summernote();
-                        });
                     $(document).ready( function() {
                         var priceTypeVal = $('#productPriceType').val();
                         if (priceTypeVal === 'onePriceForm') {

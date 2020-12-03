@@ -114,6 +114,7 @@ export const updateProduct = async (
   stock,
   additionalInfo,
   discount,
+  codOption,
   colours,
   sizes,
   promoQtyPrice
@@ -128,6 +129,7 @@ export const updateProduct = async (
         stock,
         additionalInfo,
         discount,
+        codOption,
         colours,
         sizes,
         promoQtyPrice

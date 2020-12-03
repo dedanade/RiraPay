@@ -9,6 +9,7 @@ export const createProduct = async (
   stock,
   additionalInfo,
   discount,
+  codOption,
   colours,
   sizes,
   promoQtyPrice
@@ -23,6 +24,7 @@ export const createProduct = async (
         stock,
         additionalInfo,
         discount,
+        codOption,
         colours,
         sizes,
         promoQtyPrice

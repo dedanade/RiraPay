@@ -26,7 +26,10 @@ export const createProductInput = e => {
   const promoPrice4 = document.getElementById('promoPrice4').value || 0;
 
   const promoPriceQty = `${promoQty} = ${promoPrice} Naira, ${promoQty2} = ${promoPrice2} Naira, ${promoQty3} = ${promoPrice3} Naira, ${promoQty4} = ${promoPrice4} Naira`;
-
+  const codOptionCheckbox = document.getElementById('cod_Check_Option');
+  if (codOptionCheckbox.checked) {
+    var codOption = false;
+  }
   if (price > 0 && promoPriceQty.split(',')[0] != '0 = 0 Naira') {
     alert(`You can't use one Price and Varient at the same time`);
   } else
@@ -36,6 +39,7 @@ export const createProductInput = e => {
       stock,
       additionalInfo,
       discount,
+      codOption,
       colours,
       sizes,
       promoPriceQty
@@ -45,7 +49,7 @@ export const createProductInput = e => {
 export const editProductInput = e => {
   e.preventDefault();
   const productName = document.getElementById('editproductName').value;
-  const price = (document.getElementById('editproductPrice') || 0).value;
+  const editprice = document.getElementById('editproductPrice').value || 0;
   const stock = document.getElementById('editproductStock').value;
   const additionalInfo = document.getElementById('editadditionalInfo').value;
   const discount = document.getElementById('editinputDiscount').value;
@@ -66,15 +70,25 @@ export const editProductInput = e => {
 
   const promoPriceQty = `${promoQty} = ${promoPrice} Naira, ${promoQty2} = ${promoPrice2} Naira, ${promoQty3} = ${promoPrice3} Naira, ${promoQty4} = ${promoPrice4} Naira`;
 
-  if (price > 0 && promoPriceQty.split(',')[0] != '0 = 0 Naira') {
+  const editCodOptionCheckbox = document.getElementById(
+    'edit_cod_Check_Option'
+  );
+  if (editCodOptionCheckbox.checked) {
+    var editCodOption = false;
+  } else {
+    var editCodOption = true;
+  }
+  console.log(editprice);
+  if (editprice > 0 && promoPriceQty.split(',')[0] != '0 = 0 Naira') {
     alert(`You can't use one Price and Varient at the same time`);
   } else
     updateProduct(
       productName,
-      price,
+      editprice,
       stock,
       additionalInfo,
       discount,
+      editCodOption,
       colours,
       sizes,
       promoPriceQty

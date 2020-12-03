@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    codOption: {
+      type: Boolean,
+      default: true
+    },
     promoQtyPrice: [String],
     images: [String],
     colours: [String],

@@ -165,32 +165,32 @@ if (updateDeliveryForm)
 // if (submitbtn)
 //
 
-const paymentForm = document.getElementById('paymentForm');
+// const paymentForm = document.getElementById('paymentForm');
 
-if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
+// if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
 
-const order_Id = (document.getElementById('orderid') || {}).value;
+// const order_Id = (document.getElementById('orderid') || {}).value;
 
-function payWithPaystack(e) {
-  e.preventDefault();
-  var handler = PaystackPop.setup({
-    key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
-    email: document.getElementById('email').value,
-    amount: document.getElementById('total').value * 100,
-    firstname: document.getElementById('name').value,
-    lastname: document.getElementById('newOrderID').value,
-    ref: order_Id,
-    onClose: function() {
-      alert('Window closed.');
-    },
-    callback: function(response) {
-      window.location = document.getElementById('successpage').value;
-      alert(message);
-    }
-  });
+// function payWithPaystack(e) {
+//   e.preventDefault();
+//   var handler = PaystackPop.setup({
+//     key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
+//     email: document.getElementById('email').value,
+//     amount: document.getElementById('total').value * 100,
+//     firstname: document.getElementById('name').value,
+//     lastname: document.getElementById('newOrderID').value,
+//     ref: order_Id,
+//     onClose: function() {
+//       alert('Window closed.');
+//     },
+//     callback: function(response) {
+//       window.location = document.getElementById('successpage').value;
+//       alert(message);
+//     }
+//   });
 
-  handler.openIframe();
-}
+//   handler.openIframe();
+// }
 
 const paymentFormOrderPage = document.getElementById('paymentFormOrderPage');
 const orderIdOrderPage = (document.getElementById('orderIdOrderPage') || {})

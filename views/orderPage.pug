@@ -100,6 +100,37 @@ block content
                                                                 | involve in any transaction carried out offline without the prior notice of Rirapay
                                     if (order.status === 'Paid')
                                         p.mx-2.py-3.text-center Congrats, you've paid for this order. The merchant has 48 hours to ship this item. If item is not shipped within the Timeframe, kindly contact us to cancel the order and refund your money
+                                    if (order.status === 'Shipped')
+
+                                        p.mx-2.text-center
+                                            | This order has been shipped and waiting for delivery confirmation.
+                                        .mx-2
+                                            p 
+                                                b.my-2 Shipping information:
+                                            p Logistics Name: #{order.logisticName}
+                                            p Tracking Number: #{order.trackingNum}
+                                        .my-5
+                                            p.small__P.mx-1 Product Delivered? Click below to confirm delivery
+                                            form#deliveryForm
+                                                input#DelOrderId(type='hidden', name='DelOrderId', value= order.id)
+                                                .text-center
+                                                    button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "Click ok to confirm`)") Mark as Delivered
+
+                                            p.small__P.mx-1.my-3 Product Delivered and not satisfied? Click below to request for a refund
+                                            .text-center
+                                                button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#reqrefundform', aria-expanded='false', aria-controls='reqrefundform')  Request for Refund
+                                            .justify-content-center
+                                                #reqrefundform.collapse
+                                                    .card.card-body
+                                                        form#deliveryForm
+                                                            input#DelOrderId(type='hidden', name='DelOrderId', value= order.id)
+                                                            .row
+                                                                .col
+                                                                    p.small__P.mx-1.my-2 Kindly state the reason you're requesting for a refund
+                                                                    textarea#additionalInfo.form-control
+                                                            .text-center
+                                                                button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "Click ok to confirm`)") Submit
+                                                        
 
 
                             #nav-deliver-info.tab-pane.fade(role='tabpanel', aria-labelledby='nav-del-tab')
