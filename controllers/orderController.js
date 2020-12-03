@@ -137,10 +137,7 @@ exports.monifyWebhook = catchAsync(async (req, res, next) => {
 
   const transactionhash = `${secret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
 
-  const hash = crypto
-    .createHmac('sha512', transactionhash)
-    .update(JSON.stringify(req.body))
-    .digest('hex');
+  const hash = crypto.createHmac('sha512', transactionhash);
 
   if (hash === allevents.transactionHash) {
     console.log('correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
