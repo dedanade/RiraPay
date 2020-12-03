@@ -126,17 +126,25 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
 });
 
 exports.monifyWebhook = catchAsync(async (req, res, next) => {
-  // const secret = process.env.SECRET_KEYS_MONIFY;
-
   const allevents = req.body;
   console.log(allevents);
 
-  // const transactionhash =
-  // const hash = crypto
-  //   .createHmac('sha512', secret)
-  //   .update(JSON.stringify(req.body))
-  //   .digest('hex');
-  // if (hash === req.headers['x-paystack-signature']) {
+  const secret = process.env.SECRET_KEYS_MONIFY;
+  const { paymentReference } = allevents;
+  const { amountPaid } = allevents;
+  const { paidOn } = allevents;
+  const { transactionReference } = allevents;
+
+  const transactionhash = `${secret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
+
+  const hash = crypto
+    .createHmac('sha512', transactionhash)
+    .update(JSON.stringify(req.body))
+    .digest('hex');
+
+  if (hash === allevents.transactionHash) {
+    console.log('correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  }
   //   // Retrieve the request's body
   //   const event = req.body;
   //   const eventtype = event.event;
