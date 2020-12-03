@@ -130,59 +130,48 @@ exports.monifyWebhook = catchAsync(async (req, res, next) => {
   console.log(allevents);
 
   const secret = process.env.SECRET_KEYS_MONIFY;
-  console.log(secret);
   const { paymentReference } = allevents;
   const { amountPaid } = allevents;
   const { paidOn } = allevents;
   const { transactionReference } = allevents;
 
   const transactionhash = `${secret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
-
-  // const hash = crypto.createHmac('sha512', transactionhash);
   const hash = crypto
     .createHash('sha512')
     .update(`${transactionhash}`)
     .digest('hex');
 
   if (hash === allevents.transactionHash) {
-    console.log('correct!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    //   // Retrieve the request's body
+    const ordernum = allevents.metaData.OrderId;
+    console.log(ordernum);
+    // const rirafee = amountPaid * 0.02; // discounted total * the 2% transaction fee
+    // const displaytotal = amountPaid - rirafee;
+
+    const order = await Order.findById({ _id: ordernum });
+    const busUser = await BusinessUser.findById(order.businessUser);
+    const product = await Product.findById(order.product);
+
+    const url = `${req.protocol}://${req.get('host')}/dashboard`;
+    const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
+
+    // console.log(busUser);
+    // console.log(product);
+
+    await new AllEmail.OrderEmail(order, url, product).sendPayEmail();
+    await new AllBusEmail.BusOrderEmail(
+      busUser,
+      url2,
+      product,
+      order
+    ).sendBusPayEmail();
+
+    order.total = amountPaid;
+    order.status = 'Paid';
+    order.paidAt = Date.now();
+    order.createdAt = Date.now();
+    await order.save();
   }
-  //   // Retrieve the request's body
-  //   const event = req.body;
-  //   const eventtype = event.event;
-  //   const ordernum = event.data.reference;
-  //   const discounttotal = event.data.amount / 100;
-  //   const rirafee = discounttotal * 0.025; // discounted total * the 2.5 transaction fee
-  //   const displaytotal = discounttotal - rirafee;
-
-  //   console.log(event);
-
-  //   if (eventtype === 'charge.success');
-
-  //   const order = await Order.findById({ _id: ordernum });
-  //   const busUser = await BusinessUser.findById(order.businessUser);
-  //   const product = await Product.findById(order.product);
-
-  //   const url = `${req.protocol}://${req.get('host')}/dashboard`;
-  //   const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
-
-  //   // console.log(busUser);
-  //   // console.log(product);
-
-  //   await new AllEmail.OrderEmail(order, url, product).sendPayEmail();
-  //   await new AllBusEmail.BusOrderEmail(
-  //     busUser,
-  //     url2,
-  //     product,
-  //     order
-  //   ).sendBusPayEmail();
-
-  //   order.total = displaytotal;
-  //   order.status = 'Paid';
-  //   order.paidAt = Date.now();
-  //   order.createdAt = Date.now();
-  //   await order.save();
-  // }
   res.sendStatus(200);
 });
 
