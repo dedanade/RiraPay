@@ -127,7 +127,7 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
 
 exports.monifyWebhook = catchAsync(async (req, res, next) => {
   const allevents = req.body;
-  console.log(allevents);
+  // console.log(allevents);
 
   const secret = process.env.SECRET_KEYS_MONIFY;
   const { paymentReference } = allevents;
@@ -144,7 +144,7 @@ exports.monifyWebhook = catchAsync(async (req, res, next) => {
   if (hash === allevents.transactionHash) {
     //   // Retrieve the request's body
     const ordernum = allevents.metaData.OrderId;
-    console.log(ordernum);
+    // console.log(ordernum);
     // const rirafee = amountPaid * 0.02; // discounted total * the 2% transaction fee
     // const displaytotal = amountPaid - rirafee;
 
