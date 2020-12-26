@@ -27,6 +27,15 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    facebookPixelId: {
+      type: String
+    },
+    facebookCurrency: {
+      type: String
+    },
+    facebookValue: {
+      type: String
+    },
 
     createdAt: {
       type: Date,

@@ -445,6 +445,8 @@ exports.myorderinfo = catchAsync(async (req, res, next) => {
 
   const protocol = `${req.protocol}://${req.get('host')}`;
 
+  // const fbCurrency = product.facebookCurrency;
+
   if (!order && !cart && !product) {
     return next(new AppError('There is no order with that ID.', 404));
   }

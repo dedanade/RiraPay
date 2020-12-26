@@ -5,9 +5,25 @@ block Indexcss
 block footer
 block content
 
+    //- script.
+    //-     currency = #{product.facebookCurrency}
+    //-     value = #{product.facebookValue}
+    //-     fbq('track', 'Purchase'{
+    //-     value: `${value}`,
+    //-     currency: `${currency}`
+    //-     });
     script.
-        fbq('track', 'Purchase');
+        
+        
+    script.
+        let fbcurrency =!{JSON.stringify(product.facebookCurrency)}
+        value= #{product.facebookValue}
+        fbq('track', 'Purchase', {
+        value: `${value}.00`,
+        currency: fbcurrency
+        });
     section
+        //- -console.log(product.facebookCurrency);
         .container
             .text-center
                 img(src='#')
