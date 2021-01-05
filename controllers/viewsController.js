@@ -486,6 +486,8 @@ exports.getPodPage = catchAsync(async (req, res, next) => {
 
   const businessUser = await BusinessUser.findById(order.businessUser);
 
+  const product = await Product.findById(order.product);
+
   if (!order) {
     return next(new AppError('There is no order with that ID.', 404));
   }
@@ -493,7 +495,8 @@ exports.getPodPage = catchAsync(async (req, res, next) => {
   res.status(200).render('podOrder', {
     title: 'Pod Page',
     order,
-    businessUser
+    businessUser,
+    product
   });
 });
 
