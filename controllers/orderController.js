@@ -1,9 +1,13 @@
+const request = require('request');
 const crypto = require('crypto');
 const moment = require('moment');
+const { BitlyClient } = require('bitly');
 const AppError = require('./../utils/appError');
 const Order = require('./../Model/orderModel');
 const BusinessUser = require('./../Model/businessUserModel');
 const Product = require('./../Model/productModel');
+
+const bitly = new BitlyClient('4c8dfbb881c62187be4bd1330134ac7d07715dfc');
 // const Cart = require('./../Model/cart');
 const AllEmail = require('./../utils/email');
 const AllBusEmail = require('./../utils/busEmail');
@@ -35,15 +39,6 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   });
 
   if (duplicateOrder && duplicateOrder.length) {
-    // const arrayDuplicateOrder = [];
-    // duplicateOrder.forEach(e => {
-    //   arrayDuplicateOrder.push(e.id);
-    // });
-
-    // const duplicateOrderId = arrayDuplicateOrder.toString();
-    // if (process.env.NODE_ENV === 'production') {
-    //   return next(new AppError('Duplicate Order!', 401));
-    // }
     return next(new AppError('Duplicate Order!', 401));
   }
 
@@ -70,6 +65,42 @@ exports.createOrder = catchAsync(async (req, res, next) => {
     product,
     order
   ).sendBusOrderEmail();
+
+  const shortName = order.name
+    .split(' ')
+    .splice(0, 1)
+    .join(' ');
+
+  const shtProductName = product.productName
+    .split(' ')
+    .splice(0, 3)
+    .join(' ');
+
+  const shrtURL = await bitly.shorten(url);
+  console.log(shrtURL.link);
+
+  const data = {
+    to: `234${order.phone}`,
+    from: 'N-Alert',
+    sms: `Hi ${shortName}, your ${shtProductName} order has been created. Claim your 7 days money-back here ${
+      shrtURL.link
+    } or call us on 09016772472`,
+    type: 'plain',
+    api_key: 'TLMwV93ySLFMtfXVYtHGMbqYeOfUs4Bo1riU8r4dzkBcMnuQPwzTz90VNYjd9m',
+    channel: 'generic'
+  };
+  const options = {
+    method: 'POST',
+    url: 'https://termii.com/api/sms/send',
+    headers: {
+      'Content-Type': ['application/json', 'application/json']
+    },
+    body: JSON.stringify(data)
+  };
+  request(options, function(error, response) {
+    if (error) throw new Error(error);
+    console.log(response.body);
+  });
 
   res.status(201).json({
     status: 'success',
