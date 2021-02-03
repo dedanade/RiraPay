@@ -1,72 +1,30 @@
 /*eslint-disable */
 
 import '@babel/polyfill';
-import { createProductInput, editProductInput } from './product';
-import { createOrderInput, createCartInput } from './orders';
+import { createOrderInput } from './orders';
 
-import { busLogout, logout } from './loginAPI';
+import { logout } from './signup_loginAPI';
 
-import {
-  updatePixel,
-  updateTags,
-  updateOrderEmails,
-  updateShippingOrder,
-  updateDelivery
-} from './update';
+import { updateOrderEmails } from './update';
 import { showAlert } from './alert';
-import {
-  busLoginInput,
-  busSignupInput,
-  loginInput,
-  signupInput
-} from './signup_login';
-import {
-  busForgotPassInput,
-  busResetPassInput,
-  forgotPassInput,
-  resetPassInput
-} from './forgot_resetPass';
-
-export const submitlink = (document.getElementById('submitlinkinput') || {})
-  .value;
-
-export const token = (document.getElementById('forgotPassToken') || {}).value;
-export const busToken = (document.getElementById('forgotBusPassToken') || {})
-  .value;
-
-export const orderId = (document.getElementById('orderid') || {}).value;
-
-export const DelOrderId = (document.getElementById('DelOrderId') || {}).value;
-
-export const productId = (document.getElementById('productId') || {}).value;
+import { loginInput, signupInput } from './signup_login';
+import { forgotPassInput, resetPassInput } from './forgot_resetPass';
 
 const loginForm = document.querySelector('.login-form');
-const busloginForm = document.querySelector('.bus-login-form');
 
-const logoutBus = document.querySelector('.logout_bus_btn');
 const Logout = document.querySelector('.logout_btn');
 
 const signupForm = document.querySelector('.signup-form');
-const busSignupForm = document.querySelector('.signup-bus-form');
 
 const forgotForm = document.querySelector('.forgot-form');
 const resetPassForm = document.querySelector('.reset-pass-form');
 
-const busForgotForm = document.querySelector('.bus-forgot-form');
-const resetBusPassForm = document.querySelector('.reset-bus-pass-form');
-
-const createProductForm = document.querySelector('.create-product-form');
-const editProductForm = document.querySelector('.edit-product-form');
-
-const createCartForm = document.querySelector('.cart-details');
 const createOrderForm = document.querySelector('.create-order-form');
 
-const pixelForm = document.getElementById('pixelform');
-const tagsForm = document.getElementById('tagsform');
-const updateForm = document.getElementById('updateorderform');
-const updateFormmobile = document.getElementById('updateFormmobile');
-const updateShipingForm = document.getElementById('shippingForm');
-const updateDeliveryForm = document.getElementById('deliveryForm');
+const updateordersbtn = document.getElementById('#refresh_ordersbtn');
+const updateordersbtnmobile = document.getElementById(
+  'refresh_mobile_ordersbtn'
+);
 
 const selectColorOptions = document.querySelector('.selectColorOptions');
 const selectSizeOptions = document.querySelector('.selectSizeOptions');
@@ -74,37 +32,35 @@ const selectPriceOptions = document.querySelector('.selectPriceOptions');
 
 if (loginForm) loginForm.addEventListener('submit', loginInput);
 
-if (busloginForm) busloginForm.addEventListener('submit', busLoginInput);
-
-if (logoutBus) logoutBus.addEventListener('click', busLogout);
 if (Logout) Logout.addEventListener('click', logout);
 
 if (signupForm) signupForm.addEventListener('submit', signupInput);
 
-if (busSignupForm) busSignupForm.addEventListener('submit', busSignupInput);
-
 if (forgotForm) forgotForm.addEventListener('submit', forgotPassInput);
 
 if (resetPassForm) resetPassForm.addEventListener('submit', resetPassInput);
-
-if (busForgotForm) busForgotForm.addEventListener('submit', busForgotPassInput);
-
-if (resetBusPassForm)
-  resetBusPassForm.addEventListener('submit', busResetPassInput);
-
-if (createProductForm)
-  createProductForm.addEventListener('submit', createProductInput);
-
-if (editProductForm)
-  editProductForm.addEventListener('submit', editProductInput);
-
-if (createCartForm) createCartForm.addEventListener('submit', createCartInput);
 
 $('#show_Product_Quantity').on('keyup click', function() {
   const tot = $('#product_price_hidden').val() * this.value;
   const total = `That's ₦${tot.toLocaleString()}`;
   $('#show_Product_total').val(total);
 });
+
+// LOADING BUTTON
+
+export function loadingBtnSpinner(submitButton) {
+  submitButton.classList.add('btnLoadingSpiner');
+  submitButton.disabled = true;
+
+  setTimeout(() => {
+    submitButton.classList.remove('btnLoadingSpiner');
+  }, 20000);
+}
+
+export function stopLoadingBtnSpinner(submitButton) {
+  submitButton.classList.remove('btnLoadingSpiner');
+  submitButton.disabled = false;
+}
 
 const show_product_Price_Qty = document.querySelector('#selectPromoPrice');
 
@@ -116,51 +72,19 @@ if (show_product_Price_Qty)
     $('#show_Product_total').val(total);
   });
 
-if (pixelForm)
-  pixelForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const facebookPixel = document.getElementById('pixelId').value;
-    updatePixel(facebookPixel);
+if (updateordersbtn)
+  updateordersbtn.addEventListener('click', e => {
+    updateOrderEmails();
   });
 
-if (tagsForm)
-  tagsForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const tags = document.getElementById('order-tags').value;
-    updateTags(tags);
-  });
-
-if (updateForm)
-  updateForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const orders = document.getElementById('ordersemail').value;
-    updateOrderEmails(orders);
-  });
-
-if (updateFormmobile)
-  updateFormmobile.addEventListener('submit', e => {
-    e.preventDefault();
-    const orders = document.getElementById('ordersemail').value;
-    updateOrderEmails(orders);
+if (updateordersbtnmobile)
+  updateordersbtnmobile.addEventListener('click', e => {
+    updateOrderEmails();
   });
 
 if (createOrderForm)
   createOrderForm.addEventListener('submit', createOrderInput);
 
-if (updateShipingForm)
-  updateShipingForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const OrderId = document.getElementById('OrderId').value;
-    const logisticName = document.getElementById('logName').value;
-    const trackingNum = document.getElementById('logNum').value;
-    updateShippingOrder(OrderId, logisticName, trackingNum);
-  });
-
-if (updateDeliveryForm)
-  updateDeliveryForm.addEventListener('submit', e => {
-    e.preventDefault();
-    updateDelivery();
-  });
 //
 // if (submitbtn)
 //
@@ -262,22 +186,6 @@ $(document).ready(function() {
     order: [0, 'desc'],
     bInfo: true
   });
-});
-
-$('.sales-today a').click(function(e) {
-  e.preventDefault();
-  $('.sales-toggle').hide();
-  $('#button-sales').html($(this).text());
-  var toShow = $(this).attr('href');
-  $(toShow).show();
-});
-
-$('.trans-today a').click(function(e) {
-  e.preventDefault();
-  $('#button-trans').html($(this).text());
-  $('.trans-toggle').hide();
-  var toShow = $(this).attr('href');
-  $(toShow).show();
 });
 
 $('.toggle-password').click(function() {

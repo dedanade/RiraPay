@@ -4,12 +4,9 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const businessUserSchema = new mongoose.Schema({
-  businessName: {
+  fullName: {
     type: String,
-    required: [true, 'Please tell us your Business name']
-  },
-  facebookPixel: {
-    type: String
+    required: [true, 'Please tell us your Full Personal name']
   },
   businessPhoneNumber: {
     type: String,
@@ -67,33 +64,6 @@ businessUserSchema.index(
   { businessUserName: 1, businessPhoneNumber: 1, businessEmail: 1 },
   { unique: true }
 );
-
-businessUserSchema.virtual('products', {
-  ref: 'Product',
-  foreignField: 'businessUser',
-  localField: '_id'
-});
-
-businessUserSchema.virtual('orders', {
-  ref: 'Order',
-  foreignField: 'businessUser',
-  localField: '_id'
-});
-
-businessUserSchema.virtual('product', {
-  ref: 'Product',
-  foreignField: 'orders',
-  localField: '_id'
-});
-
-businessUserSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'products',
-    select: ''
-  });
-
-  next();
-});
 
 businessUserSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified

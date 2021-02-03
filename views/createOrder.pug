@@ -10,7 +10,7 @@ block footer
             img(src="#")
     section
         h4#form-heading.mx-2.mb-2.mt-5
-            | Place Order for your
+            | Place Order for your 
             b= product.productName
         .order_form_container(style = 'margin-top: 30px; margin-bottom: 200px;')
             .card.border-0.box-shadow-1
@@ -79,10 +79,7 @@ block footer
                     .card.border-2.box-shadow-1.py-2.mx-lg-1
                         .card.wrap.border-0  
                             form.create-order-form     
-                                input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
-                                //- input#businessUser(type='hidden', name='businessUser', value= businessUser.id)
-
-                                //- input#cart(type='hidden', name='cart', value= cart.id)
+                                input#create_order_businessAccountID(type='hidden', value= businessAccount.id)
                                 input#product_id(type='hidden', name='product_id', value= product.id)
                                 .row.mx-2.py-4
                                     .col
@@ -126,7 +123,7 @@ block footer
                                                 b Free
                                 
                                 .text-center
-                                    button#checkout1-button.btn.btn-lg.mt-3.mb-3.submit_order_btn(type='submit')
+                                    button.btn.btn-lg.rira-color-btn.mt-3.mb-3.w-50(type='submit')
                                         | Place Order
 
                         

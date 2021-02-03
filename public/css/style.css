@@ -49,6 +49,9 @@ body {
   font-weight: bold;
   margin-left: 1rem;
 }
+#hideAlertNotification {
+  margin-left: 20px;
+}
 
 .error_title {
   margin-top: 200px;
@@ -205,10 +208,9 @@ label {
   color: white;
 }
 
-#checkout1-button {
+.rira-color-btn {
   background-color: #01afee;
   color: white;
-  width: 12em;
 }
 
 #place_order_float_btn {
@@ -458,5 +460,52 @@ table {
 @media (min-width: 728px) {
   .small-container {
     display: none;
+  }
+}
+
+/* Button Loading Spinner */
+/* .btn:hover {
+  color: white;
+} */
+
+.btnLoadingSpiner {
+  position: relative;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px transparent;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  transition: all ease-in-out 0.2s;
+  color: transparent;
+  opacity: 1;
+}
+
+.btnLoadingSpiner:after {
+  content: '';
+  animation: spin 500ms linear infinite;
+  position: absolute;
+  top: calc(50% - 0.5rem);
+  left: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  opacity: 1;
+}
+.btnLoadingSpiner:hover {
+  color: transparent;
+}
+.btnLoadingSpiner:disabled {
+  filter: brightness(75%);
+  color: transparent;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }

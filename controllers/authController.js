@@ -5,6 +5,7 @@ const User = require('./../Model/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const AllEmail = require('./../utils/email');
+const Order = require('../Model/orderModel');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -157,11 +158,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 exports.updateUserOrders = catchAsync(async (req, res, next) => {
   // 2) Filtered out fields names that are allowed to be updated
   const filteredBody = filterObj(req.body, 'orders');
+  const raworderemails = await Order.find({ email: req.user.email }).distinct(
+    '_id'
+  );
 
+  const orderemails = raworderemails.toString();
   // 3) Update user document
-
   // Validator not working!!!
-  const newOrders = req.body.orders.split(',');
+  const newOrders = orderemails.split(',');
   // console.log(newOrders);
   const Updateduserorders = await User.findByIdAndUpdate(
     {

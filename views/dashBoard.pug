@@ -18,14 +18,13 @@ block content
     section.large-view-table
         .large-container
             .card-body.py-5.mx-2
-                - const order = user.orders;
+            - const order = user.orders;
                 if(order.length)
                     ul.list-group
                         li.d-flex.justify-content-between
                             h4.d-flex.justify-content-between.mb-0.mt-3 Latest Orders:
-                            form#updateorderform
-                                input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
-                                button#sign-up-button.btn.btn-sm.my-3.mx-auto.d-block(type='submit') Refresh Orders
+                            h6
+                                button#refresh_ordersbtn.btn.btn-sm.rira-color-btn.my-3.mx-auto.d-block(type='submit') Refresh Orders
                     table.table.table-condensed.table-hover
                         
                             thead
@@ -36,28 +35,28 @@ block content
                                 th Amount
 
                             tbody
-                                each orders in user.orders.reverse().slice(0, 10)
+                                
+                                each orders in user.orders
                                     each product in orders.product
-                                        each businessUser in orders.businessUser
-
+                                        each businessAccount in orders.businessAccount
                                             
                                             -const Date = moment(orders.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
                                             -const orderTotal = orders.total.toLocaleString()
                                         
-
-                                            tr.table-row(style= 'height: 65px' data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                           
+                                            tr.table-row(style= 'height: 65px' data-href=`/order/${product.slug}/${orders._id}`)
                                             
                                                 td
-                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=Date
+                                                    a(href=`/order/${product.slug}/${orders._id}`)=Date
                                                                                         
                                                 td
-                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= product.productName
+                                                    a(href=`/order/${product.slug}/${orders._id}`)= product.productName
                                                 td
-                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                                    a(href=`/order/${product.slug}/${orders._id}`)= orders.status
                                                 td
-                                                    a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=businessUser.businessName                              
+                                                    a(href=`/order/${product.slug}/${orders._id}`)= businessAccount.businessName                            
                                                 td
-                                                        a(href=`/order/${product.slug}/${product.id}/${orders._id}`)=`₦${orderTotal}`
+                                                        a(href=`/order/${product.slug}/${orders._id}`)=`₦${orderTotal}`
                     p=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
                     h6
                         .text-center
@@ -65,41 +64,37 @@ block content
                             
                 else
                     ul.list-group
-                    li.d-flex.justify-content-between
+                        li.d-flex.justify-content-between
                         h4.d-flex.justify-content-between Latest Orders:
                     .text-center.mx-3
                         h6=`If you have Placed Order with your Email Address ${user.email}, Click on the button below to show the orders`
-                        form#updateorderform
-                            input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
-                            button#sign-up-button.btn.btn-md.my-3.mx-auto.d-block(type='submit') Update Orders
+                        button#refresh_mobile_ordersbtn.btn.btn-md.rira-color-btn.my-3.mx-auto.d-block(type='submit') Update Orders
     section
         .small-container
             if (order.length)
                 ul.list-group.my-4
                     li.d-flex.justify-content-between.my-2
                         h4 Latest Orders:
-                        form#updateFormmobile
-                            input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
-                            button#sign-up-button.btn.btn-sm.my-0(type='submit') Refresh Orders 
+                        button#refresh_mobile_orders.btn.btn.btn-sm.rira-color-btn.my-0(type='submit') Refresh Orders 
                     each orders in user.orders.slice(0, 10)
                         each product in orders.product
-                            each businessUser in orders.businessUser
+                            each businessAccount in orders.businessAccount
                                 -const orderTotal = orders.total.toLocaleString()
                                 -const mobiledate = moment(orders.createdAt).format('DD/MMM/YY');
 
-                                .mini-table(data-href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                .mini-table(data-href=`/order/${product.slug}/${orders._id}`)
                                     .row.clickable-row.no-gutters.mx-3.py-2.px-2.border-top.border-bottom
                                         .col-9
                                             p.m-0 
-                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)
+                                                a(target='_blank' href=`/order/${product.slug}/${orders._id}`)
                                                     b= `₦${orderTotal}`
                                             p.m-0 
-                                                a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)=product.productName 
+                                                a(target='_blank' href=`/order/${product.slug}/${orders._id}`)=product.productName 
                                         .col-3
                                             p.m-0 
-                                            a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= orders.status
+                                            a(target='_blank' href=`/order/${product.slug}/${orders._id}`)= orders.status
                                             p.m-0 
-                                            a(target='_blank' href=`/order/${product.slug}/${product.id}/${orders._id}`)= mobiledate
+                                            a(target='_blank' href=`/order/${product.slug}/${orders._id}`)= mobiledate
                     p.my-3.mx-2=`*If you have Placed Order with your Email Address ${user.email} and you can't see it on the list, Click on the refresh orders button above`
                     
                     .text-center.my-3
@@ -112,9 +107,7 @@ block content
                         h4 Latest Orders:   
                 .text-center.mx-3 
                     h6=`If you have Placed Order with your Email Address ${user.email}, Click on the button below to show the orders`
-                    form#updateFormmobile
-                        input#ordersemail(type='hidden', name='ordersemail', value= orderemails)
-                        button#sign-up-button.btn.btn-md.my-3.mx-auto.d-block(type='submit') Update Orders      
+                    button#refresh_mobile_ordersbtn.btn.btn-md.rira-color-btn.my-3.mx-auto.d-block(type='submit') Update Orders      
                 
                                 
                                             

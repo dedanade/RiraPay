@@ -2,7 +2,6 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -66,22 +65,23 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'orders',
-    select: ''
-  });
-
-  next();
-});
-
 userSchema.set('toObject', { virtuals: true });
 userSchema.set('toJSON', { virtuals: true });
 
-userSchema.plugin(uniqueValidator, {
-  message:
-    ' Your {PATH} must be unique. Try another or Login if you have an account '
-});
+userSchema.path('phoneNumber').validate(async phoneNumber => {
+  const phoneNumberCount = await mongoose.models.User.countDocuments({
+    phoneNumber
+  });
+  return !phoneNumberCount;
+}, 'Phone Number already exists');
+
+userSchema.path('email').validate(async email => {
+  const emailCount = await mongoose.models.User.countDocuments({
+    email
+  });
+  return !emailCount;
+}, 'Email already exists');
+
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
@@ -101,6 +101,11 @@ userSchema.pre('save', function(next) {
 userSchema.pre(/^find/, function(next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
+  next();
+});
+
+userSchema.pre(/^find/, function(next) {
+  this.populate('orders');
   next();
 });
 

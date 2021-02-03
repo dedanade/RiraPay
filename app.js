@@ -10,9 +10,7 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
 const Ordercontroler = require('./controllers/orderController');
-const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
-const businessUserRouter = require('./routes/businessUserRoutes');
 const viewRouter = require('./routes/viewRouter');
 const orderRoutes = require('./routes/orderRoutes');
 const AppError = require('./utils/appError');
@@ -39,8 +37,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
 
-app.use(helmet());
-
+app.use(helmet({ frameguard: false }));
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -80,9 +77,7 @@ app.use((req, res, next) => {
 // 3) ROUTES
 
 app.use('/', viewRouter);
-app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/businessUsers', businessUserRouter);
 app.use('/api/v1/orders', orderRoutes);
 app.post('/mywebhook', Ordercontroler.paystackwebhook);
 app.post('/moniwebhook', Ordercontroler.monifyWebhook);

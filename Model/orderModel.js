@@ -83,18 +83,11 @@ const orderSchema = new mongoose.Schema(
     shippedAt: { type: Date, default: 0 },
     deliveredAt: { type: Date, default: 0 },
 
-    businessUser: [
+    businessAccount: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: 'BusinessUser',
-        required: [true, 'BusinessUser is required']
-      }
-    ],
-
-    cart: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Cart'
+        ref: 'BusinessAccount',
+        required: [true, 'BusinessAccount is required']
       }
     ],
     product: [
@@ -120,9 +113,8 @@ orderSchema.virtual('user', {
 });
 
 orderSchema.pre(/^find/, function(next) {
-  this.populate('cart', '');
-  this.populate('product', '-businessUser');
-  this.populate('businessUser', '-products');
+  this.populate('product');
+  this.populate('businessAccount');
   next();
 });
 

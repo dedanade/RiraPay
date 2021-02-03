@@ -1,76 +1,10 @@
 /* eslint-disable */
 import axios from 'axios';
 import { showAlert } from './alert';
-import { submitlink } from './index';
-
-export const createProduct = async (
-  productName,
-  price,
-  stock,
-  additionalInfo,
-  discount,
-  codOption,
-  colours,
-  sizes,
-  promoQtyPrice
-) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: '/api/v1/products',
-      data: {
-        productName,
-        price,
-        stock,
-        additionalInfo,
-        discount,
-        codOption,
-        colours,
-        sizes,
-        promoQtyPrice
-      }
-    });
-
-    const productSlug = res.data.data.newProduct.slug;
-    const productId = res.data.data.newProduct._id;
-    if (res.data.status === 'success') {
-      showAlert('success', 'Product created Successfully!');
-      window.setTimeout(() => {
-        location.assign(`/myproduct/${productSlug}/${productId}`);
-      }, 1500);
-    }
-  } catch (err) {
-    showAlert('error', err.response.data.message);
-  }
-};
-
-export const createCart = async (qty, total, colour, size) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: '/api/v1/products/cart',
-      data: {
-        qty,
-        total,
-        colour,
-        size
-      }
-    });
-
-    const cartId = res.data.data.newCart._id;
-    if (res.data.status === 'success') {
-      showAlert('success', 'Your Cart created Successfully!');
-      window.setTimeout(() => {
-        location.assign(`/createorder/${submitlink}/${cartId}`);
-      }, 1500);
-    }
-  } catch (err) {
-    showAlert('error', err.response.data.message);
-  }
-};
+import { stopLoadingBtnSpinner } from './index';
 
 export const createOrder = async (
-  businessUser,
+  businessAccount,
   product,
   name,
   email,
@@ -82,14 +16,15 @@ export const createOrder = async (
   qty,
   total,
   colour,
-  size
+  size,
+  submitbtn
 ) => {
   try {
     const res = await axios({
       method: 'POST',
       url: `/api/v1/orders`,
       data: {
-        businessUser,
+        businessAccount,
         product,
         name,
         email,
@@ -114,6 +49,7 @@ export const createOrder = async (
       }, 1000);
     }
   } catch (err) {
+    stopLoadingBtnSpinner(submitbtn);
     showAlert('error', err.response.data.message);
   }
 };

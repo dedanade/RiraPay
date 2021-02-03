@@ -157,20 +157,6 @@ class OrderEmail {
       `Payment for OrderId ${this.orderNum} has been confirmed`
     );
   }
-
-  async sendShipEmail() {
-    await this.send(
-      'shipemail',
-      `Your order ${this.orderNum} has been Shipped`
-    );
-  }
-
-  async sendDeliveryEmail() {
-    await this.send(
-      'deliveryemail',
-      `DELIVERED: Your order ${this.orderNum} has been marked as delivered`
-    );
-  }
 }
 
 module.exports = {

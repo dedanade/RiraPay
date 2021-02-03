@@ -42,12 +42,10 @@ const productSchema = new mongoose.Schema(
       default: Date.now(),
       select: false
     },
-    businessUser: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'BusinessUser'
-      }
-    ],
+    businessAccount: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'BusinessAccount'
+    },
 
     date: { type: Date, default: Date.now }
   },
@@ -67,6 +65,10 @@ productSchema.pre('save', function(next) {
   next();
 });
 
+// productSchema.pre(/^find/, function(next) {
+//   this.populate('businessAccount');
+//   next();
+// });
 // productSchema.pre(/^find/, function(next) {
 //   this.populate({
 //     path: 'orders',
