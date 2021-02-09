@@ -20,7 +20,7 @@ block footer
                         #hidden_description(style = 'display: none')
                             != product.additionalInfo
                         #display_description.mt-5(style = 'display: contents;')
-                        input#product_price_hidden(type='hidden', value=`${product.price}`)
+                       input#product_price_hidden(type='hidden', value=`${product.price}`)
   
                         if (product.price > 0) 
                             .col-12.my-2       
@@ -125,5 +125,6 @@ block footer
                                 .text-center
                                     button.btn.btn-lg.rira-color-btn.mt-3.mb-3.w-50(type='submit')
                                         | Place Order
+                                    
 
                         
