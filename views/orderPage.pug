@@ -73,16 +73,16 @@ block content
                                         if (product.discount > 0) 
                                             p.mx-1.mt-5=`Your ${product.discount}% is still valid if you pay with RiraPay Now! You're paying ₦${strdiscountprice} instead of ₦${ordertotal}`
 
-                                        form#paymentFormOrderPage
-                                            input#email2(type='hidden', name='email2', value= order.email)
-                                            input#total2(type='hidden', name='total2', value= discountPrice)
-                                            input#name2(type='hidden', name='name2', value= order.name)
-                                            input#newOrderID2(type='hidden', name='newOrderID2', value= order.orderNum)
-                                            input#orderIdOrderPage(type='hidden', name='orderIdOrderPage', value= order._id)
+                                            input#successpage(type='hidden', value= `/success/${order._id}`)
+                                            input#email(type='hidden', value= order.email)
+                                            input#total(type='hidden', value= discountPrice)
+                                            input#name(type='hidden',  value= order.name)
+                                            input#phoneNum(type='hidden', value= order.phone)
+                                            input#newOrderNum(type='hidden', value= order.orderNum)
+                                            input#orderid(type='hidden', value= order._id)
 
                                             .text-center
-                                                .form-submit
-                                                    button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit')= `Pay ₦${strdiscountprice} Now`
+                                                button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit' onclick='payWithPaystack()')= `Pay ₦${strdiscountprice} Now`
                                     
                                         .text-center
                                             button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details
@@ -154,3 +154,23 @@ block content
                                             | Alternative Phone Number:
                                             a(href=`tel:${order.altphone}`)= order.altPhone
                                     
+            script.
+                function payWithPaystack() {
+                var handler = PaystackPop.setup({
+                key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
+                email: document.getElementById('email').value,
+                amount: document.getElementById('total').value * 100,
+                firstname: document.getElementById('name').value,
+                lastname: document.getElementById('newOrderNum').value,
+                ref: document.getElementById('orderid').value,
+                onClose: function() {
+                alert('Window closed.');
+                },
+                callback: function(response) {
+                window.location(`/success/${order._id}`);
+                alert(message);
+                }
+                });
+
+                handler.openIframe();
+                }

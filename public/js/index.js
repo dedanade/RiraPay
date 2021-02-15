@@ -21,9 +21,9 @@ const resetPassForm = document.querySelector('.reset-pass-form');
 
 const createOrderForm = document.querySelector('.create-order-form');
 
-const updateordersbtn = document.getElementById('#refresh_ordersbtn');
-const updateordersbtnmobile = document.getElementById(
-  'refresh_mobile_ordersbtn'
+const updateordersbtn = document.querySelector('#refresh_ordersbtn');
+const updateordersbtnmobile = document.querySelector(
+  '#refresh_mobile_ordersbtn'
 );
 
 const selectColorOptions = document.querySelector('.selectColorOptions');
@@ -73,80 +73,18 @@ if (show_product_Price_Qty)
   });
 
 if (updateordersbtn)
-  updateordersbtn.addEventListener('click', e => {
+  updateordersbtn.addEventListener('click', () => {
     updateOrderEmails();
   });
 
 if (updateordersbtnmobile)
-  updateordersbtnmobile.addEventListener('click', e => {
+  updateordersbtnmobile.addEventListener('click', () => {
     updateOrderEmails();
   });
 
 if (createOrderForm)
   createOrderForm.addEventListener('submit', createOrderInput);
 
-//
-// if (submitbtn)
-//
-
-// const paymentForm = document.getElementById('paymentForm');
-
-// if (paymentForm) paymentForm.addEventListener('submit', payWithPaystack, false);
-
-// const order_Id = (document.getElementById('orderid') || {}).value;
-
-// function payWithPaystack(e) {
-//   e.preventDefault();
-//   var handler = PaystackPop.setup({
-//     key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
-//     email: document.getElementById('email').value,
-//     amount: document.getElementById('total').value * 100,
-//     firstname: document.getElementById('name').value,
-//     lastname: document.getElementById('newOrderID').value,
-//     ref: order_Id,
-//     onClose: function() {
-//       alert('Window closed.');
-//     },
-//     callback: function(response) {
-//       window.location = document.getElementById('successpage').value;
-//       alert(message);
-//     }
-//   });
-
-//   handler.openIframe();
-// }
-
-const paymentFormOrderPage = document.getElementById('paymentFormOrderPage');
-const orderIdOrderPage = (document.getElementById('orderIdOrderPage') || {})
-  .value;
-
-if (paymentFormOrderPage)
-  paymentFormOrderPage.addEventListener(
-    'submit',
-    payWithPaystackOrderPage,
-    false
-  );
-function payWithPaystackOrderPage(e) {
-  e.preventDefault();
-  var handler = PaystackPop.setup({
-    key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
-    email: document.getElementById('email2').value,
-    amount: document.getElementById('total2').value * 100,
-    firstname: document.getElementById('name2').value,
-    lastname: document.getElementById('newOrderID2').value,
-    ref: orderIdOrderPage,
-    onClose: function() {
-      alert('Window closed.');
-    },
-    callback: function(response) {
-      location.reload();
-      +response.reference;
-      alert(message);
-    }
-  });
-
-  handler.openIframe();
-}
 $('.mini-table[data-href]').on('click', function() {
   window.location = $(this).data('href');
   $(this).css({ background: 'darkgray' });

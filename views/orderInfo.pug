@@ -110,7 +110,7 @@ block content
                 p.mx-2.text-center(style = 'font-size: 1.2rem; font-weight: 500;')=`For today, you enjoy ${product.discount}% discount if you pay with RiraPay Now! This means you're paying ₦${strdiscountprice} instead of ₦${orderTotal}`
 
             .text-center
-                button#pay-btn.checkout1-button.btn.btn-lg.mt-3.my-0(type= 'submit' onclick='payWithMonnify()')= `Pay ₦${strdiscountprice}`
+                button#pay-btn.checkout1-button.btn.btn-lg.mt-3.my-0(type= 'submit' onclick='payWithPaystack()')= `Pay ₦${strdiscountprice}`
                 small.form-text.mx-2.mb-3.mt-0 Enjoy 100% Buyer Protection
             if (product.codOption === true)
                 form#not_interested_form
@@ -127,35 +127,58 @@ block content
             input#newOrderNum(type='hidden', name='newOrderID', value= order.orderNum)
             input#orderid(type='hidden', name='orderid', value= order._id)
 
+            //- script.
+            //-     function payWithMonnify() {
+            //-         const phoneNum = document.getElementById('phoneNum').value;
+            //-         const totalAmount = document.getElementById('total').value;
+            //-         const refOrderId = document.getElementById('orderid').value;
+            //-         const cusName = document.getElementById('name').value;
+            //-         const orderNum = document.getElementById('newOrderNum').value;
+            //-         const cusEmail = document.getElementById('email').value;
+            //-         const productName = document.getElementById('productName').value;
+            //-         MonnifySDK.initialize({
+            //-             amount: totalAmount,
+            //-             currency: "NGN",
+            //-             reference: '' + Math.floor((Math.random() * 1000000000) + 1),
+            //-             customerName: `${cusName} ${orderNum}`,
+            //-             customerEmail: cusEmail,
+            //-             customerMobileNumber: phoneNum,
+            //-             apiKey: "MK_PROD_2F5ZGR5NQK",
+            //-             contractCode: "318439413121",
+            //-             paymentDescription: `${productName} Payment RiraPay`,
+            //-             isTestMode: true,
+            //-             paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
+            //-             metadata: {
+            //-                 "OrderId": `${refOrderId}`,
+            //-                 },
+            //-             onComplete: function(response){
+            //-                 window.location = document.getElementById('successpage').value;
+            //-             },
+            //-             onClose: function(){
+            //-                 location.reload();
+            //-             }
+            //-         });
+            //-     }
+
             script.
-                function payWithMonnify() {
-                    const phoneNum = document.getElementById('phoneNum').value;
-                    const totalAmount = document.getElementById('total').value;
-                    const refOrderId = document.getElementById('orderid').value;
-                    const cusName = document.getElementById('name').value;
-                    const orderNum = document.getElementById('newOrderNum').value;
-                    const cusEmail = document.getElementById('email').value;
-                    const productName = document.getElementById('productName').value;
-                    MonnifySDK.initialize({
-                        amount: totalAmount,
-                        currency: "NGN",
-                        reference: '' + Math.floor((Math.random() * 1000000000) + 1),
-                        customerName: `${cusName} ${orderNum}`,
-                        customerEmail: cusEmail,
-                        customerMobileNumber: phoneNum,
-                        apiKey: "MK_PROD_2F5ZGR5NQK",
-                        contractCode: "318439413121",
-                        paymentDescription: `${productName} Payment RiraPay`,
-                        isTestMode: true,
-                        paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
-                        metadata: {
-                            "OrderId": `${refOrderId}`,
-                            },
-                        onComplete: function(response){
-                            window.location = document.getElementById('successpage').value;
-                        },
-                        onClose: function(){
-                            location.reload();
-                        }
-                    });
+                function payWithPaystack() {
+                var handler = PaystackPop.setup({
+                key: 'pk_live_3ef2940e51a265dcff51c7d3e31dadbdb9889b67', // Replace with your public key
+                email: document.getElementById('email').value,
+                amount: document.getElementById('total').value * 100,
+                firstname: document.getElementById('name').value,
+                lastname: document.getElementById('newOrderNum').value,
+                ref: document.getElementById('orderid').value,
+                onClose: function() {
+                alert('Window closed.');
+                },
+                callback: function(response) {
+                window.location(`/success/${order._id}`);
+                alert(message);
                 }
+                });
+
+                handler.openIframe();
+                }
+
+

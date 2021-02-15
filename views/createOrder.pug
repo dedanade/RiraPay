@@ -17,11 +17,10 @@ block footer
                 form.create-order-form
                     .row.mx-2.mx-2.pb-5.mt-5
                         -const productprice = product.price.toLocaleString()
-                        #hidden_description(style = 'display: none')
-                            != product.additionalInfo
-                        #display_description.mt-5(style = 'display: contents;')
-                       input#product_price_hidden(type='hidden', value=`${product.price}`)
-  
+                        //- #hidden_description(style = 'display: none')
+                        //-     != product.additionalInfo
+                        //- #display_description.mt-5(style = 'display: contents;')
+                        input#product_price_hidden(type='hidden', value=`${product.price}`)
                         if (product.price > 0) 
                             .col-12.my-2       
                                 .place_order_one_price
@@ -121,7 +120,7 @@ block footer
                                             li.d-flex.justify-content-between.my-0
                                                 p Shipping
                                                 b Free
-                                
+                                p.ml-2.font-weight-bold=product.additionalInfo
                                 .text-center
                                     button.btn.btn-lg.rira-color-btn.mt-3.mb-3.w-50(type='submit')
                                         | Place Order
