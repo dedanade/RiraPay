@@ -1,7 +1,7 @@
 /*eslint-disable */
 
 import '@babel/polyfill';
-import { createOrderInput } from './orders';
+import { createOrderInput, updateRefundRequestInput } from './orders';
 
 import { logout } from './signup_loginAPI';
 
@@ -30,6 +30,8 @@ const selectColorOptions = document.querySelector('.selectColorOptions');
 const selectSizeOptions = document.querySelector('.selectSizeOptions');
 const selectPriceOptions = document.querySelector('.selectPriceOptions');
 
+const refundRequestForm = document.querySelector('.refund-request-form');
+
 if (loginForm) loginForm.addEventListener('submit', loginInput);
 
 if (Logout) Logout.addEventListener('click', logout);
@@ -39,6 +41,9 @@ if (signupForm) signupForm.addEventListener('submit', signupInput);
 if (forgotForm) forgotForm.addEventListener('submit', forgotPassInput);
 
 if (resetPassForm) resetPassForm.addEventListener('submit', resetPassInput);
+
+if (refundRequestForm)
+  refundRequestForm.addEventListener('submit', updateRefundRequestInput);
 
 $('#show_Product_Quantity').on('keyup click', function() {
   const tot = $('#product_price_hidden').val() * this.value;

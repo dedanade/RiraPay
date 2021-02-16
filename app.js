@@ -83,7 +83,6 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/orders', orderRoutes);
 app.post('/mywebhook', Ordercontroler.paystackwebhook);
 app.post('/moniwebhook', Ordercontroler.monifyWebhook);
-app.post('/creatembedeorder', Ordercontroler.createEmbedOrder);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

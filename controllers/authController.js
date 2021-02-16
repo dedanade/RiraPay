@@ -121,6 +121,21 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.restrictOrderView = catchAsync(async (req, res, next) => {
+  const order = await Order.findById(req.params.orderId);
+  const user = await User.findById(req.user.id);
+  if (!order) {
+    return next(new AppError('No order found with that ID', 404));
+  }
+
+  const currentOrder = await Order.find({ _id: user.orders });
+
+  if (!currentOrder) {
+    return next(new AppError(`You don't have access to this page`, 403));
+  }
+  next();
+});
+
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Create error if user POSTs password data
   if (req.body.password) {

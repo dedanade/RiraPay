@@ -3,7 +3,7 @@ block Indexcss
 block script
 block content    
     section
-        .larger-container(style='margin-top: 150px;')
+        .larger-container(style='margin-top: 150px; width: fit-content;')
             .card.border-0.box-shadow
                 .card-block
                     #border-row.row.mx-1.mx-lg-5.mx-md-5
@@ -51,8 +51,30 @@ block content
                                 p.mx-3.my-2 
                                     b Status: 
                                     | Shipped (Order has been shipped, wait for it to be delivered)
-                    #border-row.row.mx-1.mx-lg-5.mx-md-5.my-3
-                        .col
+                    if (order.status === 'Delivered')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Delivered (Order has been Delivered, you have 7 days to request for refund)
+                    if (order.status === 'Completed')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Completed (Order has been Completed. Thanks)
+                    if (order.status === 'Canceled')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Canceled (Order has been Canceled and amount refunded to your wallet)
+                    if (order.status === 'refundRequested')
+                        #border-row.row.mx-1.mx-lg-5.mx-md-5
+                            .col-12
+                                p.mx-3.my-2 
+                                    b Status: 
+                                    | Refund Requested (You've requested for a refund. Waiting for merchant verdict)
          
                     nav
                         .row
@@ -73,16 +95,16 @@ block content
                                         if (product.discount > 0) 
                                             p.mx-1.mt-5=`Your ${product.discount}% is still valid if you pay with RiraPay Now! You're paying ₦${strdiscountprice} instead of ₦${ordertotal}`
 
-                                            input#successpage(type='hidden', value= `/success/${order._id}`)
-                                            input#email(type='hidden', value= order.email)
-                                            input#total(type='hidden', value= discountPrice)
-                                            input#name(type='hidden',  value= order.name)
-                                            input#phoneNum(type='hidden', value= order.phone)
-                                            input#newOrderNum(type='hidden', value= order.orderNum)
-                                            input#orderid(type='hidden', value= order._id)
+                                        input#successpage(type='hidden', value= `/success/${order._id}`)
+                                        input#email(type='hidden', value= order.email)
+                                        input#total(type='hidden', value= discountPrice)
+                                        input#name(type='hidden',  value= order.name)
+                                        input#phoneNum(type='hidden', value= order.phone)
+                                        input#newOrderNum(type='hidden', value= order.orderNum)
+                                        input#orderid(type='hidden', value= order._id)
 
-                                            .text-center
-                                                button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit' onclick='payWithPaystack()')= `Pay ₦${strdiscountprice} Now`
+                                        .text-center
+                                            button.checkout1-button.btn.btn-md.mt-5.mb-3#pay-btn(type= 'submit' onclick='payWithPaystack()')= `Pay ₦${strdiscountprice} Now`
                                     
                                         .text-center
                                             button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#merchantinfo', aria-expanded='false', aria-controls='merchantinfo') Merchant Details
@@ -110,28 +132,58 @@ block content
                                             p Logistics Name: #{order.logisticName}
                                             p Tracking Number: #{order.trackingNum}
                                         .my-5
-                                            p.small__P.mx-1 Product Delivered? Click below to confirm delivery
-                                            form#deliveryForm
+                                            p.mx-1 Product Delivered? Click below to confirm delivery
+                                            form.deliveryForm
                                                 input#DelOrderId(type='hidden', name='DelOrderId', value= order.id)
                                                 .text-center
-                                                    button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "Click ok to confirm`)") Mark as Delivered
+                                                    button.btn.btn-md.rira-color-btn.mt-2.mb-3(type= 'submit' onclick= "Click ok to confirm`)") Mark as Delivered
 
-                                            p.small__P.mx-1.my-3 Product Delivered and not satisfied? Click below to request for a refund
+                                            p.mx-1.my-3 Product Delivered and not satisfied? Click below to request for a refund
                                             .text-center
-                                                button.btn.btn-light.btn-md(type='button', data-toggle='collapse', data-target='#reqrefundform', aria-expanded='false', aria-controls='reqrefundform')  Request for Refund
-                                            .justify-content-center
-                                                #reqrefundform.collapse
-                                                    .card.card-body
-                                                        form#deliveryForm
-                                                            input#DelOrderId(type='hidden', name='DelOrderId', value= order.id)
-                                                            .row
-                                                                .col
-                                                                    p.small__P.mx-1.my-2 Kindly state the reason you're requesting for a refund
-                                                                    textarea#additionalInfo.form-control
-                                                            .text-center
-                                                                button#pay-btn.checkout1-button.btn.btn-md.mt-2.mb-3(type= 'submit' onclick= "Click ok to confirm`)") Submit
-                                                        
+                                                a.btn.rira-color-btn.text-white(href=`mailto:support@rirapay.com?subject=Refund Request for Order ${order.orderNum}&body=Kindly include the reason you're requesting for refund below and attach pictures(if any)&cc=${busAccount.businessAccountEmail}`) Click here to send Email
 
+                                                
+                                                //- a.btn.rira-color-btn.text-white(type='button', data-toggle='modal', data-target='#requestRefundModal') Request a Refund
+                                    if (order.status === 'Delivered')
+                                        .text-center
+                                            p.mx-1.my-3 Product Delivered and not satisfied? Click below to request for a refund
+                                            a.btn.rira-color-btn.text-white(href=`mailto:support@rirapay.com?subject=Refund Request for Order ${order.orderNum}&body=Kindly include the reason you're requesting for refund below and attach pictures(if any)&cc=${busAccount.businessAccountEmail}`) Click here to send Email
+
+                                            //- a.btn.rira-color-btn.text-white(type='button', data-toggle='modal', data-target='#requestRefundModal') Request a Refund
+ 
+                                    if (order.status === 'refundRequested')
+                                        b.ml-2 Refund Reason: 
+                                        p.ml-2.mb-2= order.refundReason
+
+                                        p Images:
+                                        each images in order.refundMedia
+                                            .text-center
+                                                img.my-3(src=`/media/orders/${images}`, alt='Order refund Image')
+                    
+                                    //- Modal
+                                    //- #requestRefundModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='requestRefundModalTitle', aria-hidden='true')
+                                    //-     .modal-dialog.modal-dialog-centered(role='document')
+                                    //-         .modal-content
+                                    //-             .modal-header
+                                    //-                 h5#exampleModalLongTitle.modal-title Request Refund
+                                    //-                 button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    //-                 span(aria-hidden='true') &times;
+                                    //-             .modal-body
+                                    //-                 section.refund-request-section
+                                    //-                         form.refund-request-form
+                                    //-                             input#refundOrderId(type='hidden', value= order._id)
+                                    //-                             .row.mx-1.py-3
+                                    //-                                 .col
+                                    //-                                     | Why are you requesting for a refund?
+                                    //-                                     textarea#refund-request-reason.form-control(type='text', name="refund-request-reason", rows="5" required='')
+                                    //-                             .row.mx-1.py-3
+                                    //-                                 .col
+                                    //-                                     | Include pictures (if any)
+                                    //-                                     input#refund-request-files.form-control(type='file', accept='image/*' multiple='' name='refund-request-files')
+
+                                    //-                             .modal-footer
+                                    //-                                 button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                    //-                                 button.rira-color-btn.btn.btn(type='submit' onclick= "return confirm(`You confirm all information provided are accurate and you're not satisfied with this order? Click ok to confirm.`)") Request Refund
 
                             #nav-deliver-info.tab-pane.fade(role='tabpanel', aria-labelledby='nav-del-tab')
                                 #border-row.row.mx-1.mx-lg-5.mx-md-5

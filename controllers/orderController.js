@@ -4,9 +4,12 @@
 /* eslint-disable vars-on-top */
 // const request = require('request');
 const crypto = require('crypto');
+const multer = require('multer');
+const sharp = require('sharp');
 // const moment = require('moment');
 // const { BitlyClient } = require('bitly');
 // const AppError = require('./../utils/appError');
+
 const Order = require('./../Model/orderModel');
 const BusinessAccount = require('./../Model/businessAccount');
 const Product = require('./../Model/productModel');
@@ -14,15 +17,75 @@ const AllEmail = require('./../utils/email');
 const AllBusEmail = require('./../utils/busEmail');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
+const AppError = require('./../utils/appError');
 
-// const filterObj = (obj, ...allowedFields) => {
-//   const newObj = {};
-//   Object.keys(obj).forEach(el => {
-//     if (allowedFields.includes(el)) newObj[el] = obj[el];
-//   });
-//   return newObj;
-// };
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
 
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+});
+
+exports.uploadRefundMedia = upload.array('refundMedia');
+
+// upload.single('image') req.file
+// upload.array('images', 5) req.files
+
+exports.editOrderRefundMedia = catchAsync(async (req, res, next) => {
+  if (!req.files) return next();
+  req.body.refundMedia = [];
+
+  await Promise.all(
+    req.files.map(async (file, i) => {
+      const filename = `order-${req.params.orderId}-${Date.now()}-${i +
+        1}.jpeg`;
+      await sharp(file.buffer)
+        .resize(500, 500)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/media/orders/${filename}`);
+      req.body.refundMedia.push(filename);
+    })
+  );
+  next();
+});
+
+exports.orderReturnRequest = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, 'refundMedia', 'refundReason');
+
+  const Updatedorder = await Order.findByIdAndUpdate(
+    req.params.orderId,
+    filteredBody,
+    {
+      new: true,
+      upsert: true
+    }
+  );
+  Updatedorder.status = 'refundRequested';
+  await Updatedorder.save();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      Updatedorder
+    }
+  });
+});
 exports.createOrder = catchAsync(async (req, res, next) => {
   // const twoMinutesAgo = moment()
   //   .subtract(2, 'minute')
@@ -151,74 +214,6 @@ exports.paystackwebhook = catchAsync(async (req, res, next) => {
     await order.save();
   }
   res.sendStatus(200);
-});
-
-exports.createEmbedOrder = catchAsync(async (req, res, next) => {
-  try {
-    var newEmbedOrder = await Order.create({});
-  } catch (err) {
-    return next(err);
-  }
-  // const order = await Order.findById(newEmbedOrder._id);
-
-  // const busAccount = await BusinessAccount.findById(order.businessAccount);
-  // const product = await Product.findById(order.product);
-  // if (product.price > 0) {
-  //   product.stock -= order.qty;
-  // }
-  // await product.save();
-
-  // const url = `${req.protocol}://${req.get('host')}/orderinfo/${order._id}`;
-  // const url2 = `${req.protocol}://${req.get('host')}/busdashboard`;
-
-  // // console.log(busAccount);
-  // // console.log(product);
-
-  // await new AllEmail.OrderEmail(order, url, product).sendOrderEmail();
-  // await new AllBusEmail.BusOrderEmail(
-  //   busAccount,
-  //   url2,
-  //   product,
-  //   order
-  // ).sendBusOrderEmail();
-
-  // // const shortName = order.name
-  // //   .split(' ')
-  // //   .splice(0, 1)
-  // //   .join(' ');
-
-  // // const shtProductName = product.productName
-  // //   .split(' ')
-  // //   .splice(0, 3)
-  // //   .join(' ');
-
-  // // const shrtURL = await bitly.shorten(url);
-  // // console.log(shrtURL.link);
-
-  // // const data = {
-  // //   to: `234${order.phone}`,
-  // //   from: 'N-Alert',
-  // //   sms: `Hi ${shortName}, your ${shtProductName} order has been created. Claim your 7 days money-back here ${
-  // //     shrtURL.link
-  // //   } or call us on 09016772472`,
-  // //   type: 'plain',
-  // //   api_key: 'TLMwV93ySLFMtfXVYtHGMbqYeOfUs4Bo1riU8r4dzkBcMnuQPwzTz90VNYjd9m',
-  // //   channel: 'generic'
-  // // };
-  // // const options = {
-  // //   method: 'POST',
-  // //   url: 'https://termii.com/api/sms/send',
-  // //   headers: {
-  // //     'Content-Type': ['application/json', 'application/json']
-  // //   },
-  // //   body: JSON.stringify(data)
-  // // };
-  // // request(options, function(error, response) {
-  // //   if (error) throw new Error(error);
-  // //   console.log(response.body);
-  // // });
-
-  res.redirect(`/orderinfo/${newEmbedOrder._id}`);
 });
 
 exports.monifyWebhook = catchAsync(async (req, res, next) => {

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { createOrder } from './create';
+import { updateRefundRequest } from './update';
 
 import { loadingBtnSpinner } from './index';
 
@@ -59,4 +60,25 @@ export const createOrderInput = e => {
     size,
     submitButton
   );
+};
+
+export const updateRefundRequestInput = e => {
+  e.preventDefault();
+  const submitButton = e.submitter;
+  const form = new FormData();
+  const orderId = document.getElementById('refundOrderId').value;
+
+  var fileInput = document.getElementById('refund-request-files');
+
+  var files = fileInput.files;
+
+  form.append(
+    'refundReason',
+    document.getElementById('refund-request-reason').value
+  );
+  for (var i = 0; i < files.length; i++) {
+    form.append('refundMedia', files[i]);
+  }
+  loadingBtnSpinner(submitButton);
+  updateRefundRequest(form, submitButton, orderId);
 };

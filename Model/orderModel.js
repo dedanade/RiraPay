@@ -51,6 +51,8 @@ const orderSchema = new mongoose.Schema(
     },
     colour: String,
     size: String,
+    refundMedia: [String],
+    refundReason: String,
     status: {
       type: String,
       enum: [
@@ -59,7 +61,8 @@ const orderSchema = new mongoose.Schema(
         'Shipped',
         'Delivered',
         'Completed',
-        'Canceled'
+        'Canceled',
+        'refundRequested'
       ],
       default: 'Incomplete'
     },
