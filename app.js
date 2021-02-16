@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -76,8 +75,6 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-app.use(cors());
-
 app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/orders', orderRoutes);
